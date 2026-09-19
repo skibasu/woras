@@ -1,0 +1,27 @@
+{
+  "name": "woras",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "public_build": "npm run build -- --webpack && find ~/domains/px661515.pxcloud.pl/public_html -mindepth 1 -maxdepth 1 ! -name cms -exec rm -rf {} + && cp -R out/. ~/domains/px661515.pxcloud.pl/public_html/",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "next": "16.3.5",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.5",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
