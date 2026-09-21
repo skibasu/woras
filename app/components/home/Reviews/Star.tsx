@@ -1,10 +1,10 @@
 export type FillType = 0 | 25 | 50 | 75 | 100
 
-type StarProps = {
+type Props = {
     fill: FillType
 }
 
-const Star = ({ fill }: StarProps) => {
+const Star = ({ fill }: Props) => {
     return (
         <div className="relative size-5">
             {/* empty star */}
