@@ -3,6 +3,7 @@ import { getGoogleReviews } from "@/lib/google-reviews"
 import RatingSummary from "./RatingSummary"
 import Image from "next/image"
 import StarsCounter from "./StarsCounter"
+import ReviewCart from "./ReviewCart"
 
 type ReviewsData = NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["reviews"] | undefined
 
@@ -11,7 +12,7 @@ type ReviewsProps = {
 }
 const Reviews = async ({ data }: ReviewsProps) => {
     const reviews = await getGoogleReviews()
-    console.log("reviews", reviews)
+
     return (
         <section
             className="py-14 min-h-175 bg-cover bg-center bg-no-repeat relative"
@@ -29,13 +30,18 @@ const Reviews = async ({ data }: ReviewsProps) => {
                             <span className="block rounded-full relative overflow-hidden mr-4 bg-white p-2">
                                 <Image src="/images/google.svg" alt="Google Logo" width={42} height={42} className="block" />
                             </span>
-                            <span className="block text-number mr-8">{reviews?.rating?.toFixed(1)}</span>
+                            <span className="block text-number mr-8">{reviews?.rating?.toFixed(1) || 0}</span>
                             <div>
                                 <StarsCounter rating={reviews?.rating || 0} />
                                 <span className="block text-sm">({reviews?.userRatingCount || 0}) Reviews</span>
                             </div>
                         </div>
                     </RatingSummary>
+                </div>
+                <div className="flex">
+                    {reviews?.reviews?.map((review, index) => {
+                        return <ReviewCart key={index} data={review} />
+                    })}
                 </div>
             </div>
         </section>

@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
                 hostname: "px661515.pxcloud.pl",
                 pathname: "/cms/wp-content/uploads/**",
             },
+            {
+                protocol: "https",
+                hostname: "lh3.googleusercontent.com",
+            },
         ],
     },
 }

@@ -1,6 +1,6 @@
 const PLACE_ID = "ChIJY6Sxx26NdiIRfFgTyZxdcg8"
 
-type GoogleReview = {
+export type GoogleReview = {
     rating: number
     text: {
         text: string
