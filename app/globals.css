@@ -1,26 +1,86 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #000000;
+    --primary: crimson;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-primary: var(--primary);
+    --font-base: var(--font-share);
+    --font-heading: var(--font-squada-one);
+    --text-base: 1.125rem;
+    --text-h1: 4rem;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    --line-height-base: 1.5;
+    --line-height-lg: 1.8;
+
+    --text-h1--line-height: 1.2;
+    --text-h1--letter-spacing: 0.02em;
+
+    --text-h2: 3rem;
+    --text-h2--line-height: 1.4;
+    --text-h2--letter-spacing: 0.02em;
+
+    --text-h3: 1.5rem;
+    --text-h3--line-height: 1.25;
+    --text-h3--letter-spacing: 0.02em;
+
+    --text-column: 1.25rem;
+
+    --spacing-section: 7.5rem;
+
+    --spacing-container: 3.5rem;
+
+    --max-width-content: 80rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-base);
+    font-size: var(--text-base);
+}
+h1 {
+    font-family: var(--font-heading);
+    font-size: var(--text-h1);
+    line-height: var(--text-h1--line-height);
+    letter-spacing: var(--text-h1--letter-spacing);
+}
+h2 {
+    font-family: var(--font-heading);
+    font-size: var(--text-h2);
+    line-height: var(--text-h2--line-height);
+    letter-spacing: var(--text-h2--letter-spacing);
+}
+h3 {
+    font-family: var(--font-heading);
+    font-size: var(--text-h3);
+    line-height: var(--text-h3--line-height);
+    letter-spacing: var(--text-h3--letter-spacing);
+}
+.btn {
+    @apply inline-flex items-center justify-center rounded-full py-2 px-10 text-[18px] min-h-14;
+}
+.btn-primary {
+    background: var(--color-primary);
+    @apply text-white;
+}
+.container {
+    @apply w-full max-w-(--max-width-content) mx-auto px-(--spacing-container);
+}
+
+.text-column {
+    line-height: var(--line-height-lg);
+    font-size: var(--text-column);
+}
+.text-slogan {
+    @apply text-white shadow;
+}
+.text-number {
+    font-family: var(--font-heading);
+    @apply text-5xl font-bold;
 }

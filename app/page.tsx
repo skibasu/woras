@@ -1,21 +1,19 @@
-import { HOME_QUERY } from "@/lib/queries"
 import { wordpressClient } from "@/lib/wpgraphql"
+import { Hero } from "./components/home/Hero"
+import { HomeDocument } from "@/graphql/generated/graphql"
+import Features from "./components/home/Features"
+import Reviews from "./components/home/Reviews/Reviews"
 
 const Home = async () => {
-    const data = await wordpressClient.request(HOME_QUERY)
+    const data = await wordpressClient.request(HomeDocument)
 
     return (
-        <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-            <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-                <div>
-                    <h1>{data.page.title}</h1>
-
-                    <h2>{data.page.homePage.hero.slogan}</h2>
-
-                    <a href={data.page.homePage.hero.buttonUrl}>{data.page.homePage.hero.buttonText}</a>
-                </div>
-            </main>
-        </div>
+        <main>
+            <Hero data={data.page?.homePage?.hero} />
+            <Features data={data.page?.homePage?.features} />
+            <Reviews data={data.page?.homePage?.reviews} />
+        </main>
     )
 }
+
 export default Home
