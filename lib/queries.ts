@@ -7,7 +7,11 @@ export const HOME_QUERY = gql`
 
             homePage {
                 hero {
+                    eyebrow
                     slogan
+                    sloganAccent
+                    sloganEnd
+                    subtitle
                     buttonText
                     buttonUrl
                     backgroundImage {
@@ -16,9 +20,26 @@ export const HOME_QUERY = gql`
                             altText
                         }
                     }
+                    accentImage {
+                        node {
+                            sourceUrl
+                            altText
+                        }
+                    }
+                    serviceList {
+                        serviceTitle
+                        serviceIcon {
+                            node {
+                                sourceUrl
+                                altText
+                            }
+                        }
+                    }
                 }
 
                 gallery {
+                    title
+                    description
                     slides {
                         image {
                             node {
@@ -30,7 +51,11 @@ export const HOME_QUERY = gql`
                 }
 
                 reviews {
+                    eyebrow
                     title
+                    titleAccent
+                    accentEnd
+                    subtitle
                     backgroundImage {
                         node {
                             sourceUrl
@@ -40,7 +65,11 @@ export const HOME_QUERY = gql`
                 }
 
                 features {
+                    eyebrow
                     title
+                    titleAccent
+                    accentEnd
+                    subtitle
                     items {
                         image {
                             node {
@@ -51,7 +80,51 @@ export const HOME_QUERY = gql`
                         title
                         description
                     }
+                    accentImage {
+                        node {
+                            sourceUrl
+                            altText
+                        }
+                    }
                 }
+            }
+        }
+    }
+`
+export const PRICING_QUERY = gql`
+    query Pricing {
+        page(id: 30, idType: DATABASE_ID) {
+            title
+            pricingPage {
+                title
+                heroImage {
+                    node {
+                        sourceUrl
+                        altText
+                    }
+                }
+                categories {
+                    categoryTitle
+                    categoryIcon {
+                        node {
+                            sourceUrl
+                            altText
+                        }
+                    }
+                    thumbnail {
+                        node {
+                            sourceUrl
+                            altText
+                        }
+                    }
+                    categoryDescription
+                    items {
+                        itemTitle
+                        itemDescription
+                        price
+                    }
+                }
+                footerText
             }
         }
     }

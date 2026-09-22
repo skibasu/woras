@@ -13,9 +13,16 @@ type SlidesPerView = {
     lg: number
 }
 
+type SlideSize = {
+    base: string
+    md?: string
+    lg?: string
+}
+
 type CarouselSettings = {
     options?: EmblaOptionsType
     slidesPerView?: SlidesPerView
+    slideSize?: SlideSize
 }
 
 type Props = PropsWithChildren<{
@@ -40,6 +47,12 @@ const DEFAULT_OPTIONS: EmblaOptionsType = {
 
 const EmblaCarousel = ({ children, settings }: Props) => {
     const slidesPerView = settings?.slidesPerView ?? DEFAULT_SLIDES_PER_VIEW
+    const computedSlideSize: SlideSize = settings?.slideSize ?? {
+        base: `${100 / slidesPerView.base}%`,
+        md: `${100 / slidesPerView.md}%`,
+        lg: `${100 / slidesPerView.lg}%`,
+    }
+
     const options = useMemo(() => {
         return {
             ...DEFAULT_OPTIONS,
@@ -80,15 +93,15 @@ const EmblaCarousel = ({ children, settings }: Props) => {
     }, [emblaApi])
 
     const sliderStyle = {
-        "--embla-slide-size": `${100 / slidesPerView.base}%`,
-        "--embla-slide-size-md": `${100 / slidesPerView.md}%`,
-        "--embla-slide-size-lg": `${100 / slidesPerView.lg}%`,
+        "--embla-slide-size": computedSlideSize.base,
+        "--embla-slide-size-md": computedSlideSize.md ?? computedSlideSize.base,
+        "--embla-slide-size-lg": computedSlideSize.lg ?? computedSlideSize.md ?? computedSlideSize.base,
     } as React.CSSProperties
 
     return (
         <>
             <div className="embla relative" style={sliderStyle}>
-                <button className="none lg-block embla__prev absolute top-[50%] -left-15 hover:scale-110 cursor-pointer" onClick={scrollPrev}>
+                <button className="hidden lg:block embla__prev absolute top-[50%] -left-6 xl:-left-15 hover:scale-110 cursor-pointer" onClick={scrollPrev}>
                     <Image src="/images/arrow.svg" alt="previous" width={24} height={24} className="block rotate-180" />
                 </button>
 
@@ -102,10 +115,11 @@ const EmblaCarousel = ({ children, settings }: Props) => {
                     </div>
                 </div>
 
-                <button className="none lg-block embla__next absolute top-[50%] -right-15 hover:scale-110 cursor-pointer" onClick={scrollNext}>
+                <button className="hidden lg:block embla__next absolute top-[50%] -right-6 xl:-right-15 hover:scale-110 cursor-pointer" onClick={scrollNext}>
                     <Image src="/images/arrow.svg" alt="next" width={24} height={24} className="block" />
                 </button>
             </div>
+
             <div className="mt-10">
                 <EmblaCorouselDots count={snapCount} selectedIndex={selectedIndex} onClick={(index) => emblaApi?.scrollTo(index)} />
             </div>

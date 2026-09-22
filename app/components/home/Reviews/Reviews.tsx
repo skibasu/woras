@@ -5,6 +5,7 @@ import Image from "next/image"
 import StarsCounter from "./StarsCounter"
 import ReviewCart from "./ReviewCart"
 import EmblaCarousel from "../../ui/Carousel/EmblaCarousel"
+import SectionTitle from "../../ui/SectionTitle/SectionTitle"
 
 type ReviewsData = NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["reviews"] | undefined
 
@@ -13,7 +14,6 @@ type Props = {
 }
 const Reviews = async ({ data }: Props) => {
     const reviews = await getGoogleReviews()
-    console.log("Reviews", reviews)
 
     return (
         <section
@@ -23,10 +23,10 @@ const Reviews = async ({ data }: Props) => {
             }}
         >
             <div className="absolute inset-0 bg-linear-to-b from-black/80 via-black/40 to-transparent w-full h-full min-h-150 top-0 left-0" />
-            <div className="max-w-5xl m-auto relative z-10">
-                <h2 className="mb-6 text-center text-white">{data?.title}</h2>
+            <div className="main-container-sm relative z-10 -mx-8 md:mx-0">
+                <SectionTitle textColor="light" title={data?.title} titleAccent={data?.titleAccent} accentEnd={data?.accentEnd} eyebrow={data?.eyebrow} subtitle={data?.subtitle} />
                 <div className="flex flex-col items-center mb-12">
-                    <p className="mb-1 text-white text-center text-h3">{reviews?.displayName?.text}</p>
+                    {/* <p className="mb-1 text-white text-center text-h3">{reviews?.displayName?.text}</p> */}
                     <RatingSummary>
                         <div className="text-white flex items-center">
                             <span className="block rounded-full relative overflow-hidden mr-4 bg-white p-2">
