@@ -11,7 +11,7 @@ interface Props {
 const ReviewCart = ({ data, className }: Props) => {
     return (
         <div className={clsx("px-6 flex flex-col h-full", className)}>
-            <div className="cart py-8 px-6 flex flex-col items-center h-full">
+            <div className="cart py-8 px-6 flex flex-col h-full">
                 <div className="rounded-full relative overflow-hidden flex  mb-6">
                     <Image src={data?.authorAttribution?.photoUri || "/images/default-avatar.png"} alt={data?.authorAttribution?.displayName || "Anonymous"} width={70} height={70} className="block shrink-0 grow-0" />
                     <div className="shrink-0 grow-0 pl-3">

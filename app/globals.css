@@ -194,19 +194,19 @@ h4 {
 }
 
 .embla__slide {
-    flex: 0 0 var(--embla-slide-size, 100%);
+    flex: 0 0 100%;
     min-width: 0;
 }
 
 @media (min-width: 768px) {
     .embla__slide {
-        flex-basis: var(--embla-slide-size-md, var(--embla-slide-size, 100%));
+        flex-basis: 50%;
     }
 }
 
 @media (min-width: 1024px) {
     .embla__slide {
-        flex-basis: var(--embla-slide-size-lg, var(--embla-slide-size-md, var(--embla-slide-size, 100%)));
+        flex-basis: 33.333333%;
     }
 }
 

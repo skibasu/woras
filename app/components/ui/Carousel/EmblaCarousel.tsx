@@ -1,41 +1,12 @@
 "use client"
 
-import type { EmblaOptionsType } from "embla-carousel"
 import useEmblaCarousel from "embla-carousel-react"
 import Image from "next/image"
-import { Children, PropsWithChildren, useEffect, useMemo, useState } from "react"
+import { Children, PropsWithChildren, useEffect, useState } from "react"
 
 import EmblaCorouselDots from "./EmblaCorouselDots"
 
-type SlidesPerView = {
-    base: number
-    md: number
-    lg: number
-}
-
-type SlideSize = {
-    base: string
-    md?: string
-    lg?: string
-}
-
-type CarouselSettings = {
-    options?: EmblaOptionsType
-    slidesPerView?: SlidesPerView
-    slideSize?: SlideSize
-}
-
-type Props = PropsWithChildren<{
-    settings?: CarouselSettings
-}>
-
-const DEFAULT_SLIDES_PER_VIEW: SlidesPerView = {
-    base: 1,
-    md: 2,
-    lg: 3,
-}
-
-const DEFAULT_OPTIONS: EmblaOptionsType = {
+const DEFAULT_OPTIONS = {
     loop: true,
     align: "start",
     slidesToScroll: 1,
@@ -45,26 +16,8 @@ const DEFAULT_OPTIONS: EmblaOptionsType = {
     },
 }
 
-const EmblaCarousel = ({ children, settings }: Props) => {
-    const slidesPerView = settings?.slidesPerView ?? DEFAULT_SLIDES_PER_VIEW
-    const computedSlideSize: SlideSize = settings?.slideSize ?? {
-        base: `${100 / slidesPerView.base}%`,
-        md: `${100 / slidesPerView.md}%`,
-        lg: `${100 / slidesPerView.lg}%`,
-    }
-
-    const options = useMemo(() => {
-        return {
-            ...DEFAULT_OPTIONS,
-            ...settings?.options,
-            breakpoints: {
-                ...DEFAULT_OPTIONS.breakpoints,
-                ...settings?.options?.breakpoints,
-            },
-        } satisfies EmblaOptionsType
-    }, [settings?.options])
-
-    const [emblaRef, emblaApi] = useEmblaCarousel(options)
+const EmblaCarousel = ({ children }: PropsWithChildren) => {
+    const [emblaRef, emblaApi] = useEmblaCarousel(DEFAULT_OPTIONS)
 
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [snapCount, setSnapCount] = useState(0)
@@ -92,15 +45,9 @@ const EmblaCarousel = ({ children, settings }: Props) => {
         }
     }, [emblaApi])
 
-    const sliderStyle = {
-        "--embla-slide-size": computedSlideSize.base,
-        "--embla-slide-size-md": computedSlideSize.md ?? computedSlideSize.base,
-        "--embla-slide-size-lg": computedSlideSize.lg ?? computedSlideSize.md ?? computedSlideSize.base,
-    } as React.CSSProperties
-
     return (
         <>
-            <div className="embla relative" style={sliderStyle}>
+            <div className="embla relative">
                 <button className="hidden lg:block embla__prev absolute top-[50%] -left-6 xl:-left-15 hover:scale-110 cursor-pointer" onClick={scrollPrev}>
                     <Image src="/images/arrow.svg" alt="previous" width={24} height={24} className="block rotate-180" />
                 </button>

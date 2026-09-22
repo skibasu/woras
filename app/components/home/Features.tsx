@@ -1,4 +1,3 @@
-import React from "react"
 import { HomeQuery } from "@/graphql/generated/graphql"
 import Image from "next/image"
 import Link from "next/link"

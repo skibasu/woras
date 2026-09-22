@@ -41,18 +41,7 @@ const Reviews = async ({ data }: Props) => {
                     </RatingSummary>
                 </div>
 
-                <EmblaCarousel
-                    settings={{
-                        options: {
-                            loop: true,
-                        },
-                        slidesPerView: {
-                            base: 1,
-                            md: 2,
-                            lg: 3,
-                        },
-                    }}
-                >
+                <EmblaCarousel>
                     {reviews?.reviews?.map((review, index) => {
                         return <ReviewCart key={index} data={review} />
                     })}
