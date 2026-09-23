@@ -8,7 +8,7 @@ type HeaderProps = {
 const Header = ({ data }: HeaderProps) => {
     return (
         <header className="header">
-            <div className="main-section py-2 flex justify-between items-center">
+            <div className="page-section py-2 flex justify-between items-center">
                 <Link href="/">{data?.logo?.node?.sourceUrl ? <Image src={data.logo.node.sourceUrl} alt={data.logo.node.altText || "Logo"} width={200} height={50} className="h-[50px] w-auto" /> : <span className="text-white text-lg font-bold">Logo</span>}</Link>
                 <nav className="hidden md:flex gap-5 items-center">
                     <Link className="menu-link p-2" href="/">

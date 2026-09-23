@@ -1,5 +1,6 @@
 import type { HomeQuery } from "@/graphql/generated/graphql"
 import Image from "next/image"
+import SectionTitle from "../../ui/SectionTitle/SectionTitle"
 
 type GalleryData = NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["gallery"] | undefined
 
@@ -15,8 +16,13 @@ const Gallery = ({ data }: Props) => {
     }
 
     return (
-        <section className="py-24 flex flex-col items-center">
-            <h2 className="text-center mb-24">Gallery</h2>
+        <section
+            className="bg-content bg-center bg-no-repeat relative section-y-spacing section-full-height"
+            style={{
+                backgroundImage: `url("/images/background-gallery.svg")`,
+            }}
+        >
+            <SectionTitle className="mb-10 lg:mb-16" title={data?.title} titleAccent={data?.titleAccent} accentEnd={data?.accentEnd} eyebrow={data?.eyebrow} subtitle={data?.subtitle} />
             <div className="main-container">
                 <div className="gallery-grid w-full">
                     {slides.map((item, index) => {

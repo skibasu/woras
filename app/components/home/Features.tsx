@@ -12,18 +12,18 @@ const Features = ({ data }: FeaturesProps) => {
     return (
         <section className="section-y-spacing relative overflow-hidden">
             <div className="main-container-sm relative z-30">
-                <SectionTitle title={data?.title} titleAccent={data?.titleAccent} accentEnd={data?.accentEnd} eyebrow={data?.eyebrow} subtitle={data?.subtitle} />
+                <SectionTitle className="mb-10 lg:mb-16" title={data?.title} titleAccent={data?.titleAccent} accentEnd={data?.accentEnd} eyebrow={data?.eyebrow} subtitle={data?.subtitle} />
                 <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3">
                     {data?.items?.map((feature, i) => {
                         const className = i == 2 ? { className: "md:col-span-2 md:justify-self-center lg:col-span-1" } : {}
                         return (
                             <div key={i} {...className}>
-                                <div className="px-4 py-4 text-center">
+                                <div className="px-4 text-center">
                                     <div className="relative w-full overflow-hidden flex justify-center">
                                         <Image src={feature?.image?.node?.sourceUrl ?? ""} alt={feature?.image?.node?.altText ?? ""} width={400} height={400} className="h-[95px]" loading="lazy" />
                                     </div>
                                     <h3 className="mb-6 mt-8">{feature?.title}</h3>
-                                    <p className="text-column">{feature?.description}</p>
+                                    <p className="text-lg leading-[1.3]">{feature?.description}</p>
                                 </div>
                             </div>
                         )

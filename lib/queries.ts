@@ -38,8 +38,11 @@ export const HOME_QUERY = gql`
                 }
 
                 gallery {
+                    eyebrow
                     title
-                    description
+                    titleAccent
+                    accentEnd
+                    subtitle
                     slides {
                         image {
                             node {
@@ -96,7 +99,11 @@ export const PRICING_QUERY = gql`
         page(id: 30, idType: DATABASE_ID) {
             title
             pricingPage {
+                eyebrow
                 title
+                titleAccent
+                accentEnd
+                subtitle
                 heroImage {
                     node {
                         sourceUrl

@@ -1,12 +1,13 @@
 "use client"
 
+import type { EmblaOptionsType } from "embla-carousel"
 import useEmblaCarousel from "embla-carousel-react"
 import Image from "next/image"
 import { Children, PropsWithChildren, useEffect, useState } from "react"
 
 import EmblaCorouselDots from "./EmblaCorouselDots"
 
-const DEFAULT_OPTIONS = {
+const DEFAULT_OPTIONS: EmblaOptionsType = {
     loop: true,
     align: "start",
     slidesToScroll: 1,
@@ -48,7 +49,7 @@ const EmblaCarousel = ({ children }: PropsWithChildren) => {
     return (
         <>
             <div className="embla relative">
-                <button className="hidden lg:block embla__prev absolute top-[50%] -left-6 xl:-left-15 hover:scale-110 cursor-pointer" onClick={scrollPrev}>
+                <button className="hidden lg:block embla__prev absolute top-[50%] lg:-left-15 hover:scale-120 cursor-pointer" onClick={scrollPrev}>
                     <Image src="/images/arrow.svg" alt="previous" width={24} height={24} className="block rotate-180" />
                 </button>
 
@@ -62,7 +63,7 @@ const EmblaCarousel = ({ children }: PropsWithChildren) => {
                     </div>
                 </div>
 
-                <button className="hidden lg:block embla__next absolute top-[50%] -right-6 xl:-right-15 hover:scale-110 cursor-pointer" onClick={scrollNext}>
+                <button className="hidden lg:block embla__next absolute top-[50%]  lg:-right-15 hover:scale-120 cursor-pointer" onClick={scrollNext}>
                     <Image src="/images/arrow.svg" alt="next" width={24} height={24} className="block" />
                 </button>
             </div>

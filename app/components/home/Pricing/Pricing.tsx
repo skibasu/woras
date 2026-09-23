@@ -1,21 +1,23 @@
 import { PricingDocument } from "@/graphql/generated/graphql"
 import { wordpressClient } from "@/lib/wpgraphql"
 import Image from "next/image"
+import SectionTitle from "../../ui/SectionTitle/SectionTitle"
 
 const Pricing = async () => {
     const data = await wordpressClient.request(PricingDocument)
 
     return (
         <section
-            className="py-14 min-h-175 bg-cover bg-center bg-no-repeat relative"
+            className="page-section section-y-spacing section-full-height bg-cover bg-center bg-no-repeat relative"
             style={{
                 backgroundImage: `url(${data?.page?.pricingPage?.heroImage?.node?.sourceUrl})`,
             }}
         >
             <div className="absolute inset-0 bg-linear-to-b from-black/80 via-black/40 to-transparent w-full h-full min-h-150 top-0 left-0" />
 
-            <div className="main-container relative z-10">
-                <h2 className="mb-24 text-center text-white">{data?.page?.pricingPage?.title ?? ""}</h2>
+            <div className="relative z-10">
+                <SectionTitle className="mb-10 lg:mb-16" title={data?.page?.pricingPage?.title} titleAccent={data?.page?.pricingPage?.titleAccent} accentEnd={data?.page?.pricingPage?.accentEnd} eyebrow={data?.page?.pricingPage?.eyebrow} subtitle={data?.page?.pricingPage?.subtitle} textColor="light" />
+
                 <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {data.page?.pricingPage?.categories?.map((item, i) => (
                         <div key={i} className="cart">
@@ -36,7 +38,7 @@ const Pricing = async () => {
                                                 <h4 className="first-letter:uppercase">{subItem?.itemTitle ?? ""}</h4>
                                                 <p className="shrink-0 grow-0 pl-5">{subItem?.price ?? 0}</p>
                                             </div>
-                                            <p className="first-letter:uppercase text-reset">{subItem?.itemDescription ?? ""}</p>
+                                            <p className="first-letter:uppercase text-sm">{subItem?.itemDescription ?? ""}</p>
                                         </li>
                                     ))}
                                 </ul>
