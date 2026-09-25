@@ -20,17 +20,17 @@ const PricingCart = ({ item }: Props) => {
                     <h4 className="with-mini-accent-separator-right flex items-center text-primary">01</h4>
                 </div> */}
                 <div className="mb-8">
-                    <h3 className="">{item?.categoryTitle ?? ""}</h3>
+                    <h3 className="text-black/80">{item?.categoryTitle ?? ""}</h3>
                     {item?.categoryDescription && <p>{item?.categoryDescription ?? ""}</p>}
                 </div>
                 <ul>
                     {item?.items?.map((subItem, j) => (
                         <li key={j} className="flex flex-col pb-4  mb-4">
                             <div className="flex justify-between border-b border-gray-300 pb-2 mb-2">
-                                <h4 className="first-letter:uppercase ">{subItem?.itemTitle ?? ""}</h4>
-                                {subItem?.price && <p className="shrink-0 grow-0 pl-5 font-semibold">{`$${subItem.price}`}</p>}
+                                <h4 className="first-letter:uppercase text-black/80">{subItem?.itemTitle ?? ""}</h4>
+                                {subItem?.price && <p className="shrink-0 grow-0 pl-5 font-semibold text-black/70">{`$${subItem.price}`}</p>}
                             </div>
-                            <p className="first-letter:uppercase text-sm">{subItem?.itemDescription ?? ""}</p>
+                            <p className="first-letter:uppercase text-sm text-black/80">{subItem?.itemDescription ?? ""}</p>
                         </li>
                     ))}
                 </ul>

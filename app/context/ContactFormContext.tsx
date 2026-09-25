@@ -4,9 +4,9 @@ import { createContext, useContext, useMemo, useState, type ReactNode } from "re
 
 type ContactFormContextValue = {
     isSuccess: boolean
-    setIsSuccess: (value: boolean) => void
     successMessage: string | null
-    setSuccessMessage: (value: string | null) => void
+    setSubmissionResult: (value: { isSuccess: boolean; successMessage: string | null }) => void
+    clearSubmissionResult: () => void
 }
 
 const ContactFormContext = createContext<ContactFormContextValue | null>(null)
@@ -19,12 +19,22 @@ export const ContactFormProvider = ({ children }: ContactFormProviderProps) => {
     const [isSuccess, setIsSuccess] = useState(false)
     const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
+    const setSubmissionResult = ({ isSuccess, successMessage }: { isSuccess: boolean; successMessage: string | null }) => {
+        setIsSuccess(isSuccess)
+        setSuccessMessage(successMessage)
+    }
+
+    const clearSubmissionResult = () => {
+        setIsSuccess(false)
+        setSuccessMessage(null)
+    }
+
     const value = useMemo(
         () => ({
             isSuccess,
-            setIsSuccess,
             successMessage,
-            setSuccessMessage,
+            setSubmissionResult,
+            clearSubmissionResult,
         }),
         [isSuccess, successMessage],
     )

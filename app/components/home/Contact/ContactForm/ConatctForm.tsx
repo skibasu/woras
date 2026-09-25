@@ -4,6 +4,7 @@ import { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import { useContactFormContext } from "@/app/context/ContactFormContext"
 import ClipIcon from "@/app/components/ui/IconsSvg/ClipIcon"
 import Input from "@/app/components/ui/Form/Input"
 import Textarea from "@/app/components/ui/Form/Textarea"
@@ -102,10 +103,10 @@ const resizeImageToJpegDataUrl = async (file: File): Promise<MailAttachment> => 
 }
 
 const ContactForm = () => {
+    const { successMessage, setSubmissionResult, clearSubmissionResult } = useContactFormContext()
     const [images, setImages] = useState<File[]>([])
     const [imagesError, setImagesError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
-    const [successMessage, setSuccessMessage] = useState<string | null>(null)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [fileInputKey, setFileInputKey] = useState(0)
     const fileInputRef = useRef<HTMLInputElement>(null)
@@ -124,7 +125,7 @@ const ContactForm = () => {
             return
         }
 
-        setSuccessMessage(null)
+        clearSubmissionResult()
         setErrorMessage(null)
 
         try {
@@ -139,45 +140,26 @@ const ContactForm = () => {
                 return
             }
 
-            const response = await fetch("/contact.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    login: data.login,
-                    email: data.email,
-                    message: data.message,
-                    attachments,
-                }),
+            console.log("CONTACT FORM SUBMISSION", {
+                login: data.login,
+                email: data.email,
+                message: data.message,
+                attachments,
             })
 
-            let result: { success?: boolean; message?: string } = {}
-            try {
-                result = await response.json()
-            } catch {
-                result = {}
-            }
-
-            if (!response.ok) {
-                setErrorMessage(result.message || "Server returned an error while sending the message.")
-                setLoading(false)
-                return
-            }
-
-            if (result.success === true) {
-                setSuccessMessage("Your message has been sent successfully!")
-                setImages([])
-                setImagesError(null)
-                setErrorMessage(null)
-                reset()
-                setFileInputKey((prev) => prev + 1)
-            } else {
-                setErrorMessage(result.message || "Message was not accepted by the mail service.")
-            }
+            setSubmissionResult({
+                isSuccess: true,
+                successMessage: "Your message has been sent successfully!",
+            })
+            setImages([])
+            setImagesError(null)
+            setErrorMessage(null)
+            reset()
+            setFileInputKey((prev) => prev + 1)
 
             setLoading(false)
         } catch (error) {
+            clearSubmissionResult()
             setLoading(false)
             if (error instanceof Error && error.message) {
                 setErrorMessage(error.message)

@@ -6,7 +6,7 @@ import OpeningHours from "./OpeningHours"
 import ContactInfo from "./ContactInfo"
 import WhatsApp from "./Whatsapp"
 import Image from "next/image"
-import Tabs from "./Tabs/Tabs"
+import ContactFormResultView from "./ContactFormResultView/ContactFormResultView"
 
 const Contact = async () => {
     const data = await wordpressClient.request(ContactDocument)
@@ -28,7 +28,7 @@ const Contact = async () => {
 
                     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-20">
                         <div className="cart bg-white p-6 lg:p-8 lg:col-span-2 lg:order-2 relative overflow-hidden">
-                            <Tabs />
+                            <ContactFormResultView />
                         </div>
 
                         <div className="cart p-6 lg:p-8 lg:col-span-1 lg:order-1">

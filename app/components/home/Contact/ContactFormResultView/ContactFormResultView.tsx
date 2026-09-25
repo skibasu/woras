@@ -1,11 +1,12 @@
 "use client"
 import { useContactFormContext } from "@/app/context/ContactFormContext"
 import ContactForm from "../ContactForm/ConatctForm"
+import SuccessMessage from "../SuccessMessage/SuccessMessage"
 
-const Tabs = () => {
+const ContactFormResultView = () => {
     const { isSuccess, successMessage } = useContactFormContext()
 
-    return isSuccess ? <p>{successMessage}</p> : <ContactForm />
+    return isSuccess ? <SuccessMessage /> : <ContactForm />
 }
 
-export default Tabs
+export default ContactFormResultView

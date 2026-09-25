@@ -22,8 +22,8 @@
     --color-link: var(--link);
     --color-link-hover: var(--link-hover);
     --color-whatsapp: #455a64;
-    --font-base: var(--font-barlow);
-    --font-heading: var(--font-barlow);
+    --font-base: var(--font-roboto);
+    --font-heading: var(--font-roboto);
     --font-slogan: var(--font-squada-one);
 
     --text-sm: 0.875rem;
@@ -36,11 +36,11 @@
     --text-h1--letter-spacing: 0.02em;
 
     --text-h2: 3rem;
-    --text-h2--line-height: 1.4;
+    --text-h2--line-height: 1.2;
     --text-h2--letter-spacing: 0.02em;
 
     --text-h3: 1.5rem;
-    --text-h3--line-height: 1.25;
+    --text-h3--line-height: 1.2;
     --text-h3--letter-spacing: 0.02em;
 
     --text-h4: 1.25rem;
@@ -63,50 +63,52 @@
 }
 
 /* Base elements */
-body {
-    background: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-base);
-    font-size: var(--text-base);
-}
-button {
-    @apply cursor-pointer;
-}
-p {
-    font-size: var(--text-base);
-    line-height: var(--line-height-base);
-}
+@layer base {
+    body {
+        background: var(--background);
+        color: var(--foreground);
+        font-family: var(--font-base);
+        font-size: var(--text-base);
+    }
+    button {
+        @apply cursor-pointer;
+    }
+    p {
+        font-size: var(--text-base);
+        line-height: var(--line-height-base);
+    }
 
-h1 {
-    font-family: var(--font-heading);
-    font-size: var(--text-h1);
-    line-height: var(--text-h1--line-height);
-    letter-spacing: var(--text-h1--letter-spacing);
-    font-weight: 500;
-}
+    h1 {
+        font-family: var(--font-heading);
+        font-size: var(--text-h1);
+        line-height: var(--text-h1--line-height);
+        letter-spacing: var(--text-h1--letter-spacing);
+        font-weight: 500;
+    }
 
-h2 {
-    font-family: var(--font-heading);
-    font-size: var(--text-h2);
-    line-height: var(--text-h2--line-height);
-    letter-spacing: var(--text-h2--letter-spacing);
-    font-weight: 600;
-}
+    h2 {
+        font-family: var(--font-heading);
+        font-size: var(--text-h2);
+        line-height: var(--text-h2--line-height);
+        letter-spacing: var(--text-h2--letter-spacing);
+        font-weight: 500;
+    }
 
-h3 {
-    font-family: var(--font-heading);
-    font-size: var(--text-h3);
-    line-height: var(--text-h3--line-height);
-    letter-spacing: var(--text-h3--letter-spacing);
-    font-weight: 600;
-}
+    h3 {
+        font-family: var(--font-heading);
+        font-size: var(--text-h3);
+        line-height: var(--text-h3--line-height);
+        letter-spacing: var(--text-h3--letter-spacing);
+        font-weight: 500;
+    }
 
-h4 {
-    font-family: var(--font-heading);
-    font-size: var(--text-h4);
-    line-height: var(--text-h4--line-height);
-    letter-spacing: var(--text-h4--letter-spacing);
-    font-weight: 500;
+    h4 {
+        font-family: var(--font-heading);
+        font-size: var(--text-h4);
+        line-height: var(--text-h4--line-height);
+        letter-spacing: var(--text-h4--letter-spacing);
+        font-weight: 500;
+    }
 }
 
 /* Layout */
@@ -200,7 +202,7 @@ h4 {
 }
 
 /* Text helpers */
-.text-slogan {
+.text-page-slogan {
     @apply uppercase text-[14vw] sm:text-8xl xl:text-9xl font-slogan leading-none font-normal;
 }
 
