@@ -1,6 +1,6 @@
 import { GoogleReview } from "@/lib/google-reviews"
 import Image from "next/image"
-import StarsCounter from "./StarsCounter"
+import StarsCounter from "./Rating/StarsCounter"
 import { TextExcerpt } from "../../ui/TextExcerpt"
 import { clsx } from "clsx"
 
@@ -8,7 +8,13 @@ interface Props {
     data: GoogleReview | undefined
     className?: string
 }
+enum ReviewLimit {
+    REVIEW_LIMIT = 320,
+}
 const ReviewCart = ({ data, className }: Props) => {
+    const reiewLimit = ReviewLimit.REVIEW_LIMIT
+
+    const isFullReview = (length: number, limit: number = reiewLimit) => limit >= length
     return (
         <div className={clsx("flex flex-col h-full", className)}>
             <div className="cart py-8 px-6 flex flex-col h-full">
@@ -33,16 +39,16 @@ const ReviewCart = ({ data, className }: Props) => {
                     </div>
                 </div>
                 <div className="pb-6">
-                    <p className=" text-base leading-[1.5]">
-                        <TextExcerpt text={data?.text?.text || ""} maxLength={120} />
+                    <p className="text-base leading-normal">
+                        <TextExcerpt text={data?.text?.text || ""} maxLength={ReviewLimit.REVIEW_LIMIT} />
                     </p>
                 </div>
                 <div className="flex w-full items-center mt-auto pt-3 border-t border-gray-300">
-                    <div className="p-1 rounded-full border border-gray-300 bg-background">
-                        <Image src="/images/google.svg" alt="Google Logo" width={20} height={20} className="block" />
+                    <div className="p-1">
+                        <Image src="/images/google-icon-s.svg" alt="Google Logo" width={43} height={39} className="block" />
                     </div>
                     <div className="pl-4 w-full text-reset">
-                        <a href={data?.googleMapsUri} className="link" target="_blank" rel="noopener noreferrer">
+                        <a href={data?.googleMapsUri} className={clsx("link", isFullReview(data?.text?.text?.length || 0, ReviewLimit.REVIEW_LIMIT) && "link-disabled")} target="_blank" rel="noopener noreferrer">
                             Read full review
                         </a>
                     </div>

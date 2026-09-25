@@ -1,6 +1,8 @@
 import { GlobalSettingsQuery } from "@/graphql/generated/graphql"
+import EmailIcon from "@/app/components/ui/IconsSvg/EmailIcon"
 import Link from "next/link"
 import Image from "next/image"
+import PhoneIcon from "../../ui/IconsSvg/PhoneIcon"
 
 type HeaderProps = {
     data: NonNullable<NonNullable<GlobalSettingsQuery["page"]>["generalSettingsFields"]>["branding"] | undefined
@@ -26,9 +28,14 @@ const Header = ({ data }: HeaderProps) => {
                     <Link className="menu-link p-2" href="/#pricing">
                         Pricing
                     </Link>
-                    <Link href="/contact" className="btn btn-primary btn-sm ml-3">
-                        Contact Us
-                    </Link>
+                    <div className="flex gap-2 items-center pl-3">
+                        {/* <Link href="/contact" className="block btn-rounded btn-primary h-8 w-8">
+                            <EmailIcon className="block h-full w-auto text-current" aria-hidden="true" />
+                        </Link> */}
+                        <Link href="/contact" className="block btn-rounded btn-primary h-8 w-8">
+                            <PhoneIcon className="block h-full w-auto text-current" aria-hidden="true" />
+                        </Link>
+                    </div>
                 </nav>
             </div>
         </header>

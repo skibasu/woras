@@ -83,12 +83,6 @@ export const HOME_QUERY = gql`
                         title
                         description
                     }
-                    accentImage {
-                        node {
-                            sourceUrl
-                            altText
-                        }
-                    }
                 }
             }
         }
@@ -153,6 +147,33 @@ export const GLOBAL_SETTINGS_QUERY = gql`
                             altText
                         }
                     }
+                }
+            }
+        }
+    }
+`
+export const CONTACT_QUERY = gql`
+    query Contact {
+        page(id: 44, idType: DATABASE_ID) {
+            title
+            contactPage {
+                eyebrow
+                title
+                titleAccent
+                accentEnd
+                subtitle
+                companyName
+                phone
+                email
+                whatsupEyeBrow
+                whatsappButtonLabel
+                whatsappButtonUrl
+                whatsappSubtitle
+                openingHours {
+                    day
+                    from
+                    to
+                    closed
                 }
             }
         }

@@ -1,11 +1,10 @@
 import type { HomeQuery } from "@/graphql/generated/graphql"
 import { getGoogleReviews } from "@/lib/google-reviews"
-import RatingSummary from "./RatingSummary"
-import Image from "next/image"
-import StarsCounter from "./StarsCounter"
-import ReviewCart from "./ReviewCart"
-import EmblaCarousel from "../../ui/Carousel/EmblaCarousel"
+import RatingSummary from "./Rating/RatingSummary"
+import ReviewsSlider from "./ReviewsSlider"
+import StarsCounter from "./Rating/StarsCounter"
 import SectionTitle from "../../ui/SectionTitle/SectionTitle"
+import Overlay from "../../ui/Overlay/Overlay"
 
 type ReviewsData = NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["reviews"] | undefined
 
@@ -17,35 +16,22 @@ const Reviews = async ({ data }: Props) => {
 
     return (
         <section
-            className="bg-cover bg-center bg-no-repeat relative section-y-spacing section-full-height"
+            className="page-section bg-image-cover relative section-y-spacing section-full-height "
             style={{
                 backgroundImage: `url(${data?.backgroundImage?.node?.sourceUrl})`,
             }}
         >
-            <div className="absolute inset-0 bg-linear-to-b from-black/80 via-black/40 to-transparent w-full h-full min-h-150 top-0 left-0" />
-            <div className="main-container-sm relative z-10">
+            <div className="absolute inset-0 bg-linear-to-t from-black/50 via-black/60 to-black/80 w-full h-full top-0 left-0" />
+
+            <div className="main-container relative z-10">
                 <SectionTitle className="mb-10 lg:mb-16" textColor="light" title={data?.title} titleAccent={data?.titleAccent} accentEnd={data?.accentEnd} eyebrow={data?.eyebrow} subtitle={data?.subtitle} />
                 <div className="flex flex-col items-center mb-12">
-                    {/* <p className="mb-1 text-white text-center text-h3">{reviews?.displayName?.text}</p> */}
-                    <RatingSummary>
-                        <div className="text-white flex items-center">
-                            <span className="block rounded-full relative overflow-hidden mr-4 bg-white p-2 w-10 h-10">
-                                <Image src="/images/google.svg" alt="Google Logo" width={42} height={42} className="block w-full h-full" />
-                            </span>
-                            <span className="block text-number mr-8">{reviews?.rating?.toFixed(1) || 0}</span>
-                            <div>
-                                <StarsCounter rating={reviews?.rating || 0} />
-                                <span className="block text-sm mt-1">({reviews?.userRatingCount || 0}) Reviews</span>
-                            </div>
-                        </div>
+                    <RatingSummary rating={reviews?.rating || 0} reviewsCount={reviews?.userRatingCount || 0}>
+                        <StarsCounter rating={reviews?.rating || 0} />
                     </RatingSummary>
                 </div>
 
-                <EmblaCarousel>
-                    {reviews?.reviews?.map((review, index) => {
-                        return <ReviewCart key={index} data={review} />
-                    })}
-                </EmblaCarousel>
+                <ReviewsSlider reviews={reviews?.reviews} />
             </div>
         </section>
     )

@@ -1,50 +1,31 @@
 import { PricingDocument } from "@/graphql/generated/graphql"
 import { wordpressClient } from "@/lib/wpgraphql"
-import Image from "next/image"
 import SectionTitle from "../../ui/SectionTitle/SectionTitle"
+import PricingCart from "./PricingCart"
 
 const Pricing = async () => {
     const data = await wordpressClient.request(PricingDocument)
 
     return (
         <section
-            className="page-section section-y-spacing section-full-height bg-cover bg-center bg-no-repeat relative"
+            className="page-section section-y-spacing section-full-height bg-image-cover relative"
             style={{
                 backgroundImage: `url(${data?.page?.pricingPage?.heroImage?.node?.sourceUrl})`,
             }}
         >
-            <div className="absolute inset-0 bg-linear-to-b from-black/80 via-black/40 to-transparent w-full h-full min-h-150 top-0 left-0" />
+            <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black/20 w-full h-full top-0 left-0" />
 
-            <div className="relative z-10">
+            <div className="relative z-10 md:max-w-5xl 2xl:max-w-full m-auto">
                 <SectionTitle className="mb-10 lg:mb-16" title={data?.page?.pricingPage?.title} titleAccent={data?.page?.pricingPage?.titleAccent} accentEnd={data?.page?.pricingPage?.accentEnd} eyebrow={data?.page?.pricingPage?.eyebrow} subtitle={data?.page?.pricingPage?.subtitle} textColor="light" />
 
-                <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {data.page?.pricingPage?.categories?.map((item, i) => (
-                        <div key={i} className="cart">
-                            <div className="h-24 w-full bg-cover bg-center bg-no-repeat relative" style={{ backgroundImage: `url(${item?.thumbnail?.node?.sourceUrl})` }}>
-                                <div className="w-12 h-12 rounded-full p-3 overflow-hidden border border-gray-300 absolute -bottom-4.5 left-1/2 -translate-x-1/2 flex items-center justify-center bg-gray-200 text-orange-700">
-                                    <Image src={item?.categoryIcon?.node?.sourceUrl ?? "/images/icon-3.svg"} alt={item?.thumbnail?.node?.altText ?? ""} width={24} height={24} className="block" />
-                                </div>
-                            </div>
-                            <div className="pb-6 pt-10 px-4">
-                                <div className="mb-6">
-                                    <h3 className="text-center">{item?.categoryTitle ?? ""}</h3>
-                                    {item?.categoryDescription && <p>{item?.categoryDescription ?? ""}</p>}
-                                </div>
-                                <ul>
-                                    {item?.items?.map((subItem, j) => (
-                                        <li key={j} className="flex flex-col pb-3 border-b border-gray-300 mb-3">
-                                            <div className="flex justify-between">
-                                                <h4 className="first-letter:uppercase">{subItem?.itemTitle ?? ""}</h4>
-                                                <p className="shrink-0 grow-0 pl-5">{subItem?.price ?? 0}</p>
-                                            </div>
-                                            <p className="first-letter:uppercase text-sm">{subItem?.itemDescription ?? ""}</p>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    ))}
+                <div className="grid grid-cols-1  md:grid-cols-2 2xl:grid-cols-4 gap-6 lg:gap-10 2xl-gap-6">
+                    {data.page?.pricingPage?.categories?.map((item, i) => {
+                        if (!item) {
+                            return null
+                        }
+
+                        return <PricingCart key={i} item={item} />
+                    })}
                 </div>
             </div>
         </section>

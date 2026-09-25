@@ -4,9 +4,13 @@
 :root {
     --background: #ffffff;
     --foreground: #000000;
-    --primary: crimson;
-    --secondary: #ff6600;
-    --primary-hover: #b01030;
+    --primary: #417c22;
+    --primary-hover: #315f19;
+
+    --accent: #ff6600;
+
+    --link: #1769aa;
+    --link-hover: #ff6600;
 }
 
 /* Theme tokens */
@@ -14,10 +18,13 @@
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --color-primary: var(--primary);
-    --color-secondary: var(--secondary);
-
-    --font-base: var(--font-share);
-    --font-heading: var(--font-squada-one);
+    --color-accent: var(--accent);
+    --color-link: var(--link);
+    --color-link-hover: var(--link-hover);
+    --color-whatsapp: #455a64;
+    --font-base: var(--font-barlow);
+    --font-heading: var(--font-barlow);
+    --font-slogan: var(--font-squada-one);
 
     --text-sm: 0.875rem;
     --text-base: 1.125rem;
@@ -46,6 +53,8 @@
     --letter-spacing-base: 0.02em;
     --letter-spacing-lg: 0.04em;
     --letter-spacing-xl: 0.065em;
+    --letter-spacing-2xl: 0.1em;
+    --letter-spacing-3xl: 0.15em;
 
     --spacing-section: 7.5rem;
     --spacing-container: 3.5rem;
@@ -73,6 +82,7 @@ h1 {
     font-size: var(--text-h1);
     line-height: var(--text-h1--line-height);
     letter-spacing: var(--text-h1--letter-spacing);
+    font-weight: 500;
 }
 
 h2 {
@@ -80,6 +90,7 @@ h2 {
     font-size: var(--text-h2);
     line-height: var(--text-h2--line-height);
     letter-spacing: var(--text-h2--letter-spacing);
+    font-weight: 600;
 }
 
 h3 {
@@ -87,6 +98,7 @@ h3 {
     font-size: var(--text-h3);
     line-height: var(--text-h3--line-height);
     letter-spacing: var(--text-h3--letter-spacing);
+    font-weight: 600;
 }
 
 h4 {
@@ -94,6 +106,7 @@ h4 {
     font-size: var(--text-h4);
     line-height: var(--text-h4--line-height);
     letter-spacing: var(--text-h4--letter-spacing);
+    font-weight: 500;
 }
 
 /* Layout */
@@ -102,15 +115,15 @@ h4 {
 }
 
 .main-container {
-    @apply w-full max-w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto px-4;
+    @apply w-full max-w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto;
 }
 
 .main-container-sm {
-    @apply w-full max-w-96 md:max-w-2xl lg:max-w-4xl xl:max-w-5xl m-auto px-4;
+    @apply w-full max-w-96 md:max-w-2xl lg:max-w-4xl xl:max-w-5xl m-auto;
 }
 
 .page-section {
-    @apply w-full px-5 md:px-10 lg:px-section;
+    @apply w-full px-5 md:px-10 2xl:px-section;
 }
 
 .hero-section {
@@ -124,12 +137,25 @@ h4 {
     min-height: calc(100dvh - var(--height-header));
 }
 
+.bg-image-cover {
+    @apply bg-cover bg-center bg-no-repeat;
+}
+
 /* Buttons and links */
 .btn {
     letter-spacing: var(--letter-spacing-lg);
     @apply inline-flex items-center justify-center rounded-full py-2 px-10 text-[18px] min-h-14 uppercase text-lg font-bold;
 }
-
+.btn-rounded {
+    letter-spacing: var(--letter-spacing-lg);
+    @apply inline-flex items-center justify-center rounded-full py-2 px-2 text-[18px]  uppercase text-lg font-bold;
+}
+.btn-whatsapp {
+    @apply inline-flex items-center justify-center rounded-full py-2 px-10 text-[18px] min-h-14 text-base font-bold text-white;
+}
+.btn-wathsapp-primary {
+    background: var(--color-whatsapp);
+}
 .btn-primary {
     background: var(--color-primary);
     @apply text-white;
@@ -144,11 +170,17 @@ h4 {
     @apply py-2 px-4 min-h-10 text-sm;
 }
 
-.link {
-    color: var(--color-primary);
-    text-decoration: none;
+.btn-full-rounded {
+    @apply rounded-full;
 }
-
+.link {
+    color: var(--color-link);
+    text-decoration: none;
+    @apply hover:text-link-hover;
+}
+.link-disabled {
+    @apply pointer-events-none opacity-50 cursor-not-allowed text-gray-400;
+}
 .link:hover {
     color: var(--primary-hover);
     text-decoration: none;
@@ -164,50 +196,64 @@ h4 {
 
 /* Generic cards */
 .cart {
-    @apply bg-background rounded-md shadow relative overflow-hidden;
+    @apply bg-background shadow relative overflow-hidden rounded-2xl border border-black/10;
 }
 
 /* Text helpers */
 .text-slogan {
-    @apply uppercase text-[14vw] sm:text-8xl xl:text-9xl font-heading leading-none;
-}
-
-.text-accent {
-    color: var(--secondary);
-    @apply font-heading;
+    @apply uppercase text-[14vw] sm:text-8xl xl:text-9xl font-slogan leading-none font-normal;
 }
 
 .text-title {
-    @apply uppercase text-4xl md:text-7xl xl:text-8xl font-heading;
+    @apply uppercase text-4xl md:text-7xl xl:text-8xl font-slogan font-normal;
 }
 
 .text-subtitle {
-    @apply text-xl lg:text-2xl font-heading;
+    letter-spacing: var(--letter-spacing-lg);
+    @apply text-xl lg:text-2xl font-base  font-normal;
 }
 
 .text-subtitle-small {
-    @apply text-base md:text-lg font-heading;
+    letter-spacing: var(--letter-spacing-xl);
+    @apply text-base md:text-lg font-slogan font-normal;
 }
 
 .text-eyebrow {
-    @apply uppercase text-sm lg:text-2xl font-heading;
+    letter-spacing: var(--letter-spacing-3xl);
+    @apply uppercase text-sm lg:text-2xl font-slogan font-normal;
 }
 
 .text-number {
-    font-family: var(--font-heading);
-    @apply text-3xl lg:text-5xl font-bold;
+    font-family: var(--font-slogan);
+    @apply text-3xl lg:text-5xl font-bold leading-0;
 }
 
 .with-accent-separator-left::before {
     content: "";
-    background-color: var(--secondary);
+    background-color: var(--accent);
     @apply w-4 lg:w-12 h-0.5 lg:h-1 mr-2 lg:mr-4 inline-block;
 }
 
 .with-accent-separator-right::after {
     content: "";
-    background-color: var(--secondary);
+    background-color: var(--accent);
     @apply w-4 lg:w-12 h-0.5 lg:h-1 ml-2 lg:ml-4 inline-block;
+}
+
+.with-small-accent-separator-left::before {
+    content: "";
+    @apply w-4 lg:w-12 h-0.5 mr-2  inline-block  bg-black/20;
+}
+
+.with-mini-accent-separator-right::after {
+    background-color: var(--primary);
+    content: "";
+    @apply w-5  h-0.5 ml-4  inline-block;
+}
+.with-small-accent-separator-right::after {
+    content: "";
+
+    @apply w-4 lg:w-12 h-0.5 ml-2  inline-block bg-black/20;
 }
 .star svg {
     @apply w-full h-full;
