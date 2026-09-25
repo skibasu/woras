@@ -142,7 +142,7 @@ const ContactForm = () => {
                 return
             }
 
-            const response = await fetch("http://localhost:8080/contact.php", {
+            const response = await fetch("/contact.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
