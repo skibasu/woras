@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "next dev",
         "build": "next build",
-        "public_build": "wp --path=~/domains/px661515.pxcloud.pl/public_html/cms cache flush && npm run build -- --webpack && find ~/domains/px661515.pxcloud.pl/public_html -mindepth 1 -maxdepth 1 ! -name cms -exec rm -rf {} + && cp -R out/. ~/domains/px661515.pxcloud.pl/public_html/",
+        "public_build": "wp --path=/home/px661515/domains/px661515.pxcloud.pl/public_html/cms cache flush && npm run build -- --webpack && find ~/domains/px661515.pxcloud.pl/public_html -mindepth 1 -maxdepth 1 ! -name cms -exec rm -rf {} + && cp -R out/. ~/domains/px661515.pxcloud.pl/public_html/",
         "start": "next start",
         "codegen": "graphql-codegen",
         "lint": "eslint"
