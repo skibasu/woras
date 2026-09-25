@@ -20,7 +20,7 @@ const Contact = async () => {
                 <div className="hidden  absolute left-0 bottom-0 z-0 translate-x-[-30%] translate-y-[20%] w-[630px] h-[630px]">
                     <Image className="opacity-7" src="images/background-contact.svg" alt="" fill />
                 </div>
-                <div className="hidden absolute translate-x-1/3 right-0 top-[-70px] z-0  w-[787px] h-[907px]">
+                <div className="hidden absolute translate-x-1/3 right-0 -top-17.5 z-0  w-196.75 h-226.75">
                     <Image className="opacity-7" src="images/background-bike.svg" alt="" fill />
                 </div>
                 <div className="main-container relative">
