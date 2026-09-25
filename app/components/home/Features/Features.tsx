@@ -24,7 +24,7 @@ const Features = ({ data }: FeaturesProps) => {
                     })}
                 </div>
                 <div className="flex justify-center mt-10">
-                    <Link href="/contact" className="btn btn-primary btn-hero">
+                    <Link href="#contact" className="btn btn-primary btn-hero">
                         Contact Us
                     </Link>
                 </div>
