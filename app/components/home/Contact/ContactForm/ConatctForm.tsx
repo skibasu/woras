@@ -4,6 +4,7 @@ import { useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import { useContactFormContext } from "@/app/context/ContactFormContext"
 import ClipIcon from "@/app/components/ui/IconsSvg/ClipIcon"
 import Input from "@/app/components/ui/Form/Input"
 import Textarea from "@/app/components/ui/Form/Textarea"
@@ -102,10 +103,10 @@ const resizeImageToJpegDataUrl = async (file: File): Promise<MailAttachment> => 
 }
 
 const ContactForm = () => {
+    const { setIsSuccess, successMessage, setSuccessMessage } = useContactFormContext()
     const [images, setImages] = useState<File[]>([])
     const [imagesError, setImagesError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
-    const [successMessage, setSuccessMessage] = useState<string | null>(null)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [fileInputKey, setFileInputKey] = useState(0)
     const fileInputRef = useRef<HTMLInputElement>(null)
@@ -124,6 +125,7 @@ const ContactForm = () => {
             return
         }
 
+        setIsSuccess(false)
         setSuccessMessage(null)
         setErrorMessage(null)
 
@@ -135,11 +137,12 @@ const ContactForm = () => {
             if (totalAttachmentBytes > MAX_TOTAL_PAYLOAD_BYTES) {
                 setImagesError("Selected images are too large to send. Please remove some images or choose smaller files.")
                 setErrorMessage("Attachments exceed safe email size limits.")
+                setIsSuccess(false)
                 setLoading(false)
                 return
             }
 
-            const response = await fetch("/contact.php", {
+            const response = await fetch("http://localhost:8080/contact.php", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -161,11 +164,13 @@ const ContactForm = () => {
 
             if (!response.ok) {
                 setErrorMessage(result.message || "Server returned an error while sending the message.")
+                setIsSuccess(false)
                 setLoading(false)
                 return
             }
 
             if (result.success === true) {
+                setIsSuccess(true)
                 setSuccessMessage("Your message has been sent successfully!")
                 setImages([])
                 setImagesError(null)
@@ -173,11 +178,13 @@ const ContactForm = () => {
                 reset()
                 setFileInputKey((prev) => prev + 1)
             } else {
+                setIsSuccess(false)
                 setErrorMessage(result.message || "Message was not accepted by the mail service.")
             }
 
             setLoading(false)
         } catch (error) {
+            setIsSuccess(false)
             setLoading(false)
             if (error instanceof Error && error.message) {
                 setErrorMessage(error.message)
