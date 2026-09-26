@@ -17,7 +17,7 @@ export const Hero = ({ data }: HeroProps) => {
 
     return (
         <section
-            className="hero-section relative bg-image-cover flex flex-col md:justify-center min-h-dvh"
+            className="hero-section relative bg-image-cover flex flex-col justify-center min-h-dvh"
             style={{
                 backgroundImage: `url(${data.backgroundImage?.node?.sourceUrl})`,
             }}
@@ -32,7 +32,7 @@ export const Hero = ({ data }: HeroProps) => {
                     </Link>
                     {data.serviceList && <ServiceList items={data.serviceList} />}
                 </div>
-                <div className="image-accent hidden lg:block absolute right-[64px] bottom-[100px] z-20">{data.accentImage?.node?.sourceUrl && <Image className="opacity-60" src={data.accentImage.node.sourceUrl} alt={data.accentImage.node.altText || ""} width={134} height={100} />}</div>
+                <div className="image-accent hidden lg:block absolute right-[64px] bottom-[100px] z-20">{data.accentImage?.node?.sourceUrl && <Image className="opacity-30" src={data.accentImage.node.sourceUrl} alt={data.accentImage.node.altText || ""} width={134} height={100} />}</div>
             </div>
         </section>
     )

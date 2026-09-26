@@ -1,12 +1,13 @@
 import { Share, Squada_One, Rubik, Lato } from "next/font/google"
 
 import { wordpressClient } from "@/lib/wpgraphql"
-import { GlobalSettingsDocument } from "@/graphql/generated/graphql"
+import { ContactDocument, GlobalSettingsDocument } from "@/graphql/generated/graphql"
 
 import "./globals.css"
 
 import Header from "./components/layout/Header/Header"
 import Footer from "./components/layout/Footer/Footer"
+import { MenuContextProvider } from "./context/MenuContext"
 
 const share = Share({
     weight: ["400", "700"],
@@ -25,18 +26,21 @@ const roboto = Rubik({
 })
 
 const RootLayout = async ({ children }: LayoutProps<"/">) => {
-    const data = await wordpressClient.request(GlobalSettingsDocument)
+    const contactData = await wordpressClient.request(ContactDocument)
+    const settingsData = await wordpressClient.request(GlobalSettingsDocument)
 
-    const settings = data.page?.generalSettingsFields?.branding
-
+    const { email, phone } = { email: contactData.page?.contactPage?.email, phone: contactData.page?.contactPage?.phone }
+    const data = settingsData.page?.generalSettingsFields?.branding
     return (
         <html lang="en" className={`${squadaOne.variable} ${share.variable} ${roboto.variable} h-full`}>
             <body className="min-h-full flex flex-col antialiased">
-                <Header data={settings} />
+                <MenuContextProvider>
+                    <Header data={data} />
+                </MenuContextProvider>
 
                 {children}
 
-                <Footer data={settings} />
+                <Footer email={email || null} phone={phone || null} />
             </body>
         </html>
     )
