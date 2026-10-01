@@ -1,13 +1,5 @@
-import Overlay from "@/app/components/ui/Overlay/Overlay"
-import clsx from "clsx"
-
 const MenuDrawer = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <div className={clsx("fixed top-0 right-0 left-0 w-full h-full z-100 flex flex-col")}>
-            <Overlay />
-            <div className="h-full w-65 max-w-3/4 relative z-10 rounded-br-lg rounded-tr-lg">{children}</div>
-        </div>
-    )
+    return <div className="h-full w-full relative z-10 overflow-hidden">{children}</div>
 }
 
 export default MenuDrawer

@@ -1,3 +1,5 @@
+"use client"
+
 import { createPortal } from "react-dom"
 
 const Portal = ({ children }: { children: React.ReactNode }) => {
@@ -5,7 +7,7 @@ const Portal = ({ children }: { children: React.ReactNode }) => {
         return null
     }
 
-    return createPortal(<div>{children}</div>, document.body)
+    return createPortal(children, document.body)
 }
 
 export default Portal
