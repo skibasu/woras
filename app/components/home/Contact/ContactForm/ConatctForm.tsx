@@ -8,6 +8,7 @@ import { useContactFormContext } from "@/app/context/ContactFormContext"
 import ClipIcon from "@/app/components/ui/IconsSvg/ClipIcon"
 import Input from "@/app/components/ui/Form/Input"
 import Textarea from "@/app/components/ui/Form/Textarea"
+import clsx from "clsx"
 
 const MAX_IMAGES = 10
 const MAX_IMAGE_DIMENSION = 1600
@@ -197,10 +198,18 @@ const ContactForm = () => {
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <h2 className="mb-6">Contact Form</h2>
             <p className="mb-8 text-black/70">Tell us what&apos;s wrong and we&apos;ll help you get back on the road.</p>
-            <Input className="mb-6 relative z-10" placeholder="Your name or phone number" {...register("login")} />
-            <Input className="mb-6 relative z-10" type="email" placeholder="Your email" {...register("email")} />
-            <Textarea className="mb-6 relative z-10 max-h-50" placeholder="Describe your problem" {...register("message")} />
-
+            <div className="relative z-10 pb-9">
+                <Input placeholder="Your name or phone number" {...register("login")} className={clsx(errors.login?.message && "border-b border-red-600 bg-red-50")} />
+                {errors.login?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.login?.message}</p>}
+            </div>
+            <div className="relative z-10 pb-9">
+                <Input type="email" placeholder="Your email" {...register("email")} className={clsx(errors.email?.message && "border-b border-red-600 bg-red-50")} />
+                {errors.email?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.email?.message}</p>}
+            </div>
+            <div className="relative z-10 pb-9">
+                <Textarea placeholder="Describe your problem" {...register("message")} className={clsx(errors.message?.message && "border-b border-red-600 bg-red-50", "max-h-50")} />
+                {errors.message?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.message?.message}</p>}
+            </div>
             <input key={fileInputKey} ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={onPickImages} />
 
             <div className="mb-6">
@@ -236,12 +245,7 @@ const ContactForm = () => {
                 </button>
             </div>
 
-            {successMessage ? <p className="mt-3 text-sm text-green-700">{successMessage}</p> : null}
             {errorMessage ? <p className="mt-3 text-sm text-red-600">{errorMessage}</p> : null}
-
-            <p className="mt-2 text-sm text-red-600">{errors.login?.message}</p>
-            <p className="mt-2 text-sm text-red-600">{errors.email?.message}</p>
-            <p className="mt-2 text-sm text-red-600">{errors.message?.message}</p>
         </form>
     )
 }

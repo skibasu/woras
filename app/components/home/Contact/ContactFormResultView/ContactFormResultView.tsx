@@ -4,7 +4,7 @@ import ContactForm from "../ContactForm/ConatctForm"
 import SuccessMessage from "../SuccessMessage/SuccessMessage"
 
 const ContactFormResultView = () => {
-    const { isSuccess, successMessage } = useContactFormContext()
+    const { isSuccess } = useContactFormContext()
 
     return isSuccess ? <SuccessMessage /> : <ContactForm />
 }

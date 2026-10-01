@@ -1,10 +1,11 @@
-import type { PropsWithChildren } from "react"
 import { createPortal } from "react-dom"
 
-interface Props extends PropsWithChildren<{ isOpen: boolean }> {}
+const Portal = ({ children }: { children: React.ReactNode }) => {
+    if (typeof document === "undefined" || !document.body) {
+        return null
+    }
 
-const Portal = ({ isOpen, children }: Props) => {
-    return isOpen && createPortal(<div>{children}</div>, document.body)
+    return createPortal(<div>{children}</div>, document.body)
 }
 
 export default Portal

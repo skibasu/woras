@@ -3,6 +3,7 @@ import { useMenuContext } from "@/app/context/MenuContext"
 import MenuDrawer from "../MenuDrawer/MenuDrawer"
 import MobileMenu from "../MobileMenu/MobileMenu"
 import Portal from "@/app/components/ui/Portal/Portal"
+import { AnimatePresence, motion } from "motion/react"
 
 interface Props {
     data: {
@@ -17,10 +18,14 @@ interface Props {
 const MenuModal = ({ data }: Props) => {
     const { isMenuOpen } = useMenuContext()
     return (
-        <Portal isOpen={isMenuOpen}>
-            <MenuDrawer>
-                <MobileMenu data={{ logoUrl: data.logoUrl, logoAlt: data.logoAlt, phone: data.phone, email: data.email, city: data.city }} />
-            </MenuDrawer>
+        <Portal>
+            <AnimatePresence>
+                {isMenuOpen && (
+                    <MenuDrawer>
+                        <MobileMenu data={{ logoUrl: data.logoUrl, logoAlt: data.logoAlt, phone: data.phone, email: data.email, city: data.city }} />
+                    </MenuDrawer>
+                )}
+            </AnimatePresence>
         </Portal>
     )
 }
