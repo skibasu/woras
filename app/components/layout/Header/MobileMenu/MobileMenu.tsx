@@ -6,6 +6,7 @@ import EmailIcon from "@/app/components/ui/IconsSvg/EmailIcon"
 import MapMarkerIcon from "@/app/components/ui/IconsSvg/MapMarkerIcon"
 import CloseIcon from "@/app/components/ui/IconsSvg/CloseIcon"
 import { useMenuContext } from "@/app/context/MenuContext"
+import { menuScrollTo } from "@/app/helpers/menuScrollTo"
 
 interface Data {
     logoUrl: string | null
@@ -20,46 +21,60 @@ interface Props {
 }
 const MobileMenu = ({ data }: Props) => {
     const { setIsMenuOpen } = useMenuContext()
+
+    const closeMenu = () => {
+        setIsMenuOpen(false)
+    }
+
+    const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, target: string) => {
+        if (typeof window !== "undefined") {
+            event.preventDefault()
+            menuScrollTo(target)
+        }
+
+        closeMenu()
+    }
+
     return (
         <div className="mobile-menu-gradient h-full">
             <div className="py-4 flex justify-between items-start px-5 relative z-1">
                 <Link href="/" className="block">
                     {data?.logoUrl ? <Image src={data?.logoUrl} alt={data.logoAlt || "Logo"} width={260} height={60} className="block h-13 w-auto" /> : <span className="text-white text-lg font-bold">Logo</span>}
                 </Link>
-                <button className="flex justify-center items-center w-7 h-6.25" aria-label="Close menu" onClick={() => setIsMenuOpen(false)}>
+                <button className="flex justify-center items-center w-7 h-6.25" aria-label="Close menu" onClick={closeMenu}>
                     <CloseIcon className="block text-current" aria-hidden="true" />
                 </button>
             </div>
             <nav className="relative z-1">
                 <ul>
                     <li className="border-t border-gray-300">
-                        <Link className="mobile-menu-link" href="/">
+                        <Link className="mobile-menu-link" href="/#home" onClick={(event) => handleLinkClick(event, "home")}>
                             Home
                         </Link>
                     </li>
-                    <li className="">
-                        <Link className="mobile-menu-link" href="/#features">
+                    <li>
+                        <Link className="mobile-menu-link" href="/#features" onClick={(event) => handleLinkClick(event, "features")}>
                             Features
                         </Link>
                     </li>
-                    <li className="">
-                        <Link className="mobile-menu-link" href="/#reviews">
+                    <li>
+                        <Link className="mobile-menu-link" href="/#reviews" onClick={(event) => handleLinkClick(event, "reviews")}>
                             Reviews
                         </Link>
                     </li>
-                    <li className="">
-                        <Link className="mobile-menu-link" href="/#gallery">
+                    <li>
+                        <Link className="mobile-menu-link" href="/#gallery" onClick={(event) => handleLinkClick(event, "gallery")}>
                             Gallery
                         </Link>
                     </li>
-                    <li className="">
-                        <Link className="mobile-menu-link" href="/#pricing">
+                    <li>
+                        <Link className="mobile-menu-link" href="/#pricing" onClick={(event) => handleLinkClick(event, "pricing")}>
                             Pricing
                         </Link>
                     </li>
                 </ul>
                 <div className="px-5 py-6">
-                    <Link href="/#contact" className="btn-small btn-primary w-full">
+                    <Link href="/#contact" className="btn-small btn-primary w-full" onClick={closeMenu}>
                         Contact Us
                     </Link>
                 </div>
@@ -67,7 +82,7 @@ const MobileMenu = ({ data }: Props) => {
                     {/* <Link href="/contact" className="block btn-rounded btn-primary h-8 w-8">
                             <EmailIcon className="block h-full w-auto text-current" aria-hidden="true" />
                         </Link> */}
-                    <Link href="/contact" className="block btn-rounded btn-primary h-8 w-8">
+                    <Link href="/contact" className="block btn-rounded btn-primary h-8 w-8" onClick={closeMenu}>
                         <PhoneIcon className="block h-full w-auto text-current" aria-hidden="true" />
                     </Link>
                 </div>

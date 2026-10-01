@@ -8,6 +8,7 @@ const Pricing = async () => {
 
     return (
         <section
+            id="pricing"
             className="page-section section-y-spacing section-full-height bg-image-cover relative"
             style={{
                 backgroundImage: `url(${data?.page?.pricingPage?.heroImage?.node?.sourceUrl})`,

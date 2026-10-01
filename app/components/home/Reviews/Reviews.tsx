@@ -16,6 +16,7 @@ const Reviews = async ({ data }: Props) => {
 
     return (
         <section
+            id="reviews"
             className="page-section bg-image-cover relative section-y-spacing section-full-height "
             style={{
                 backgroundImage: `url(${data?.backgroundImage?.node?.sourceUrl})`,

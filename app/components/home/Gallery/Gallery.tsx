@@ -16,7 +16,7 @@ const Gallery = ({ data }: Props) => {
     }
 
     return (
-        <section className="page-section section-y-spacing bg-content bg-center bg-no-repeat relative  section-full-height overflow-hidden">
+        <section id="gallery" className="page-section section-y-spacing bg-content bg-center bg-no-repeat relative  section-full-height overflow-hidden">
             <div className="lg:block absolute -translate-x-4/6 translate-y-[-5%] left-0 top-0 z-0  w-[597px] h-[1187px]">
                 <Image className="hidden opacity-12" src="images/background-tire-1.svg" alt="" fill />
             </div>

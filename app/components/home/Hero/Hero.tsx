@@ -17,6 +17,7 @@ export const Hero = ({ data }: HeroProps) => {
 
     return (
         <section
+            id="home"
             className="hero-section relative bg-image-cover flex flex-col justify-center min-h-dvh"
             style={{
                 backgroundImage: `url(${data.backgroundImage?.node?.sourceUrl})`,

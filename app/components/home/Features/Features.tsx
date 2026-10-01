@@ -11,7 +11,7 @@ type FeaturesProps = {
 }
 const Features = ({ data }: FeaturesProps) => {
     return (
-        <section className="page-section section-y-spacing relative overflow-hidden">
+        <section id="features" className="page-section section-y-spacing relative overflow-hidden">
             <div className="main-container-sm relative z-30">
                 <SectionTitle className="mb-10 lg:mb-16" title={data?.title} titleAccent={data?.titleAccent} accentEnd={data?.accentEnd} eyebrow={data?.eyebrow} subtitle={data?.subtitle} />
                 <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-6">
