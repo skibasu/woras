@@ -53,7 +53,7 @@ const MobileMenu = ({ data }: Props) => {
         <div className="mobile-menu-gradient h-full">
             <div className="py-4 flex justify-between items-start px-5 relative z-1">
                 <Link href="/" className="block">
-                    {data?.logoUrl ? <Image src={data?.logoUrl} alt={data.logoAlt || "Logo"} width={260} height={60} className="block h-13 w-auto" /> : <span className="text-white text-lg font-bold">Logo</span>}
+                    {data?.logoUrl ? <Image src={data?.logoUrl} alt={data.logoAlt || "Logo"} width={260} height={60} className="block h-13 w-auto" style={{ width: "auto" }} /> : <span className="text-white text-lg font-bold">Logo</span>}
                 </Link>
                 <button className="flex justify-center items-center w-7 h-6.25" aria-label="Close menu" onClick={closeMenu}>
                     <CloseIcon className="block text-current" aria-hidden="true" />

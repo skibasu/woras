@@ -15,7 +15,7 @@ const Contact = async () => {
         <ContactFormProvider>
             <section id="contact" className="page-section section-y-spacing relative overflow-hidden">
                 <div className="lg:block absolute  right-0 top-0 z-0  w-full h-full ">
-                    <Image className="opacity-15" src="images/picture-kontakt.png" style={{ objectFit: "cover" }} alt="" fill />
+                    <Image className="opacity-15 object-cover" src="images/picture-kontakt.png" alt="" fill />
                 </div>
                 <div className="hidden  absolute left-0 bottom-0 z-0 translate-x-[-30%] translate-y-[20%] w-[630px] h-[630px]">
                     <Image className="opacity-7" src="images/background-contact.svg" alt="" fill />

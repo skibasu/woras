@@ -13,7 +13,7 @@ const FeaturesCart = ({ feature, className }: Props) => {
         <div className={className}>
             <div className="px-4 text-center">
                 <div className="relative w-full overflow-hidden flex justify-center h-50 opacity-70">
-                    <Image src={feature?.image?.node?.sourceUrl ?? ""} alt={feature?.image?.node?.altText ?? ""} fill objectFit="contain" loading="lazy" />
+                    <Image src={feature?.image?.node?.sourceUrl ?? ""} alt={feature?.image?.node?.altText ?? ""} fill className="object-contain" loading="lazy" />
                 </div>
                 <h3 className="mb-6 mt-8">{feature?.title}</h3>
                 <p className="text-lg leading-[1.3]">{feature?.description}</p>
