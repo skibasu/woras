@@ -27,9 +27,13 @@ const Gallery = ({ data }: Props) => {
             <div className="main-container relative z-10">
                 <div className="gallery-grid w-full">
                     {slides.map((item, index) => {
+                        const mobileFull = [0, 3, 6].includes(index)
+                        const desktopHalf = index >= 3
+
+                        const sizes = mobileFull ? (desktopHalf ? "(max-width: 767px) 100vw, 50vw" : "(max-width: 767px) 100vw, 33.33vw") : desktopHalf ? "50vw" : "(max-width: 767px) 50vw, 33.33vw"
                         return (
                             <a key={index} href={item?.image?.node?.sourceUrl || "#"} className="gallery-grid-item block cart" target="_blank" rel="noopener noreferrer">
-                                <Image src={item?.image?.node?.sourceUrl || "/images/default-image.png"} alt={item?.image?.node?.altText || "Gallery Image"} fill className="object-cover" />
+                                <Image src={item?.image?.node?.sourceUrl || "/images/default-image.png"} alt={item?.image?.node?.altText || "Gallery Image"} fill sizes={sizes} className="object-cover" />{" "}
                             </a>
                         )
                     })}

@@ -18,7 +18,7 @@ const Reviews = async ({ data }: Props) => {
             <picture className="absolute inset-0 z-0 w-full h-full">
                 <source media="(max-width: 767px)" srcSet={data?.mobileBackgroundImage?.node?.sourceUrl || data?.backgroundImage?.node?.sourceUrl || ""} />
 
-                <img src={data?.backgroundImage?.node?.sourceUrl || ""} alt={data?.backgroundImage?.node?.altText || ""} fetchPriority="high" className="h-full w-full object-cover" />
+                <img src={data?.backgroundImage?.node?.sourceUrl || ""} alt={data?.backgroundImage?.node?.altText || ""} className="h-full w-full object-cover" />
             </picture>
             <div className="absolute inset-0 bg-linear-to-t from-black/50 via-black/60 to-black/80 w-full h-full top-0 left-0 z-0" />
 

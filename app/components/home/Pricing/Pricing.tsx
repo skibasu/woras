@@ -11,7 +11,7 @@ const Pricing = async () => {
             <picture className="absolute inset-0 z-0 w-full h-full">
                 <source media="(max-width: 767px)" srcSet={data?.page?.pricingPage?.mobileBackgroundImage?.node?.sourceUrl || data?.page?.pricingPage?.heroImage?.node?.sourceUrl || ""} />
 
-                <img src={data?.page?.pricingPage?.heroImage?.node?.sourceUrl || ""} alt={data?.page?.pricingPage?.heroImage?.node?.altText || ""} fetchPriority="high" className="h-full w-full object-cover" />
+                <img src={data?.page?.pricingPage?.heroImage?.node?.sourceUrl || ""} alt={data?.page?.pricingPage?.heroImage?.node?.altText || ""} className="h-full w-full object-cover" />
             </picture>
             <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black/20 w-full h-full top-0 left-0 z-0" />
 
