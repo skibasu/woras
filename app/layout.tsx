@@ -1,4 +1,4 @@
-import { Share, Squada_One, Rubik, Lato } from "next/font/google"
+import { Share, Squada_One, Rubik } from "next/font/google"
 
 import { wordpressClient } from "@/lib/wpgraphql"
 import { ContactDocument, GlobalSettingsDocument } from "@/graphql/generated/graphql"

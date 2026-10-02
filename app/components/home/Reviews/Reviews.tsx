@@ -4,7 +4,6 @@ import RatingSummary from "./Rating/RatingSummary"
 import ReviewsSlider from "./ReviewsSlider"
 import StarsCounter from "./Rating/StarsCounter"
 import SectionTitle from "../../ui/SectionTitle/SectionTitle"
-import Overlay from "../../ui/Overlay/Overlay"
 
 type ReviewsData = NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["reviews"] | undefined
 

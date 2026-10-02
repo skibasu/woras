@@ -7,10 +7,9 @@ import MapMarkerIcon from "@/app/components/ui/IconsSvg/MapMarkerIcon"
 import CloseIcon from "@/app/components/ui/IconsSvg/CloseIcon"
 import { useMenuContext } from "@/app/context/MenuContext"
 import { menuScrollTo } from "@/app/helpers/menuScrollTo"
-import useActiveSection from "@/app/hooks/useActiveSection"
+
 import clsx from "clsx"
-import { links } from "./menuLinks"
-import { useMemo } from "react"
+import { menuSettings } from "../menuSettngs"
 
 interface Data {
     logoUrl: string | null
@@ -24,12 +23,10 @@ interface Props {
     data: Data
 }
 const MobileMenu = ({ data }: Props) => {
-    const { setIsMenuOpen } = useMenuContext()
-    const sectionIds = useMemo(() => links.map((link) => `#${link.target}`).filter((id) => id !== "#contact"), [])
+    const { setIsMenuOpen, activeSection } = useMenuContext()
 
-    const activeSection = useActiveSection(sectionIds)
-    const linkContact = links.find((link) => link.target === "contact")
-    const linksRest = links.filter((link) => link.target !== "contact") // Exclude #contact from the main links list
+    const linkContact = menuSettings.links.find((link) => link.target === "contact")
+    const linksRest = menuSettings.links.filter((link) => link.target !== "contact") // Exclude #contact from the main links list
 
     const closeMenu = () => {
         setIsMenuOpen(false)

@@ -104,7 +104,7 @@ const resizeImageToJpegDataUrl = async (file: File): Promise<MailAttachment> => 
 }
 
 const ContactForm = () => {
-    const { successMessage, setSubmissionResult, clearSubmissionResult } = useContactFormContext()
+    const { setSubmissionResult, clearSubmissionResult } = useContactFormContext()
     const [images, setImages] = useState<File[]>([])
     const [imagesError, setImagesError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
