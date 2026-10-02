@@ -7,6 +7,10 @@ import MapMarkerIcon from "@/app/components/ui/IconsSvg/MapMarkerIcon"
 import CloseIcon from "@/app/components/ui/IconsSvg/CloseIcon"
 import { useMenuContext } from "@/app/context/MenuContext"
 import { menuScrollTo } from "@/app/helpers/menuScrollTo"
+import useActiveSection from "@/app/hooks/useActiveSection"
+import clsx from "clsx"
+import { links } from "./menuLinks"
+import { useMemo } from "react"
 
 interface Data {
     logoUrl: string | null
@@ -21,15 +25,28 @@ interface Props {
 }
 const MobileMenu = ({ data }: Props) => {
     const { setIsMenuOpen } = useMenuContext()
+    const sectionIds = useMemo(() => links.map((link) => `#${link.target}`).filter((id) => id !== "#contact"), [])
+
+    const activeSection = useActiveSection(sectionIds)
+    const linkContact = links.find((link) => link.target === "contact")
+    const linksRest = links.filter((link) => link.target !== "contact") // Exclude #contact from the main links list
 
     const closeMenu = () => {
         setIsMenuOpen(false)
     }
 
     const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, target: string) => {
-        if (typeof window !== "undefined") {
+        if (typeof window !== "undefined" && window.location.pathname === "/") {
             event.preventDefault()
-            menuScrollTo(target)
+            closeMenu()
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    menuScrollTo(target)
+                })
+            })
+
+            return
         }
 
         closeMenu()
@@ -47,45 +64,22 @@ const MobileMenu = ({ data }: Props) => {
             </div>
             <nav className="relative z-1">
                 <ul>
-                    <li className="border-t border-gray-300">
-                        <Link className="mobile-menu-link" href="/#home" onClick={(event) => handleLinkClick(event, "home")}>
-                            Home
-                        </Link>
-                    </li>
-                    <li>
-                        <Link className="mobile-menu-link" href="/#features" onClick={(event) => handleLinkClick(event, "features")}>
-                            Features
-                        </Link>
-                    </li>
-                    <li>
-                        <Link className="mobile-menu-link" href="/#reviews" onClick={(event) => handleLinkClick(event, "reviews")}>
-                            Reviews
-                        </Link>
-                    </li>
-                    <li>
-                        <Link className="mobile-menu-link" href="/#gallery" onClick={(event) => handleLinkClick(event, "gallery")}>
-                            Gallery
-                        </Link>
-                    </li>
-                    <li>
-                        <Link className="mobile-menu-link" href="/#pricing" onClick={(event) => handleLinkClick(event, "pricing")}>
-                            Pricing
-                        </Link>
-                    </li>
+                    {linksRest.map((link) => (
+                        <li key={link.target} className={clsx(link.target !== "home" && "border-t border-gray-300")}>
+                            <Link className={clsx("mobile-menu-link", activeSection === `#${link.target}` && "mobile-menu-link-active")} href={link.href} onClick={(event) => handleLinkClick(event, link.target)}>
+                                {link.label}
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
-                <div className="px-5 py-6">
-                    <Link href="/#contact" className="btn-small btn-primary w-full" onClick={closeMenu}>
-                        Contact Us
-                    </Link>
-                </div>
-                <div className="hidden  gap-2 items-center pl-3">
-                    {/* <Link href="/contact" className="block btn-rounded btn-primary h-8 w-8">
-                            <EmailIcon className="block h-full w-auto text-current" aria-hidden="true" />
-                        </Link> */}
-                    <Link href="/contact" className="block btn-rounded btn-primary h-8 w-8" onClick={closeMenu}>
-                        <PhoneIcon className="block h-full w-auto text-current" aria-hidden="true" />
-                    </Link>
-                </div>
+                {linkContact && (
+                    <div className="px-5 py-6">
+                        <Link href={linkContact.href} className="btn-small btn-primary w-full" onClick={(event) => handleLinkClick(event, linkContact.target)}>
+                            {linkContact.label}
+                        </Link>
+                    </div>
+                )}
+
                 <div className="space-y-6 mb-6 px-5">
                     <div className="flex items-center gap-4">
                         <div className="w-4  shrink-0 grow-0 text-black/65">
