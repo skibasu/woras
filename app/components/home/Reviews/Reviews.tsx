@@ -4,6 +4,7 @@ import RatingSummary from "./Rating/RatingSummary"
 import ReviewsSlider from "./ReviewsSlider"
 import StarsCounter from "./Rating/StarsCounter"
 import SectionTitle from "../../ui/SectionTitle/SectionTitle"
+import HeroPicture from "../Hero/HeroPicture"
 
 type ReviewsData = NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["reviews"] | undefined
 
@@ -15,11 +16,7 @@ const Reviews = async ({ data }: Props) => {
 
     return (
         <section id="reviews" className="page-section bg-image-cover relative section-y-spacing section-full-height">
-            <picture className="absolute inset-0 z-0 w-full h-full">
-                <source media="(max-width: 767px)" srcSet={data?.mobileBackgroundImage?.node?.sourceUrl || data?.backgroundImage?.node?.sourceUrl || ""} />
-
-                <img src={data?.backgroundImage?.node?.sourceUrl || ""} alt={data?.backgroundImage?.node?.altText || ""} className="h-full w-full object-cover" />
-            </picture>
+            <HeroPicture src={data?.backgroundImage?.node?.sourceUrl || ""} alt={data?.backgroundImage?.node?.altText || ""} mobileUrl={data?.mobileBackgroundImage?.node?.sourceUrl || ""} />
             <div className="absolute inset-0 bg-linear-to-t from-black/50 via-black/60 to-black/80 w-full h-full top-0 left-0 z-0" />
 
             <div className="main-container relative z-10">

@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import FeaturesCart from "./FeaturesCart"
 import SectionTitle from "../../ui/SectionTitle/SectionTitle"
+import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
 
 type FeaturesData = NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["features"] | undefined
 
@@ -29,9 +30,7 @@ const Features = ({ data }: FeaturesProps) => {
                     </Link>
                 </div>
             </div>
-            <div className="lg:block absolute right-0 top-0 translate-x-2/3 translate-y-[-10%] z-0  w-[1912px] h-[1274px]">
-                <Image className="opacity-7 w-full h-auto" src="images/background-wheel-s.webp" alt="" fill />
-            </div>
+            <ProgressiveImage src="images/background-wheel-s.webp" alt="background" className=" w-full h-auto" width={1912} height={1274} containerClassName="absolute right-0 top-0 translate-x-2/3 translate-y-[-10%] z-0 w-[1912px] h-[1274px]" onLoadOpacity={0.07} />
         </section>
     )
 }

@@ -2,17 +2,14 @@ import { PricingDocument } from "@/graphql/generated/graphql"
 import { wordpressClient } from "@/lib/wpgraphql"
 import SectionTitle from "../../ui/SectionTitle/SectionTitle"
 import PricingCart from "./PricingCart"
+import HeroPicture from "../Hero/HeroPicture"
 
 const Pricing = async () => {
     const data = await wordpressClient.request(PricingDocument)
 
     return (
-        <section id="pricing" className="page-section section-y-spacing section-full-height bg-image-cover relative">
-            <picture className="absolute inset-0 z-0 w-full h-full">
-                <source media="(max-width: 767px)" srcSet={data?.page?.pricingPage?.mobileBackgroundImage?.node?.sourceUrl || data?.page?.pricingPage?.heroImage?.node?.sourceUrl || ""} />
-
-                <img src={data?.page?.pricingPage?.heroImage?.node?.sourceUrl || ""} alt={data?.page?.pricingPage?.heroImage?.node?.altText || ""} className="h-full w-full object-cover" />
-            </picture>
+        <section id="pricing" className="page-section section-y-spacing section-full-height bg-image-cover relative ">
+            <HeroPicture src={data.page?.pricingPage?.heroImage?.node?.sourceUrl || ""} alt={data.page?.pricingPage?.heroImage?.node?.altText || ""} mobileUrl={data.page?.pricingPage?.mobileBackgroundImage?.node?.sourceUrl || ""} />
             <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-black/20 w-full h-full top-0 left-0 z-0" />
 
             <div className="relative z-10 md:max-w-5xl 2xl:max-w-full m-auto">

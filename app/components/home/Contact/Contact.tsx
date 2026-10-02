@@ -7,6 +7,7 @@ import ContactInfo from "./ContactInfo"
 import WhatsApp from "./Whatsapp"
 import Image from "next/image"
 import ContactFormResultView from "./ContactFormResultView/ContactFormResultView"
+import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
 
 const Contact = async () => {
     const data = await wordpressClient.request(ContactDocument)
@@ -14,15 +15,8 @@ const Contact = async () => {
     return (
         <ContactFormProvider>
             <section id="contact" className="page-section section-y-spacing relative overflow-hidden">
-                <div className="lg:block absolute  right-0 top-0 z-0  w-full h-full ">
-                    <Image className="opacity-15 object-cover" src="images/picture-kontakt.png" alt="" fill />
-                </div>
-                <div className="hidden  absolute left-0 bottom-0 z-0 translate-x-[-30%] translate-y-[20%] w-[630px] h-[630px]">
-                    <Image className="opacity-7" src="images/background-contact.svg" alt="" fill />
-                </div>
-                <div className="hidden absolute translate-x-1/3 right-0 -top-17.5 z-0  w-196.75 h-226.75">
-                    <Image className="opacity-7" src="images/background-bike.svg" alt="" fill />
-                </div>
+                <ProgressiveImage src="images/picture-kontakt.png" alt="background" className="object-cover w-full h-full" fill={true} containerClassName="absolute inset-0 z-0 w-full h-full" onLoadOpacity={0.15} />
+
                 <div className="main-container relative">
                     <SectionTitle className="mb-10 lg:mb-16" title={data?.page?.contactPage?.title} titleAccent={data?.page?.contactPage?.titleAccent} accentEnd={data?.page?.contactPage?.accentEnd} eyebrow={data?.page?.contactPage?.eyebrow} subtitle={data?.page?.contactPage?.subtitle} />
 

@@ -1,7 +1,6 @@
 import type { PropsWithChildren } from "react"
-import Image from "next/image"
-
 import RatingLayout from "./RatingLayout"
+import GoogleIcon from "@/app/components/ui/IconsSvg/GoogleIcon"
 
 type Props = PropsWithChildren<{
     rating: number
@@ -12,8 +11,8 @@ const RatingSummary = ({ rating, reviewsCount, children }: Props) => {
     return (
         <RatingLayout>
             <div className="text-white flex items-center">
-                <span className="block rounded-full relative overflow-hidden mr-4 bg-white p-2 w-10 h-10">
-                    <Image src="/images/google.svg" alt="Google Logo" width={42} height={42} className="block w-full h-full" />
+                <span className="rounded-full relative overflow-hidden mr-4 p-1 w-10 h-10 border border-gray-500 flex justify-center items-center bg-black">
+                    <GoogleIcon className="block w-full h-auto" aria-label="Google Logo" role="img" />
                 </span>
                 <span className="block text-number mr-8">{rating.toFixed(1)}</span>
                 <div>

@@ -134,7 +134,9 @@
 .page-section {
     @apply w-full px-5 md:px-10 2xl:px-section;
 }
-
+.section-hero-gradient {
+    @apply bg-linear-to-br from-neutral-950 via-orange-950 to-zinc-950;
+}
 .hero-section {
     @apply w-full px-5 md:px-10 lg:px-section pt-16;
 }
