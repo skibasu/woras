@@ -21,7 +21,7 @@ const Header = ({ data }: HeaderProps) => {
                         <NavLinks className="block menu-link px-4" />
                     </div>
                     <div className="flex gap-2 items-center pl-3">
-                        <Link href="/contact" className="block btn-rounded btn-primary h-8 w-8">
+                        <Link href="/contact" className="block btn btn-icon btn-primary h-8 w-8">
                             <PhoneIcon className="block h-full w-auto text-current" aria-hidden="true" />
                         </Link>
                     </div>

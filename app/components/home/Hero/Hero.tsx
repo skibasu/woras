@@ -28,7 +28,7 @@ export const Hero = ({ data }: HeroProps) => {
                 <div className="relative z-10 max-w-4xl pt-10 md:pt-0">
                     <SectionSlogan eyebrow={data.eyebrow} slogan={data.slogan} sloganAccent={data.sloganAccent} sloganEnd={data.sloganEnd} subtitle={data.subtitle} />
 
-                    <Link href="/contact" className="btn btn-primary btn-hero">
+                    <Link href="/contact" className="btn btn-large btn-primary">
                         {data.buttonText}
                     </Link>
                     {data.serviceList && <ServiceList items={data.serviceList} />}

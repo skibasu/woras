@@ -153,33 +153,40 @@
 /* Buttons and links */
 .btn {
     letter-spacing: var(--letter-spacing-lg);
-    @apply inline-flex items-center justify-center rounded-full py-2 px-10 text-[18px] min-h-14 uppercase text-lg font-bold transition-colors;
+    @apply inline-flex items-center justify-center rounded-full uppercase font-bold transition-colors;
 }
-.btn-rounded {
-    letter-spacing: var(--letter-spacing-lg);
-    @apply inline-flex items-center justify-center rounded-full py-2 px-2 text-[18px]  uppercase text-lg font-bold;
+
+.btn {
+    @apply py-2 px-10 text-lg;
+}
+.btn-icon {
+    @apply py-2 px-2 text-lg;
 }
 .btn-whatsapp {
-    letter-spacing: var(--letter-spacing-lg);
-    @apply inline-flex items-center justify-center rounded-full py-2 px-10 text-[18px] min-h-14 text-base font-bold text-white transition-colors;
+    @apply py-2 px-10 min-h-14 text-base text-white;
 }
+
+.btn-whatsapp-primary,
 .btn-wathsapp-primary {
     background: var(--color-whatsapp);
     @apply hover:bg-whatsapp-hover;
 }
+
 .btn-primary {
     background: var(--color-primary);
     @apply text-white hover:bg-primary-hover;
 }
 
 .btn-large {
-    letter-spacing: var(--letter-spacing-lg);
-    @apply text-lg;
+    @apply py-3 px-12 text-lg min-h-15;
 }
 
 .btn-small {
-    letter-spacing: var(--letter-spacing-lg);
-    @apply inline-flex items-center justify-center rounded-full py-3 px-4 text-sm uppercase font-bold transition-colors;
+    @apply py-3 px-4 text-sm;
+}
+
+.btn:disabled {
+    @apply cursor-not-allowed opacity-60;
 }
 
 .link-page {

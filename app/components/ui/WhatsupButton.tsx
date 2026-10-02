@@ -6,7 +6,7 @@ type Props = ComponentProps<typeof Link>
 
 const WhatsupButton = ({ className = "", href = "#", ...props }: Props) => {
     return (
-        <Link href={href} className={clsx("btn-whatsapp btn-wathsapp-primary", className)} {...props}>
+        <Link href={href} className={clsx("btn btn-whatsapp btn-whatsapp-primary", className)} {...props}>
             <div className="w-7 h-7 mr-4">
                 <Image src="/images/whatsapp-icon.svg" alt="WhatsApp Icon" width={24} height={24} className="block w-full h-auto" />
             </div>

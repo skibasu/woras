@@ -8,6 +8,7 @@ import { useContactFormContext } from "@/app/context/ContactFormContext"
 import ClipIcon from "@/app/components/ui/IconsSvg/ClipIcon"
 import Input from "@/app/components/ui/Form/Input"
 import Textarea from "@/app/components/ui/Form/Textarea"
+import Button from "@/app/components/ui/Button/Button"
 import clsx from "clsx"
 
 const MAX_IMAGES = 10
@@ -240,9 +241,7 @@ const ContactForm = () => {
             </div>
 
             <div>
-                <button type="submit" className="btn btn-primary disabled:opacity-60" disabled={loading}>
-                    {loading ? "Sending..." : "Send"}
-                </button>
+                <Button type="submit" size="large" label={loading ? "Sending..." : "Send"} disabled={loading} />
             </div>
 
             {errorMessage ? <p className="mt-3 text-sm text-red-600">{errorMessage}</p> : null}

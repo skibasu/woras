@@ -71,7 +71,7 @@ const MobileMenu = ({ data }: Props) => {
                 </ul>
                 {linkContact && (
                     <div className="px-5 py-6">
-                        <Link href={linkContact.href} className="btn-small btn-primary w-full" onClick={(event) => handleLinkClick(event, linkContact.target)}>
+                        <Link href={linkContact.href} className="btn btn-small btn-primary w-full" onClick={(event) => handleLinkClick(event, linkContact.target)}>
                             {linkContact.label}
                         </Link>
                     </div>
