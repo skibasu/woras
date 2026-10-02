@@ -20,6 +20,12 @@ export const HOME_QUERY = gql`
                             altText
                         }
                     }
+                    mobileBackgroundImage {
+                        node {
+                            sourceUrl
+                            altText
+                        }
+                    }
                     accentImage {
                         node {
                             sourceUrl
@@ -65,6 +71,12 @@ export const HOME_QUERY = gql`
                             altText
                         }
                     }
+                    mobileBackgroundImage {
+                        node {
+                            sourceUrl
+                            altText
+                        }
+                    }
                 }
 
                 features {
@@ -99,6 +111,12 @@ export const PRICING_QUERY = gql`
                 accentEnd
                 subtitle
                 heroImage {
+                    node {
+                        sourceUrl
+                        altText
+                    }
+                }
+                mobileBackgroundImage {
                     node {
                         sourceUrl
                         altText
