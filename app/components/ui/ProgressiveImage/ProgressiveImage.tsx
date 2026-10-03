@@ -7,9 +7,10 @@ import { useEffect, useRef, useState } from "react"
 type Props = Omit<ImageProps, "onLoad" | "onError"> & {
     containerClassName?: string
     onLoadOpacity?: number
+    loading?: "lazy" | "eager"
 }
 
-const ProgressiveImage = ({ containerClassName = "", className = "", alt, onLoadOpacity = 1, ...imageProps }: Props) => {
+const ProgressiveImage = ({ containerClassName = "", className = "", alt, onLoadOpacity = 1, loading, ...imageProps }: Props) => {
     const [loaded, setLoaded] = useState(false)
     const [error, setError] = useState(false)
     const imageRef = useRef<HTMLImageElement>(null)
@@ -35,6 +36,7 @@ const ProgressiveImage = ({ containerClassName = "", className = "", alt, onLoad
                     transition: "opacity 1000ms ease-out",
                 }}
                 className={className}
+                loading={loading}
             />
 
             {error && <div className="absolute inset-0 "></div>}

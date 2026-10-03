@@ -20,7 +20,7 @@ const ReviewCart = ({ data, className }: Props) => {
         <div className={clsx("flex flex-col h-full", className)}>
             <div className="cart py-8 px-6 flex flex-col h-full">
                 <div className="mb-6 flex">
-                    <ProgressiveImage src={data?.authorAttribution?.photoUri || "/images/default-avatar.png"} alt={data?.authorAttribution?.displayName || "Anonymous"} width={70} height={70} className="block w-full h-full" containerClassName="shrink-0 grow-0 h-16 w-16 lg:h-10 lg:w-10 xl:w-18 xl:h-18 rounded-full relative overflow-hidden" />
+                    <ProgressiveImage src={data?.authorAttribution?.photoUri || "/images/default-avatar.png"} alt={data?.authorAttribution?.displayName || "Anonymous"} width={70} height={70} className="block w-full h-full" containerClassName="shrink-0 grow-0 h-16 w-16 lg:h-10 lg:w-10 xl:w-18 xl:h-18 rounded-full relative overflow-hidden" loading="lazy" />
 
                     <div className="shrink-0 grow-0 pl-3">
                         <p className="text-sm  text-gray-500 text-left mb-2">
