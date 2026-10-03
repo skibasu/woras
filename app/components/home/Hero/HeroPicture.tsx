@@ -37,7 +37,7 @@ const HeroPicture = ({ src, alt, mobileUrl, className, fetchPriority = "high", .
         <picture className={clsx("absolute inset-0 z-0 h-full w-full", className)}>
             {mobileUrl && <source media="(max-width: 767px)" srcSet={mobileUrl} />}
 
-            <img {...rest} ref={imgRef} src={src} alt={alt} loading="eager" decoding="async" fetchPriority={fetchPriority} onLoad={handleLoad} onError={() => setLoaded(true)} className={clsx("absolute inset-0 h-full w-full object-cover transition-opacity duration-300", loaded ? "opacity-100" : "opacity-100")} />
+            <img {...rest} ref={imgRef} src={src} alt={alt} loading="eager" decoding="async" fetchPriority={fetchPriority} onLoad={handleLoad} onError={() => setLoaded(true)} className={clsx("absolute inset-0 h-full w-full object-cover transition-opacity duration-300", loaded ? "opacity-100" : "opacity-0")} />
         </picture>
     )
 }
