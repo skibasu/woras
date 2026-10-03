@@ -5,7 +5,6 @@ import SectionTitle from "../../ui/SectionTitle/SectionTitle"
 import OpeningHours from "./OpeningHours"
 import ContactInfo from "./ContactInfo"
 import WhatsApp from "./Whatsapp"
-import Image from "next/image"
 import ContactFormResultView from "./ContactFormResultView/ContactFormResultView"
 import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
 

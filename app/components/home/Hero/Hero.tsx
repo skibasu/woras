@@ -1,10 +1,8 @@
 import type { HomeQuery } from "@/graphql/generated/graphql"
-import Image from "next/image"
 import Link from "next/link"
 import ServiceList from "./ServiceList"
 import SectionSlogan from "../../ui/SectionSlogan/SectionSlogan"
 import HeroPicture from "./HeroPicture"
-import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
 
 type HeroData = NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["hero"] | undefined
 
@@ -31,7 +29,9 @@ export const Hero = ({ data }: HeroProps) => {
                     </Link>
                     {data.serviceList && <ServiceList items={data.serviceList} />}
                 </div>
-                <ProgressiveImage src={data?.accentImage?.node.sourceUrl || ""} alt={data?.accentImage?.node.altText || ""} className="w-full h-auto" width={134} height={100} containerClassName="image-accent hidden lg:block absolute right-[64px] bottom-[100px] z-20" onLoadOpacity={0.25} />
+                {/* <div className="image-accent hidden lg:block absolute right-16 bottom-25 z-20">
+                    <KeepRidingIcon className="w-full h-full" />
+                </div> */}
             </div>
         </section>
     )
