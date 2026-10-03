@@ -7,6 +7,7 @@ import Image from "next/image"
 import { Children, PropsWithChildren, useEffect, useMemo, useState } from "react"
 
 import EmblaCorouselDots from "./EmblaCorouselDots"
+import ArrowIcon from "../IconsSvg/ArrowIcon"
 
 const DEFAULT_OPTIONS: EmblaOptionsType = {
     loop: true,
@@ -80,8 +81,8 @@ const EmblaCarousel = ({ children }: PropsWithChildren) => {
     return (
         <>
             <div className="embla relative">
-                <button className="hidden lg:block embla__prev absolute top-[50%] lg:-left-15 hover:scale-120 cursor-pointer" onClick={scrollPrev} onMouseEnter={stopAutoplayOnDotsHover} onMouseLeave={resumeAutoplayAfterDotsHover}>
-                    <Image src="/images/arrow.svg" alt="previous" width={24} height={24} className="block rotate-180" />
+                <button className="hidden lg:block embla__prev absolute top-[50%] lg:-left-15 hover:scale-120 cursor-pointer w-8.5 h-8.5 text-white rotate-180" onClick={scrollPrev} onMouseEnter={stopAutoplayOnDotsHover} onMouseLeave={resumeAutoplayAfterDotsHover}>
+                    <ArrowIcon className="block w-full h-full" />
                 </button>
 
                 <div className="embla__viewport overflow-hidden" ref={emblaRef}>
@@ -94,8 +95,8 @@ const EmblaCarousel = ({ children }: PropsWithChildren) => {
                     </div>
                 </div>
 
-                <button className="hidden lg:block embla__next absolute top-[50%]  lg:-right-15 hover:scale-120 cursor-pointer" onClick={scrollNext} onMouseEnter={stopAutoplayOnDotsHover} onMouseLeave={resumeAutoplayAfterDotsHover}>
-                    <Image src="/images/arrow.svg" alt="next" width={24} height={24} className="block" />
+                <button className="hidden lg:block embla__next absolute top-[50%]  lg:-right-15 hover:scale-120 cursor-pointer text-white w-8.5 h-8.5" onClick={scrollNext} onMouseEnter={stopAutoplayOnDotsHover} onMouseLeave={resumeAutoplayAfterDotsHover}>
+                    <ArrowIcon className="block w-full h-full" />
                 </button>
             </div>
 
