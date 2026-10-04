@@ -36,6 +36,7 @@ export const HOME_QUERY = gql`
                         serviceTitle
                         serviceIcon {
                             node {
+                                id
                                 sourceUrl
                                 altText
                             }
@@ -52,6 +53,7 @@ export const HOME_QUERY = gql`
                     slides {
                         image {
                             node {
+                                id
                                 sourceUrl
                                 altText
                             }
@@ -88,6 +90,7 @@ export const HOME_QUERY = gql`
                     items {
                         image {
                             node {
+                                id
                                 sourceUrl
                                 altText
                             }

@@ -51,7 +51,7 @@ const MenuModal = ({ data }: Props) => {
                             </MenuDrawer>
                         </motion.div>
                         <motion.button type="button" aria-label="Close menu" onClick={() => setIsMenuOpen(false)} key="overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease: "easeInOut" }} className="fixed inset-0 z-50 bg-black/50">
-                            <Overlay />
+                            <Overlay gradientClassName="from-black/80 via-black/40 to-transparent backdrop-blur-sm" />
                         </motion.button>
                     </>
                 )}

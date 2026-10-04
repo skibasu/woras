@@ -6,6 +6,7 @@ import Reviews from "./components/home/Reviews/Reviews"
 import Gallery from "./components/home/Gallery/Gallery"
 import Pricing from "./components/home/Pricing/Pricing"
 import Contact from "./components/home/Contact/Contact"
+import { GalleryContextProvider } from "./context/GalleryContext"
 
 const Home = async () => {
     const data = await wordpressClient.request(HomeDocument)
@@ -16,7 +17,9 @@ const Home = async () => {
             <Features data={data.page?.homePage?.features} />
 
             <Reviews data={data.page?.homePage?.reviews} />
-            <Gallery data={data.page?.homePage?.gallery} />
+            <GalleryContextProvider>
+                <Gallery data={data.page?.homePage?.gallery} />
+            </GalleryContextProvider>
             <Pricing />
             <Contact />
         </main>
