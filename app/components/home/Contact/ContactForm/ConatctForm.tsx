@@ -11,6 +11,7 @@ import Textarea from "@/app/components/ui/Form/Textarea"
 import Button from "@/app/components/ui/Button/Button"
 import clsx from "clsx"
 import ContactFormAttachments, { useContactFormAttachments } from "./ContactFormAttachments"
+import { sendContactMessage } from "../ContactApi/contactApi"
 
 const schema = yup
     .object({
@@ -20,7 +21,7 @@ const schema = yup
     })
     .required()
 
-interface FormData {
+export interface FormData {
     login: string
     email: string
     message: string
@@ -55,23 +56,25 @@ const ContactForm = () => {
             setLoading(true)
             const attachments = await buildAttachments()
 
-            console.log("CONTACT FORM SUBMISSION", {
+            const res = await sendContactMessage({
                 login: data.login,
                 email: data.email,
                 message: data.message,
-                attachments,
             })
+            if (!res.success) {
+                throw new Error(res.error || "Failed to send message")
+            } else {
+                setSubmissionResult({
+                    isSuccess: true,
+                    successMessage: "Your message has been sent successfully!",
+                })
+                clearImages()
+                setErrorMessage(null)
+                reset()
+                setFileInputKey((prev) => prev + 1)
 
-            setSubmissionResult({
-                isSuccess: true,
-                successMessage: "Your message has been sent successfully!",
-            })
-            clearImages()
-            setErrorMessage(null)
-            reset()
-            setFileInputKey((prev) => prev + 1)
-
-            setLoading(false)
+                setLoading(false)
+            }
         } catch (error) {
             clearSubmissionResult()
             setLoading(false)
@@ -83,6 +86,7 @@ const ContactForm = () => {
             console.error(error)
         }
     }
+
     const onPickImages = (event: ChangeEvent<HTMLInputElement>) => {
         addFiles(Array.from(event.target.files ?? []))
         event.target.value = ""
