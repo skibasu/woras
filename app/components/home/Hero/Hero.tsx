@@ -1,5 +1,4 @@
 import type { HomeQuery } from "@/graphql/generated/graphql"
-import Link from "next/link"
 import ServiceList from "./ServiceList"
 import SectionSlogan from "../../ui/SectionSlogan/SectionSlogan"
 import HeroPicture from "./HeroPicture"

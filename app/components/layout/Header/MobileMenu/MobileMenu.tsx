@@ -11,7 +11,6 @@ import { menuScrollTo } from "@/app/helpers/menuScrollTo"
 import clsx from "clsx"
 import { menuSettings } from "../menuSettngs"
 import ProgressiveImage from "@/app/components/ui/ProgressiveImage/ProgressiveImage"
-import ButtonScrollTo from "@/app/components/ui/ButtonScrollTo/ButtonScrollTo"
 
 interface Data {
     logoUrl: string | null
@@ -26,7 +25,6 @@ interface Props {
 }
 const MobileMenu = ({ data }: Props) => {
     const { setIsMenuOpen, activeSection } = useMenuContext()
-
     const linkContact = menuSettings.links.find((link) => link.target === "contact")
     const linksRest = menuSettings.links.filter((link) => link.target !== "contact") // Exclude #contact from the main links list
 

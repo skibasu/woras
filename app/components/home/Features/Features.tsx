@@ -1,5 +1,4 @@
-import { HomeQuery } from "@/graphql/generated/graphql"
-import Link from "next/link"
+import type { HomeQuery } from "@/graphql/generated/graphql"
 import FeaturesCart from "./FeaturesCart"
 import SectionTitle from "../../ui/SectionTitle/SectionTitle"
 import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"

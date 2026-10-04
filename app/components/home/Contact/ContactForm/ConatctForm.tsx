@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, type ChangeEvent } from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
@@ -10,11 +10,7 @@ import Input from "@/app/components/ui/Form/Input"
 import Textarea from "@/app/components/ui/Form/Textarea"
 import Button from "@/app/components/ui/Button/Button"
 import clsx from "clsx"
-
-const MAX_IMAGES = 10
-const MAX_IMAGE_DIMENSION = 1600
-const JPEG_QUALITY = 0.8
-const MAX_TOTAL_PAYLOAD_BYTES = 18 * 1024 * 1024
+import ContactFormAttachments, { useContactFormAttachments } from "./ContactFormAttachments"
 
 const schema = yup
     .object({
@@ -30,88 +26,13 @@ interface FormData {
     message: string
 }
 
-type MailAttachment = {
-    name: string
-    data: string
-}
-
-const readFileAsDataUrl = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader()
-
-        reader.onload = () => {
-            if (typeof reader.result === "string") {
-                resolve(reader.result)
-                return
-            }
-            reject(new Error("Could not read selected file."))
-        }
-
-        reader.onerror = () => reject(new Error("Failed to read selected file."))
-        reader.readAsDataURL(file)
-    })
-}
-
-const loadImage = (src: string): Promise<HTMLImageElement> => {
-    return new Promise((resolve, reject) => {
-        const image = new Image()
-        image.onload = () => resolve(image)
-        image.onerror = () => reject(new Error("Failed to load image for processing."))
-        image.src = src
-    })
-}
-
-const getJpegName = (fileName: string): string => {
-    const dotIndex = fileName.lastIndexOf(".")
-    const baseName = dotIndex > 0 ? fileName.slice(0, dotIndex) : fileName
-    return `${baseName}.jpg`
-}
-
-const base64DataUrlSizeBytes = (dataUrl: string): number => {
-    const base64 = dataUrl.split(",")[1] ?? ""
-    const padding = base64.endsWith("==") ? 2 : base64.endsWith("=") ? 1 : 0
-    return Math.floor((base64.length * 3) / 4) - padding
-}
-
-const resizeImageToJpegDataUrl = async (file: File): Promise<MailAttachment> => {
-    const sourceDataUrl = await readFileAsDataUrl(file)
-    const image = await loadImage(sourceDataUrl)
-
-    const maxSide = Math.max(image.width, image.height)
-    const scale = maxSide > MAX_IMAGE_DIMENSION ? MAX_IMAGE_DIMENSION / maxSide : 1
-    const targetWidth = Math.max(1, Math.round(image.width * scale))
-    const targetHeight = Math.max(1, Math.round(image.height * scale))
-
-    const canvas = document.createElement("canvas")
-    canvas.width = targetWidth
-    canvas.height = targetHeight
-
-    const context = canvas.getContext("2d")
-    if (!context) {
-        throw new Error("Image processing is not available in this browser.")
-    }
-
-    context.drawImage(image, 0, 0, targetWidth, targetHeight)
-    const outputDataUrl = canvas.toDataURL("image/jpeg", JPEG_QUALITY)
-
-    if (!outputDataUrl.startsWith("data:image/jpeg;base64,")) {
-        throw new Error("Image conversion to JPEG failed.")
-    }
-
-    return {
-        name: getJpegName(file.name),
-        data: outputDataUrl,
-    }
-}
-
 const ContactForm = () => {
     const { setSubmissionResult, clearSubmissionResult } = useContactFormContext()
-    const [images, setImages] = useState<File[]>([])
-    const [imagesError, setImagesError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const [fileInputKey, setFileInputKey] = useState(0)
     const fileInputRef = useRef<HTMLInputElement>(null)
+    const { images, imagesError, maxImages, addFiles, removeImage, clearImages, buildAttachments } = useContactFormAttachments()
 
     const {
         register,
@@ -132,15 +53,7 @@ const ContactForm = () => {
 
         try {
             setLoading(true)
-            const attachments = await Promise.all(images.map((image) => resizeImageToJpegDataUrl(image)))
-            const totalAttachmentBytes = attachments.reduce((sum, attachment) => sum + base64DataUrlSizeBytes(attachment.data), 0)
-
-            if (totalAttachmentBytes > MAX_TOTAL_PAYLOAD_BYTES) {
-                setImagesError("Selected images are too large to send. Please remove some images or choose smaller files.")
-                setErrorMessage("Attachments exceed safe email size limits.")
-                setLoading(false)
-                return
-            }
+            const attachments = await buildAttachments()
 
             console.log("CONTACT FORM SUBMISSION", {
                 login: data.login,
@@ -153,8 +66,7 @@ const ContactForm = () => {
                 isSuccess: true,
                 successMessage: "Your message has been sent successfully!",
             })
-            setImages([])
-            setImagesError(null)
+            clearImages()
             setErrorMessage(null)
             reset()
             setFileInputKey((prev) => prev + 1)
@@ -171,45 +83,28 @@ const ContactForm = () => {
             console.error(error)
         }
     }
-    const onPickImages = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const pickedFiles = Array.from(event.target.files ?? [])
-        const nextCount = images.length + pickedFiles.length
-
-        if (nextCount > MAX_IMAGES) {
-            const allowed = Math.max(0, MAX_IMAGES - images.length)
-            const accepted = pickedFiles.slice(0, allowed)
-
-            setImages((prev) => [...prev, ...accepted])
-            setImagesError(`You can attach up to ${MAX_IMAGES} images.`)
-            event.target.value = ""
-            return
-        }
-
-        setImages((prev) => [...prev, ...pickedFiles])
-        setImagesError(null)
+    const onPickImages = (event: ChangeEvent<HTMLInputElement>) => {
+        addFiles(Array.from(event.target.files ?? []))
         event.target.value = ""
     }
 
-    const removeImage = (indexToRemove: number) => {
-        setImages((prev) => prev.filter((_, index) => index !== indexToRemove))
-        setImagesError(null)
-    }
-
     return (
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form noValidate>
             <h2 className="mb-6">Contact Form</h2>
             <p className="mb-8 text-black/70">Tell us what&apos;s wrong and we&apos;ll help you get back on the road.</p>
-            <div className="relative z-10 pb-9">
-                <Input placeholder="Your name or phone number" {...register("login")} className={clsx(errors.login?.message && "border-b border-red-600 bg-red-50")} />
-                {errors.login?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.login?.message}</p>}
-            </div>
-            <div className="relative z-10 pb-9">
-                <Input type="email" placeholder="Your email" {...register("email")} className={clsx(errors.email?.message && "border-b border-red-600 bg-red-50")} />
-                {errors.email?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.email?.message}</p>}
-            </div>
-            <div className="relative z-10 pb-9">
-                <Textarea placeholder="Describe your problem" {...register("message")} className={clsx(errors.message?.message && "border-b border-red-600 bg-red-50", "max-h-50")} />
-                {errors.message?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.message?.message}</p>}
+            <div className="flex flex-col gap-1 w-full">
+                <div className="relative z-10 pb-9">
+                    <Input placeholder="Your name or phone number" {...register("login")} isError={!!errors.login?.message} />
+                    {errors.login?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.login?.message}</p>}
+                </div>
+                <div className="relative z-10 pb-9">
+                    <Input type="email" placeholder="Your email" {...register("email")} isError={!!errors.email?.message} />
+                    {errors.email?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.email?.message}</p>}
+                </div>
+                <div className="relative z-10 pb-9">
+                    <Textarea placeholder="Describe your problem" {...register("message")} className={clsx(errors.message?.message && "border-b border-red-600 bg-red-50", "max-h-50")} />
+                    {errors.message?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.message?.message}</p>}
+                </div>
             </div>
             <input key={fileInputKey} ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={onPickImages} />
 
@@ -220,28 +115,14 @@ const ContactForm = () => {
                         <ClipIcon className="block h-6 w-6 text-current" aria-hidden="true" />
                     </button>
                     <p className="text-sm text-accent">
-                        {images.length} / {MAX_IMAGES}
+                        {images.length} / {maxImages}
                     </p>
                 </div>
-
-                {imagesError ? <p className="mt-2 text-sm text-red-600">{imagesError}</p> : null}
-
-                {images.length > 0 ? (
-                    <ul className="mt-4 space-y-2">
-                        {images.map((image, index) => (
-                            <li key={`${image.name}-${image.lastModified}-${index}`} className="flex items-center justify-between rounded border border-gray-200 bg-gray-50 px-3 py-2">
-                                <span className="truncate pr-3 text-sm text-black/80">{image.name}</span>
-                                <button type="button" className="text-sm text-red-600 hover:text-red-700 disabled:opacity-60" onClick={() => removeImage(index)} disabled={loading}>
-                                    Remove
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                ) : null}
+                <ContactFormAttachments images={images} imagesError={imagesError} loading={loading} onRemoveImage={removeImage} />
             </div>
 
             <div>
-                <Button type="submit" size="large" label={loading ? "Sending..." : "Send"} disabled={loading} />
+                <Button onClick={handleSubmit(onSubmit)} size="large" label={loading ? "Sending..." : "Send"} disabled={loading} />
             </div>
 
             {errorMessage ? <p className="mt-3 text-sm text-red-600">{errorMessage}</p> : null}
