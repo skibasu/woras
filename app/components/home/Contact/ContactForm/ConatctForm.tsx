@@ -55,14 +55,7 @@ const ContactForm = () => {
         try {
             setLoading(true)
             const attachments = await buildAttachments()
-            console.log(
-                "Attachments:",
-                attachments.map(({ name, data }) => ({
-                    name,
-                    dataPrefix: data.slice(0, 30),
-                    size: Math.round(data.length / 1024) + " KB",
-                })),
-            )
+
             const res = await sendContactMessage(
                 {
                     login: data.login,
