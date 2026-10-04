@@ -120,6 +120,7 @@
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.65) 0%, rgba(223, 231, 219, 0.65) 35%, rgba(225, 233, 221, 0.65) 65%, rgba(212, 229, 203, 0.65) 100%);
     @apply fixed top-0 left-0 w-full z-50 backdrop-blur-md h-header;
 }
+
 .mobile-menu-gradient {
     background: linear-gradient(180deg, #ffffff 0%, #e6f2e0 100%);
 }
@@ -238,6 +239,9 @@
 /* Generic cards */
 .cart {
     @apply bg-background shadow relative overflow-hidden rounded-2xl border border-black/10;
+}
+.cart-success {
+    background: linear-gradient(30deg, rgba(255, 255, 255, 0.45) 0%, rgba(223, 231, 219, 0.55) 85%, rgba(225, 233, 221, 0.65) 95%, rgba(212, 229, 203, 0.65) 100%);
 }
 
 /* Text helpers */

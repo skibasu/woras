@@ -14,7 +14,7 @@ const Contact = async () => {
     return (
         <ContactFormProvider>
             <section id="contact" className="page-section section-y-spacing relative overflow-hidden">
-                <ProgressiveImage src="images/picture-contact-bgr.webp" alt="background" className="object-cover w-full h-full" fill={true} containerClassName="absolute inset-0 z-0 w-full h-full" onLoadOpacity={0.15} />
+                <ProgressiveImage src="images/picture-contact-bgr.webp" alt="background" className="object-cover w-full h-full" fill={true} containerClassName="absolute inset-0 z-0 w-full h-[70%] xl:h-full" onLoadOpacity={0.15} />
 
                 <div className="main-container relative">
                     <SectionTitle className="mb-10 lg:mb-16" title={data?.page?.contactPage?.title} titleAccent={data?.page?.contactPage?.titleAccent} accentEnd={data?.page?.contactPage?.accentEnd} eyebrow={data?.page?.contactPage?.eyebrow} subtitle={data?.page?.contactPage?.subtitle} />

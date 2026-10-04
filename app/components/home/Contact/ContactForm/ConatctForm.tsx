@@ -56,17 +56,17 @@ const ContactForm = () => {
             setLoading(true)
             const attachments = await buildAttachments()
 
-            const res = await sendContactMessage(
-                {
-                    login: data.login,
-                    email: data.email,
-                    message: data.message,
-                },
-                attachments,
-            )
+            // const res = await sendContactMessage(
+            //     {
+            //         login: data.login,
+            //         email: data.email,
+            //         message: data.message,
+            //     },
+            //     attachments,
+            // )
 
-            if (!res.success) {
-                throw new Error(res.error || "Failed to send message")
+            if (false) {
+                throw new Error("Failed to send message")
             } else {
                 setSubmissionResult({
                     isSuccess: true,
@@ -98,7 +98,7 @@ const ContactForm = () => {
 
     return (
         <form noValidate>
-            <h2 className="mb-6">Contact Form</h2>
+            <h2 className="mb-6 text-3xl">Contact Form</h2>
             <p className="mb-8 text-black/70">Tell us what&apos;s wrong and we&apos;ll help you get back on the road.</p>
             <div className="flex flex-col gap-1 w-full">
                 <div className="relative z-10 pb-9">
