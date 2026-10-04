@@ -1,9 +1,9 @@
 import { HomeQuery } from "@/graphql/generated/graphql"
-import Image from "next/image"
 import Link from "next/link"
 import FeaturesCart from "./FeaturesCart"
 import SectionTitle from "../../ui/SectionTitle/SectionTitle"
 import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
+import ButtonScrollTo from "../../ui/ButtonScrollTo/ButtonScrollTo"
 
 type FeaturesData = NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["features"] | undefined
 
@@ -24,10 +24,8 @@ const Features = ({ data }: FeaturesProps) => {
                         return <FeaturesCart key={i} feature={feature} className={`${i === 2 ? "md:col-span-2 lg:col-span-1 md:max-w-1/2 m-auto lg:max-w-full lg:m-0" : ""}`} />
                     })}
                 </div>
-                <div className="flex justify-center mt-10">
-                    <Link href="#contact" className="btn btn-large btn-primary">
-                        Contact Us
-                    </Link>
+                <div className="flex justify-center mt-16">
+                    <ButtonScrollTo className="btn btn-large btn-primary" target="contact" label={"Contact Us"} />
                 </div>
             </div>
             <ProgressiveImage src="images/background-wheel-s.webp" alt="background" className=" w-full h-auto" width={1912} height={1274} containerClassName="absolute right-0 top-0 translate-x-2/3 translate-y-[-10%] z-0 w-[1912px] h-[1274px]" onLoadOpacity={0.07} />

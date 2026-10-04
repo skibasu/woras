@@ -11,6 +11,7 @@ import { menuScrollTo } from "@/app/helpers/menuScrollTo"
 import clsx from "clsx"
 import { menuSettings } from "../menuSettngs"
 import ProgressiveImage from "@/app/components/ui/ProgressiveImage/ProgressiveImage"
+import ButtonScrollTo from "@/app/components/ui/ButtonScrollTo/ButtonScrollTo"
 
 interface Data {
     logoUrl: string | null

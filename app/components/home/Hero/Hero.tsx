@@ -3,6 +3,7 @@ import Link from "next/link"
 import ServiceList from "./ServiceList"
 import SectionSlogan from "../../ui/SectionSlogan/SectionSlogan"
 import HeroPicture from "./HeroPicture"
+import ButtonScrollTo from "../../ui/ButtonScrollTo/ButtonScrollTo"
 
 type HeroData = NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["hero"] | undefined
 
@@ -23,10 +24,8 @@ export const Hero = ({ data }: HeroProps) => {
             <div className="w-full">
                 <div className="relative z-10 max-w-4xl pt-10 md:pt-0">
                     <SectionSlogan eyebrow={data.eyebrow} slogan={data.slogan} sloganAccent={data.sloganAccent} sloganEnd={data.sloganEnd} subtitle={data.subtitle} />
+                    <ButtonScrollTo className="btn btn-large btn-primary" target="contact" label={data.buttonText || "Contact Us"} />
 
-                    <Link href="/contact" className="btn btn-large btn-primary">
-                        {data.buttonText}
-                    </Link>
                     {data.serviceList && <ServiceList items={data.serviceList} />}
                 </div>
                 {/* <div className="image-accent hidden lg:block absolute right-16 bottom-25 z-20">
