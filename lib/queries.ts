@@ -153,49 +153,67 @@ export const PRICING_QUERY = gql`
 `
 export const GLOBAL_SETTINGS_QUERY = gql`
     query GlobalSettings {
-        page(id: 65, idType: DATABASE_ID) {
+        page(id: "65", idType: DATABASE_ID) {
             generalSettingsFields {
-                branding {
-                    logo {
-                        node {
-                            sourceUrl
-                            altText
-                        }
-                    }
-                    favicon {
-                        node {
-                            sourceUrl
-                            altText
-                        }
+                logo {
+                    node {
+                        altText
+                        uri
                     }
                 }
+
+                favicon {
+                    node {
+                        uri
+                        altText
+                    }
+                }
+
+                companyName
+                companyEmail
+                phoneNumber
+                city
+
+                contactButtonLabel
+
+                footerSubtitle
+                copyrights
             }
         }
     }
 `
 export const CONTACT_QUERY = gql`
-    query Contact {
-        page(id: 44, idType: DATABASE_ID) {
-            title
+    query ContactPage {
+        page(id: "44", idType: DATABASE_ID) {
             contactPage {
                 eyebrow
                 title
                 titleAccent
                 accentEnd
                 subtitle
-                companyName
-                phone
-                email
-                whatsupEyeBrow
-                whatsappButtonLabel
-                whatsappButtonUrl
-                whatsappSubtitle
+
                 openingHours {
                     day
                     from
                     to
                     closed
                 }
+
+                whatsupEyeBrow
+
+                whatsappTitle
+                whatsappSubtitle
+                whatsappButtonLabel
+
+                contactFormTitle
+                labelForInputName
+                labelForInputEmail
+                placeholderForTextarea
+                labelForSubmitButton
+                successMessageEyebrow
+                successMessage
+                successMessageAccent
+                successMessageDescription
             }
         }
     }

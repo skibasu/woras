@@ -33,7 +33,9 @@ const MobileMenu = ({ data }: Props) => {
     }
 
     const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, target: string) => {
-        if (typeof window !== "undefined" && window.location.pathname === "/") {
+        const sectionExists = typeof document !== "undefined" && document.querySelector(`#${target}`)
+
+        if (sectionExists) {
             event.preventDefault()
             closeMenu()
 

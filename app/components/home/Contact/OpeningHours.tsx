@@ -1,5 +1,3 @@
-import type { ContactQuery } from "@/graphql/generated/graphql"
-
 type OpeningHoursItem = NonNullable<NonNullable<NonNullable<ContactQuery["page"]>["contactPage"]>["openingHours"]>[number]
 
 type Props = {

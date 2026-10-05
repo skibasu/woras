@@ -15,7 +15,9 @@ const NavLinks = ({ className = "", onNavigate }: Props) => {
     const { activeSection } = useMenuContext()
 
     const handleClick = (event: React.MouseEvent<HTMLAnchorElement>, target: string) => {
-        if (typeof window !== "undefined" && window.location.pathname === "/") {
+        const sectionExists = typeof document !== "undefined" && document.querySelector(`#${target}`)
+
+        if (sectionExists) {
             event.preventDefault()
             menuScrollTo(target)
         }

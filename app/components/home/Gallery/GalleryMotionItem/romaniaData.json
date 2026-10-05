@@ -1,0 +1,27 @@
+{
+    "currecyCounter": 0.83,
+    "costs": [
+        { "name": "Agata", "cost": 18, "costName": "Autostrada Katowice Krakow", "currency": "zl", "count": 3 },
+        { "name": "Agata", "cost": 85, "costName": "Dom Ceauşescu: bilety", "currency": "rom", "count": 3 },
+        { "name": "Agata", "cost": 250.8, "costName": "Hanu Lui Manuc: obiad", "currency": "rom", "count": 1 },
+        { "name": "Agata", "cost": 210.82, "costName": "Paliwo: LPG", "currency": "zl", "count": 1 },
+        { "name": "Agata", "cost": 280, "costName": "Paliwo: PB-95", "currency": "rom", "count": 1 },
+        { "name": "Agata", "cost": 6, "costName": "Parking: Brasov", "currency": "rom", "count": 1 },
+
+        { "name": "Gosia", "cost": 583, "costName": "Caru’ cu Bere: obiad", "currency": "zł", "count": 1 },
+        { "name": "Gosia", "cost": 172.36, "costName": "Mega Image: Zakupy", "currency": "zł", "count": 1 },
+        { "name": "Gosia", "cost": 150.2, "costName": "Parlament: bilety", "currency": "zł", "count": 1 },
+        { "name": "Gosia", "cost": 261, "costName": "Snow Restaurant Brasov: Obiad", "currency": "zł", "count": 1 },
+
+        { "name": "Su", "cost": 10, "costName": "Parking: Brasov", "currency": "zł", "count": 1 },
+        { "name": "Su", "cost": 30, "costName": "Snow Restaurant Brasov: Napiwek", "currency": "zł", "count": 1 },
+        { "name": "Su", "cost": 651, "costName": "Downtown: noclegi", "currency": "zł", "count": 1 },
+        { "name": "Su", "cost": 187.75, "costName": "La Mama: Obiad", "currency": "zł", "count": 1 },
+        { "name": "Su", "cost": 141.32, "costName": "Paliwo: PB-95", "currency": "zł", "count": 1 },
+        { "name": "Su", "cost": 50.11, "costName": "Paliwo: PB-95", "currency": "zł", "count": 1 },
+        { "name": "Su", "cost": 28.69, "costName": "Parking: Bucharest", "currency": "zł", "count": 1 },
+        { "name": "Su", "cost": 123, "costName": "Uber", "currency": "zł", "count": 1 },
+        { "name": "Su", "cost": 89.3, "costName": "Coffe and kebab", "currency": "zł", "count": 1 },
+        { "name": "Su", "cost": 876.68, "costName": "Mercedes", "currency": "zl", "count": 1 }
+    ]
+}

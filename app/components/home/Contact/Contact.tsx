@@ -1,4 +1,4 @@
-import { ContactDocument } from "@/graphql/generated/graphql"
+import { ContactPageDocument } from "@/graphql/generated/graphql"
 import { wordpressClient } from "@/lib/wpgraphql"
 import { ContactFormProvider } from "@/app/context/ContactFormContext"
 import SectionTitle from "../../ui/SectionTitle/SectionTitle"
@@ -9,7 +9,7 @@ import ContactFormResultView from "./ContactFormResultView/ContactFormResultView
 import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
 
 const Contact = async () => {
-    const data = await wordpressClient.request(ContactDocument)
+    const data = await wordpressClient.request(ContactPageDocument)
 
     return (
         <ContactFormProvider>
@@ -25,7 +25,7 @@ const Contact = async () => {
                         </div>
 
                         <div className="cart p-6 lg:p-8 xl:col-span-1 xl:order-1">
-                            <ContactInfo companyName={data?.page?.contactPage?.companyName ?? null} phone={data?.page?.contactPage?.phone ?? null} email={data?.page?.contactPage?.email ?? null} />
+                            <ContactInfo />
                             <div className="my-8 h-px w-full bg-black/10" />
                             <OpeningHours items={data?.page?.contactPage?.openingHours} />
                         </div>
