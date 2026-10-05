@@ -36,7 +36,7 @@ const GalleryMotionItem = () => {
     }, [selected?.src])
 
     return (
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
             {selected !== null && (
                 <>
                     <motion.div
@@ -54,9 +54,11 @@ const GalleryMotionItem = () => {
                             </button>
                         </motion.div>
                     </motion.div>
-                    <motion.article layoutId={`gallery-${id}`} className="fixed left-1/2 top-1/2 z-100 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl">
-                        <Image src={src} alt={alt} width={naturalSize.width} height={naturalSize.height} className="block w-auto h-auto max-w-[92vw] max-h-[88dvh] object-contain" sizes="92vw" />
-                    </motion.article>
+                    <div className="fixed inset-0 z-100 grid place-items-center p-4 pointer-events-none">
+                        <motion.article layoutId={`gallery-${id}`} className="pointer-events-auto overflow-hidden rounded-2xl" onClick={(event) => event.stopPropagation()}>
+                            <Image src={src} alt={alt} width={naturalSize.width} height={naturalSize.height} className="block w-auto h-auto max-w-[92vw] max-h-[88dvh] object-contain" sizes="92vw" />
+                        </motion.article>
+                    </div>
                 </>
             )}
         </AnimatePresence>
