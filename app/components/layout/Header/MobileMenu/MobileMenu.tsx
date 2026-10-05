@@ -55,8 +55,8 @@ const MobileMenu = ({ data }: Props) => {
                 <Link href="/" className="block">
                     {data?.logoUrl ? <ProgressiveImage src={data?.logoUrl} alt={data.logoAlt || "Logo"} width={260} height={60} className="block h-13 w-auto" /> : <span className="text-white text-lg font-bold">Logo</span>}
                 </Link>
-                <button className="flex justify-center items-center w-7 h-6.25" aria-label="Close menu" onClick={closeMenu}>
-                    <CloseIcon className="block text-white" aria-hidden="true" />
+                <button className="flex justify-center items-center w-5 h-5" aria-label="Close menu" onClick={closeMenu}>
+                    <CloseIcon className="block text-accent w-full h-full" aria-hidden="true" />
                 </button>
             </div>
             <nav className="relative z-1 pt-2">

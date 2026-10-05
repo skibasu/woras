@@ -49,7 +49,7 @@ const GalleryMotionItem = () => {
                         }}
                     >
                         <motion.div className="w-7 h-6.25 absolute top-8 right-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                            <button className="flex justify-center items-center w-full h-full text-white" aria-label="Close Full View" onClick={() => setSelected(null)}>
+                            <button className="flex justify-center items-center w-5 h-5 text-white" aria-label="Close Full View" onClick={() => setSelected(null)}>
                                 <CloseIcon className="block" aria-hidden="true" />
                             </button>
                         </motion.div>

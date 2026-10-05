@@ -39,7 +39,7 @@ const SuccessMessage = ({ onClose }: Props) => {
             className="cart-success fixed left-1/2 top-1/2 z-100 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl cart w-[95vw]  max-w-[95vw] md:max-w-140 px-6 lg:px-8 shadow-lg"
         >
             <div>
-                <button className="absolute top-5 right-5 flex justify-center items-center w-[24px] h-[24px] text-black" aria-label="Close Message" onClick={() => onClose()}>
+                <button className="absolute top-5 right-5 flex justify-center items-center w-5 h-5 text-black" aria-label="Close Message" onClick={() => onClose()}>
                     <CloseIcon className="block" aria-hidden="true" />
                 </button>
                 <div className="py-8">
