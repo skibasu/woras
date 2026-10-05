@@ -6,6 +6,7 @@ import Hamburger from "./Hamburger/Hamburger"
 import MenuModal from "./MenuModal/MenuModal"
 import NavLinks from "./NavLinks/NavLinks"
 import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
+import WhatsupMobileButton from "../../ui/WhatsupMobileButton"
 
 type HeaderProps = {
     data: NonNullable<NonNullable<GlobalSettingsQuery["page"]>["generalSettingsFields"]>["branding"] | undefined
@@ -15,16 +16,14 @@ const Header = ({ data }: HeaderProps) => {
         <header id="header" className="header w-full flex items-center">
             <div className="page-section py-2 flex justify-between items-center">
                 <Link href="/" className="block">
-                    {data?.logo?.node?.sourceUrl ? <ProgressiveImage src={data.logo.node.sourceUrl} alt={data.logo.node.altText || "Logo"} width={200} height={50} className="block h-10 md:h-12.5 w-auto" /> : <span className="text-white text-lg font-bold">Logo</span>}
+                    {data?.logo?.node?.sourceUrl ? <ProgressiveImage src={data.logo.node.sourceUrl} alt={data.logo.node.altText || "Logo"} width={200} height={50} className="block h-10  w-auto" /> : <span className="text-white text-lg font-bold">Logo</span>}
                 </Link>
                 <nav className="hidden md:flex items-center">
-                    <div className="md:flex items-center">
-                        <NavLinks className="block menu-link px-4" />
+                    <div className="md:flex items-center gap-6 pr-6">
+                        <NavLinks className="block menu-link px-3" />
                     </div>
-                    <div className="flex gap-2 items-center pl-3">
-                        <Link href="/contact" className="block btn btn-icon btn-primary h-8 w-8">
-                            <PhoneIcon className="block h-full w-auto text-current" aria-hidden="true" />
-                        </Link>
+                    <div className="flexitems-center pl-9 border-l border-gray-600">
+                        <WhatsupMobileButton href="https://wa.me/1234567890" className="bg-primary px-4" iconWidth={20} iconHeight={20} label="WhatsApp" />
                     </div>
                 </nav>
                 <Hamburger />

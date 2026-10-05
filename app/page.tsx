@@ -23,7 +23,7 @@ const Home = async () => {
             </GalleryContextProvider>
             <Pricing />
             <Contact />
-            <WhatsupMobileButton href={"#"} className="fixed bottom-6 right-6 z-50 lg:hidden" />
+            <WhatsupMobileButton iconWidth={28} iconHeight={28} href={"#"} className="fixed bottom-6 right-6 z-50 lg:hidden bg-whatsapp-hover" />
         </main>
     )
 }

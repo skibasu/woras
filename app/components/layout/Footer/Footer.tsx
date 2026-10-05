@@ -9,7 +9,7 @@ type Props = {
 
 const Footer = ({ email, phone }: Props) => {
     return (
-        <footer className="page-section items-endpb-4 pt-8 bg-gradient-to-br from-[#292929] via-[#202020] to-[#151515] text-white relative overflow-hidden">
+        <footer className="page-section items-endpb-4 pt-8 bg-linear-to-br from-[#292929] via-[#202020] to-[#151515] text-white relative overflow-hidden">
             <div className="border-b border-gray-500 flex flex-col items-center md:flex-row md:items-end justify-between pb-4 lg:pb-6">
                 <div className="flex flex-col items-center md:block mb-8 md:mb-0">
                     <p className="text-brand-name text-white/70 with-accent-separator-right with-accent-separator-left mb-2 flex items-center">ace of wheel</p>

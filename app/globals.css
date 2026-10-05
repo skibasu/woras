@@ -117,13 +117,12 @@
 
 /* Layout */
 .header {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.65) 0%, rgba(223, 231, 219, 0.65) 35%, rgba(225, 233, 221, 0.65) 65%, rgba(212, 229, 203, 0.65) 100%);
-    @apply fixed top-0 left-0 w-full z-50 backdrop-blur-md h-header;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.65) 35%, rgba(0, 0, 0, 0.85) 65%, rgba(0, 0, 0, 0.85) 100%);
+
+    /* background: linear-gradient(90deg, rgba(255, 255, 255, 0.85) 0%, rgba(223, 231, 219, 0.65) 35%, rgba(225, 233, 221, 0.85) 65%, rgba(212, 229, 203, 0.85) 100%); */
+    @apply fixed top-0 left-0 w-full z-50 backdrop-blur-md h-header  border-b border-gray-900;
 }
 
-.mobile-menu-gradient {
-    background: linear-gradient(180deg, #ffffff 0%, #e6f2e0 100%);
-}
 .main-container {
     @apply w-full max-w-full md:max-w-2xl lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto;
 }
@@ -176,7 +175,7 @@
 
 .btn-whatsapp-primary,
 .btn-wathsapp-primary {
-    background: var(--color-whatsapp);
+    background: var(--color-primary);
     @apply hover:bg-whatsapp-hover;
 }
 
@@ -221,16 +220,21 @@
 
 .menu-link {
     line-height: var(--line-height-sm);
-    @apply text-black hover:text-primary hover:text-shadow-2xs hover:text-shadow-primary transition-all duration-300 ease-in-out text-center rounded-sm;
+    @apply text-white/70 font-semibold hover:text-accent hover:text-shadow-2xs  transition-all duration-300 ease-in-out text-center rounded-sm;
 }
 .menu-link-active {
-    @apply text-primary/60 text-shadow-primary text-shadow-2xs underline decoration-primary/60 underline-offset-8  transition-all duration-600 ease-in-out;
+    @apply text-accent text-shadow-primary text-shadow-2xs underline decoration-accent underline-offset-8  transition-all duration-600 ease-in-out;
 }
 .mobile-menu-link {
-    @apply block py-4 border-b border-gray-300 px-5 font-bold uppercase hover:bg-primary/20;
+    @apply block py-3 text-white/90 px-5 font-bold uppercase hover:bg-accent/10 active:bg-accent/10;
 }
 .mobile-menu-link-active {
-    @apply bg-primary/20;
+    @apply bg-accent/10 border-l-4 border-accent;
+}
+.mobile-menu-gradient {
+    background: #181717;
+    /* @apply bg-linear-to-br from-[#292929] via-[#202020] to-[#151515] background: linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.65) 35%, rgba(0, 0, 0, 0.85) 65%, rgba(0, 0, 0, 0.85) 100%);  */
+    /* background: linear-gradient(180deg, #ffffff 0%, #e6f2e0 100%); */
 }
 .block-link:hover svg {
     @apply text-accent scale-120;
