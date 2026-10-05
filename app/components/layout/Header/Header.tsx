@@ -1,7 +1,5 @@
 import { GlobalSettingsQuery } from "@/graphql/generated/graphql"
 import Link from "next/link"
-import Image from "next/image"
-import PhoneIcon from "../../ui/IconsSvg/PhoneIcon"
 import Hamburger from "./Hamburger/Hamburger"
 import MenuModal from "./MenuModal/MenuModal"
 import NavLinks from "./NavLinks/NavLinks"
@@ -18,7 +16,7 @@ const Header = ({ data }: HeaderProps) => {
                 <Link href="/" className="block">
                     {data?.logo?.node?.sourceUrl ? <ProgressiveImage src={data.logo.node.sourceUrl} alt={data.logo.node.altText || "Logo"} width={200} height={50} className="block h-10 w-auto" /> : <span className="text-white text-lg font-bold">Logo</span>}
                 </Link>
-                <nav className="hidden md:flex items-center">
+                <nav className="hidden lg:flex items-center">
                     <div className="md:flex items-center gap-6 pr-6">
                         <NavLinks className="block menu-link px-3" />
                     </div>
