@@ -17,7 +17,7 @@ const Header = ({ data }: HeaderProps) => {
                     {data?.logo?.node?.sourceUrl ? <ProgressiveImage src={data.logo.node.sourceUrl} alt={data.logo.node.altText || "Logo"} width={200} height={50} className="block h-10 w-auto" /> : <span className="text-white text-lg font-bold">Logo</span>}
                 </Link>
                 <nav className="hidden lg:flex items-center">
-                    <div className="md:flex items-center gap-6 pr-6">
+                    <div className="md:flex items-center lg:gap-2 xl:gap-6 pr-6">
                         <NavLinks className="block menu-link px-3" />
                     </div>
                     <div className="flexitems-center pl-9 border-l border-gray-600">
