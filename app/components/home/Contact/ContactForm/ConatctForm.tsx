@@ -56,16 +56,16 @@ const ContactForm = () => {
             setLoading(true)
             const attachments = await buildAttachments()
 
-            const res = await sendContactMessage(
-                {
-                    login: data.login,
-                    email: data.email,
-                    message: data.message,
-                },
-                attachments,
-            )
+            // const res = await sendContactMessage(
+            //     {
+            //         login: data.login,
+            //         email: data.email,
+            //         message: data.message,
+            //     },
+            //     attachments,
+            // )
 
-            if (!res.success) {
+            if (false) {
                 throw new Error("Failed to send message")
             } else {
                 setSubmissionResult({

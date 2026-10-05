@@ -14,7 +14,7 @@ const ContactFormResultView = () => {
             <ContactForm />
             <AnimatePresence>
                 {isSuccess && (
-                    <Modal onClose={clearSubmissionResult} className="bg-gray-400/20 backdrop-blur-sm">
+                    <Modal onClose={clearSubmissionResult} className="bg-gray-800/50 backdrop-blur-sm">
                         <SuccessMessage onClose={clearSubmissionResult} />
                     </Modal>
                 )}

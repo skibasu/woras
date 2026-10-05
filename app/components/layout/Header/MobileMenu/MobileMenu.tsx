@@ -50,7 +50,7 @@ const MobileMenu = ({ data }: Props) => {
     }
 
     return (
-        <div className="mobile-menu-gradient h-full">
+        <div className="mobile-menu-gradient h-full pb-8">
             <div className="py-6 flex justify-between items-start px-5 relative z-1 border-b border-black/90">
                 <Link href="/" className="block">
                     {data?.logoUrl ? <ProgressiveImage src={data?.logoUrl} alt={data.logoAlt || "Logo"} width={260} height={60} className="block h-13 w-auto" /> : <span className="text-white text-lg font-bold">Logo</span>}
@@ -85,20 +85,18 @@ const MobileMenu = ({ data }: Props) => {
                         </div>
                     </div>
 
-                    <div className="">
-                        <a href={`tel:${data.phone}`} className="flex items-center gap-3">
-                            <div className="h-5">
-                                <PhoneIcon className="block h-full w-auto text-accent" aria-hidden="true" />
-                            </div>
+                    <a href={`tel:${data.phone}`} className="flex items-center gap-3">
+                        <div className="h-5">
+                            <PhoneIcon className="block h-full w-auto text-accent" aria-hidden="true" />
+                        </div>
 
-                            <div>
-                                <p className="text-sm font-semibold text-white/90">{data.phone}</p>
-                                <p className="text-sm text-white/70">Call or WhatsApp</p>
-                            </div>
-                        </a>
-                    </div>
+                        <div>
+                            <p className="text-sm font-semibold text-white/90">{data.phone}</p>
+                            <p className="text-sm text-white/70">Call or WhatsApp</p>
+                        </div>
+                    </a>
 
-                    <div className="flex items-center gap-4">
+                    <a href={`mailto:${data.email}`} className="flex items-center gap-4">
                         <div className="h-5">
                             <EmailIcon className="block h-full w-auto text-accent" aria-hidden="true" />
                         </div>
@@ -106,7 +104,7 @@ const MobileMenu = ({ data }: Props) => {
                             <p className="text-sm font-semibold text-white/90">{data.email}</p>
                             <p className="text-sm text-white/80">Get in touch with us</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </nav>
             <div className="absolute h-40 w-60 bottom-0 right-0 translate-x-10 translate-y-8 overflow-hidden z-0">

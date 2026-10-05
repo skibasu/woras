@@ -36,9 +36,9 @@ const SuccessMessage = ({ onClose }: Props) => {
                 mass: 0.8,
             }}
             style={{ transformOrigin: "center center" }}
-            className="fixed bg-whte left-1/2 top-1/2 z-100 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl  w-[95vw]  max-w-[95vw] md:max-w-140 px-6 lg:px-8"
+            className="fixed bg-white left-1/2 top-1/2 z-100 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl w-[95vw] max-w-[95vw] md:max-w-140"
         >
-            <div className="cart cart-success rounded-2xl shadow-lg">
+            <div className="cart cart-success rounded-2xl shadow-lg px-6 lg:px-8">
                 <button className="absolute top-5 right-5 flex justify-center items-center w-5 h-5 text-black" aria-label="Close Message" onClick={() => onClose()}>
                     <CloseIcon className="block" aria-hidden="true" />
                 </button>

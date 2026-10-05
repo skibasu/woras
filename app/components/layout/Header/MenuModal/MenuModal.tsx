@@ -45,13 +45,13 @@ const MenuModal = ({ data }: Props) => {
             <AnimatePresence>
                 {isMenuOpen && (
                     <>
-                        <motion.div key="mobile-menu" initial={{ x: "-100%" }} animate={{ x: 0 }} exit={{ x: "-100%" }} transition={{ duration: 0.4, ease: "easeInOut" }} className="fixed inset-0 z-100 w-65 max-w-3/4 rounded-br-lg rounded-tr-lg overflow-hidden">
+                        <motion.div key="mobile-menu" initial={{ x: "-100%" }} animate={{ x: 0 }} exit={{ x: "-100%" }} transition={{ duration: 0.4, ease: "easeInOut" }} className="fixed inset-0 z-100 w-65 max-w-3/4 rounded-br-lg rounded-tr-lg overflow-y-auto">
                             <MenuDrawer>
                                 <MobileMenu data={{ logoUrl: data.logoUrl, logoAlt: data.logoAlt, phone: data.phone, email: data.email, city: data.city }} />
                             </MenuDrawer>
                         </motion.div>
                         <motion.button type="button" aria-label="Close menu" onClick={() => setIsMenuOpen(false)} key="overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4, ease: "easeInOut" }} className="fixed inset-0 z-50">
-                            <Overlay gradientClassName="from-white/30 via-white/20 to-transparent backdrop-blur-xs" />
+                            <Overlay gradientClassName="bg-gray-800/50 backdrop-blur-sm" />
                         </motion.button>
                     </>
                 )}
