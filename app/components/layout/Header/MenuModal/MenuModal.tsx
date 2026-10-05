@@ -45,7 +45,7 @@ const MenuModal = ({ data }: Props) => {
             <AnimatePresence>
                 {isMenuOpen && (
                     <>
-                        <motion.div key="mobile-menu" initial={{ x: "-100%" }} animate={{ x: 0 }} exit={{ x: "-100%" }} transition={{ duration: 0.4, ease: "easeInOut" }} className="fixed inset-0 z-100 w-65 max-w-3/4 rounded-br-lg rounded-tr-lg overflow-y-auto">
+                        <motion.div key="mobile-menu" initial={{ x: "-100%" }} animate={{ x: 0 }} exit={{ x: "-100%" }} transition={{ duration: 0.4, ease: "easeInOut" }} className="fixed inset-0 z-100 w-65 max-w-3/4 rounded-br-lg rounded-tr-lg overflow-y-auto mobile-menu-gradient">
                             <MenuDrawer>
                                 <MobileMenu data={{ logoUrl: data.logoUrl, logoAlt: data.logoAlt, phone: data.phone, email: data.email, city: data.city }} />
                             </MenuDrawer>

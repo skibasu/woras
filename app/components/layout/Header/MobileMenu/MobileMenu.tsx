@@ -50,7 +50,7 @@ const MobileMenu = ({ data }: Props) => {
     }
 
     return (
-        <div className="mobile-menu-gradient h-full pb-8">
+        <div className="h-full pb-8">
             <div className="py-6 flex justify-between items-start px-5 relative z-1 border-b border-black/90">
                 <Link href="/" className="block">
                     {data?.logoUrl ? <ProgressiveImage src={data?.logoUrl} alt={data.logoAlt || "Logo"} width={260} height={60} className="block h-13 w-auto" /> : <span className="text-white text-lg font-bold">Logo</span>}
