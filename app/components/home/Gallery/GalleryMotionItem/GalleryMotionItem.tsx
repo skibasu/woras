@@ -44,6 +44,7 @@ const GalleryMotionItem = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
                         onClick={() => {
                             setSelected(null)
                         }}
@@ -55,7 +56,7 @@ const GalleryMotionItem = () => {
                         </motion.div>
                     </motion.div>
                     <div className="fixed inset-0 z-100 grid place-items-center p-4 pointer-events-none">
-                        <motion.article layoutId={`gallery-${id}`} className="pointer-events-auto overflow-hidden rounded-2xl" onClick={(event) => event.stopPropagation()}>
+                        <motion.article key={id} layoutId={`gallery-${id}`} initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.98 }} transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }} style={{ willChange: "transform, opacity" }} className="pointer-events-auto overflow-hidden rounded-2xl" onClick={(event) => event.stopPropagation()}>
                             <Image src={src} alt={alt} width={naturalSize.width} height={naturalSize.height} className="block w-auto h-auto max-w-[92vw] max-h-[88dvh] object-contain" sizes="92vw" />
                         </motion.article>
                     </div>
