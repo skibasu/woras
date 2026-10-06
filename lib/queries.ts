@@ -177,6 +177,8 @@ export const GLOBAL_SETTINGS_QUERY = gql`
                 emailSubtitle
                 cityAdressSubtitle
                 whatsappButtonLabel
+                websiteDescription
+                websiteTitle
             }
         }
     }

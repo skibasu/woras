@@ -18,5 +18,7 @@ export const getGeneralSettings = async (): Promise<NonNullable<NonNullable<Glob
         emailSubtitle: page?.generalSettingsFields?.emailSubtitle || null,
         cityAdressSubtitle: page?.generalSettingsFields?.cityAdressSubtitle || null,
         whatsappButtonLabel: page?.generalSettingsFields?.whatsappButtonLabel || null,
+        websiteDescription: page?.generalSettingsFields?.websiteDescription || null,
+        websiteTitle: page?.generalSettingsFields?.websiteTitle || null,
     }
 }
