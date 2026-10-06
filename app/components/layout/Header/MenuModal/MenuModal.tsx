@@ -44,7 +44,7 @@ const MenuModal = ({ data }: Props) => {
         }
     }, [isMenuOpen, setIsMenuOpen])
 
-    const mobileMenuData = { logoUrl: data.logoUrl, logoAlt: data.logoAlt, phone: data.phone, email: data.email, city: data.city, whatsappButtonLabel: data.whatsappButtonLabel, phoneNumberDescription: data.phoneNumberSubtitle, emailDescription: data.emailDescription, cityDescription: data.cityDescription }
+    const mobileMenuData = { logoUrl: data.logoUrl, logoAlt: data.logoAlt, phone: data.phone, email: data.email, city: data.city, whatsappButtonLabel: data.whatsappButtonLabel, phoneNumberDescription: data.phoneNumberSubtitle, emailDescription: data.emailSubtitle, cityDescription: data.cityAdressSubtitle }
 
     return (
         <Portal>
