@@ -33,8 +33,9 @@ type Props = {
     messagePlaceholder: string | null
     sendButtonText: string | null
     addImagesLabel: string | null
+    contactFormRodoLabel: string | null
 }
-const ContactForm = ({ title, description, namePlaceholder, emailPlaceholder, messagePlaceholder, sendButtonText, addImagesLabel }: Props) => {
+const ContactForm = ({ title, description, namePlaceholder, emailPlaceholder, messagePlaceholder, sendButtonText, addImagesLabel, contactFormRodoLabel }: Props) => {
     const { setSubmissionResult, clearSubmissionResult } = useContactFormContext()
     const [loading, setLoading] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -116,14 +117,15 @@ const ContactForm = ({ title, description, namePlaceholder, emailPlaceholder, me
                     <Input type="email" placeholder={emailPlaceholder || "Your email"} {...register("email")} isError={!!errors.email?.message} />
                     {errors.email?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.email?.message}</p>}
                 </div>
-                <div className="relative z-10 pb-9">
+                <div className="relative z-10 pb-3">
                     <Textarea placeholder={messagePlaceholder || "Describe your problem"} {...register("message")} className={clsx(errors.message?.message && "border-b border-red-600 bg-red-50", "max-h-50")} />
                     {errors.message?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.message?.message}</p>}
                 </div>
+                <div className="relative z-10" dangerouslySetInnerHTML={{ __html: contactFormRodoLabel || "" }} />
             </div>
             <input key={fileInputKey} ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={onPickImages} />
 
-            <div className="mb-6">
+            <div className="mb-6 mt-2">
                 <p className="text-reset mb-2">{addImagesLabel || "Add images"}</p>
                 <div className="flex gap-2">
                     <button type="button" className="text-accent disabled:opacity-60" onClick={() => fileInputRef.current?.click()} aria-label="Attach images" disabled={loading}>

@@ -33,9 +33,8 @@ const ProgressiveImage = ({ containerClassName = "", className = "", alt, onLoad
                 onError={() => setError(true)}
                 style={{
                     opacity: loaded ? onLoadOpacity : 0,
-                    transition: "opacity 1000ms ease-out",
                 }}
-                className={className}
+                className={clsx("transition-all duration-700 ease-in-out", className)}
                 loading={loading}
             />
 

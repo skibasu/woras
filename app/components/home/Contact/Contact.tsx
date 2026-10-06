@@ -24,7 +24,7 @@ const Contact = async () => {
 
                     <div className="grid grid-cols-1 gap-6 xl:grid-cols-3 mb-20">
                         <div className="cart bg-white p-6 lg:p-8 xl:col-span-2 xl:order-2 relative overflow-hidden">
-                            <ContactForm title={data?.page?.contactPage?.contactFormTitle || null} namePlaceholder={data?.page?.contactPage?.labelForInputName || null} emailPlaceholder={data?.page?.contactPage?.labelForInputEmail || null} messagePlaceholder={data?.page?.contactPage?.placeholderForTextarea || null} addImagesLabel={null} sendButtonText={data?.page?.contactPage?.labelForSubmitButton || null} description={data?.page?.contactPage?.contactFormDescription || null} />
+                            <ContactForm title={data?.page?.contactPage?.contactFormTitle || null} namePlaceholder={data?.page?.contactPage?.labelForInputName || null} emailPlaceholder={data?.page?.contactPage?.labelForInputEmail || null} messagePlaceholder={data?.page?.contactPage?.placeholderForTextarea || null} addImagesLabel={null} sendButtonText={data?.page?.contactPage?.labelForSubmitButton || null} description={data?.page?.contactPage?.contactFormDescription || null} contactFormRodoLabel={data?.page?.contactPage?.contactFormRodoLabel || null} />
                             <ContactFormResultView eyebrow={data?.page?.contactPage?.successMessageEyebrow || null} successMessage={data?.page?.contactPage?.successMessage || null} description={data?.page?.contactPage?.successMessageDescription || null} accentText={data?.page?.contactPage?.successMessageAccent || null} />
                         </div>
 

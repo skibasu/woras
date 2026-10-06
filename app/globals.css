@@ -367,7 +367,6 @@
 .gallery-grid-item {
     height: 100%;
     overflow: hidden;
-    padding: 2rem;
     position: relative;
     @apply shadow;
 }
