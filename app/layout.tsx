@@ -11,7 +11,6 @@ import { IconURL } from "next/dist/lib/metadata/types/metadata-types"
 
 export async function generateMetadata(): Promise<Metadata> {
     const settings = await getGeneralSettings()
-    console.log("settings", settings)
 
     return {
         title: settings?.websiteTitle || "test",
