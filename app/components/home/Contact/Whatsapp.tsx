@@ -9,7 +9,7 @@ interface Props {
 }
 const WhatsApp = ({ eyebrow, subtitle, url, className }: Props) => {
     return (
-        <div className={clsx("flex flex-col items-center", className)}>
+        <div className={clsx("hidden md:flex flex-col items-center", className)}>
             {eyebrow && <p className={clsx("text-eyebrow text-black/20 flex justify-center items-center with-small-accent-separator-left with-small-accent-separator-right mb-2 lg:mb-4", className)}>{eyebrow}</p>}
 
             <WhatsupButton href={url ?? "#"} className="mb-4 lg:mb-6" />

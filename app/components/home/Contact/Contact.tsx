@@ -1,15 +1,18 @@
-import { ContactDocument } from "@/graphql/generated/graphql"
+import { ContactPageDocument as ContactDocument } from "@/graphql/generated/graphql"
 import { wordpressClient } from "@/lib/wpgraphql"
+import { getGeneralSettings } from "@/lib/getGeneralSettings"
 import { ContactFormProvider } from "@/app/context/ContactFormContext"
 import SectionTitle from "../../ui/SectionTitle/SectionTitle"
 import OpeningHours from "./OpeningHours"
 import ContactInfo from "./ContactInfo"
 import WhatsApp from "./Whatsapp"
-import ContactFormResultView from "./ContactFormResultView/ContactFormResultView"
+import ContactFormResultView from "./ContactFormSuccessCart/ContactFormSuccessCart"
 import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
+import ContactForm from "./ContactForm/ConatctForm"
 
 const Contact = async () => {
-    const data = await wordpressClient.request(ContactDocument)
+    const [data, settings] = await Promise.all([wordpressClient.request(ContactDocument), getGeneralSettings()])
+    const { phoneNumber, companyEmail, companyName } = settings || {}
 
     return (
         <ContactFormProvider>
@@ -21,16 +24,17 @@ const Contact = async () => {
 
                     <div className="grid grid-cols-1 gap-6 xl:grid-cols-3 mb-20">
                         <div className="cart bg-white p-6 lg:p-8 xl:col-span-2 xl:order-2 relative overflow-hidden">
-                            <ContactFormResultView />
+                            <ContactForm title={data?.page?.contactPage?.contactFormTitle || null} namePlaceholder={data?.page?.contactPage?.labelForInputName || null} emailPlaceholder={data?.page?.contactPage?.labelForInputEmail || null} messagePlaceholder={data?.page?.contactPage?.placeholderForTextarea || null} addImagesLabel={null} sendButtonText={data?.page?.contactPage?.labelForSubmitButton || null} description={data?.page?.contactPage?.contactFormDescription || null} />
+                            <ContactFormResultView eyebrow={data?.page?.contactPage?.successMessageEyebrow || null} successMessage={data?.page?.contactPage?.successMessage || null} description={data?.page?.contactPage?.successMessageDescription || null} accentText={data?.page?.contactPage?.successMessageAccent || null} />
                         </div>
 
                         <div className="cart p-6 lg:p-8 xl:col-span-1 xl:order-1">
-                            <ContactInfo companyName={data?.page?.contactPage?.companyName ?? null} phone={data?.page?.contactPage?.phone ?? null} email={data?.page?.contactPage?.email ?? null} />
+                            <ContactInfo companyName={companyName || null} phoneNumber={phoneNumber || null} companyEmail={companyEmail || null} />
                             <div className="my-8 h-px w-full bg-black/10" />
                             <OpeningHours items={data?.page?.contactPage?.openingHours} />
                         </div>
                     </div>
-                    <WhatsApp url="#" eyebrow={data?.page?.contactPage?.whatsupEyeBrow ?? null} subtitle={data?.page?.contactPage?.whatsappSubtitle ?? null} />
+                    <WhatsApp url="#" eyebrow={data.page?.contactPage?.eyebrow || null} subtitle={data.page?.contactPage?.whatsappSubtitle || null} />
                 </div>
             </section>
         </ContactFormProvider>
