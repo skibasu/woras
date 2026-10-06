@@ -81,7 +81,7 @@ const EmblaCarousel = ({ children }: PropsWithChildren) => {
     return (
         <>
             <div className="embla relative">
-                <button className="hidden lg:block embla__prev absolute top-[50%] lg:-left-15 hover:scale-120 transition-all cursor-pointer w-8.5 h-8.5 text-white rotate-180" onClick={scrollPrev} onMouseEnter={stopAutoplayOnDotsHover} onMouseLeave={resumeAutoplayAfterDotsHover}>
+                <button aria-label="Previous reviews" className="hidden lg:block embla__prev absolute top-[50%] lg:-left-15 hover:scale-120 transition-all cursor-pointer w-8.5 h-8.5 text-white rotate-180" onClick={scrollPrev} onMouseEnter={stopAutoplayOnDotsHover} onMouseLeave={resumeAutoplayAfterDotsHover}>
                     <ArrowIcon className="block w-full h-full" />
                 </button>
 
@@ -95,7 +95,7 @@ const EmblaCarousel = ({ children }: PropsWithChildren) => {
                     </div>
                 </div>
 
-                <button className="hidden lg:block embla__next absolute top-[50%]  lg:-right-15 hover:scale-120 transition-all cursor-pointer text-white w-8.5 h-8.5" onClick={scrollNext} onMouseEnter={stopAutoplayOnDotsHover} onMouseLeave={resumeAutoplayAfterDotsHover}>
+                <button aria-label="Next reviews" className="hidden lg:block embla__next absolute top-[50%]  lg:-right-15 hover:scale-120 transition-all cursor-pointer text-white w-8.5 h-8.5" onClick={scrollNext} onMouseEnter={stopAutoplayOnDotsHover} onMouseLeave={resumeAutoplayAfterDotsHover}>
                     <ArrowIcon className="block w-full h-full" />
                 </button>
             </div>
