@@ -1,11 +1,14 @@
-import Button from "@/app/components/ui/Button/Button"
 import { motion } from "motion/react"
 import CloseIcon from "@/app/components/ui/IconsSvg/CloseIcon"
 
 type Props = {
+    eyebrow: string | null
+    successMessage: string | null
+    accentText: string | null
+    description: string | null
     onClose: () => void
 }
-const SuccessMessage = ({ onClose }: Props) => {
+const SuccessMessage = ({ onClose, eyebrow, successMessage, description, accentText }: Props) => {
     return (
         <motion.article
             initial={{
@@ -43,12 +46,12 @@ const SuccessMessage = ({ onClose }: Props) => {
                     <CloseIcon className="block" aria-hidden="true" />
                 </button>
                 <div className="py-8">
-                    <p className="mb-2 uppercase font-slogan tracking-wide text-primary">You are all set!</p>
+                    <p className="mb-2 uppercase font-slogan tracking-wide text-primary">{eyebrow}</p>
                     <h2 className="font-base capitalize font-extrabold mb-6">
-                        Thanks for your <span className="text-primary">message!</span>
+                        {`${successMessage}`} <span className="text-primary">{accentText}</span>
                     </h2>
 
-                    <p className="mb-10">We’ve received your message and will get back to you as soon as possible. Usually within one business day. i glowna wiadonmosc musi zawiera slowo message alby byc w stylu ace</p>
+                    <p className="mb-10">{description}</p>
 
                     {/* <Button label="Close" size="small" onClick={onClose} /> */}
                 </div>

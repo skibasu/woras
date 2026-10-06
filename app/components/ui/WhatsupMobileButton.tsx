@@ -3,7 +3,7 @@ import Link from "next/link"
 import clsx from "clsx"
 import WhatsAppIcon from "./IconsSvg/WhatsAppIcon"
 
-type Props = ComponentProps<typeof Link> & { iconWidth: number; iconHeight: number; label?: string }
+type Props = ComponentProps<typeof Link> & { iconWidth: number; iconHeight: number; label?: string | null }
 
 const WhatsupMobileButton = ({ className = "", href = "#", iconWidth, iconHeight, label, ...props }: Props) => {
     return (

@@ -19,6 +19,10 @@ interface Data {
     phone: string | null
     email: string | null
     city?: string | null
+    whatsappButtonLabel: string | null
+    phoneNumberDescription: string | null
+    emailDescription: string | null
+    cityDescription: string | null
 }
 
 interface Props {
@@ -71,7 +75,7 @@ const MobileMenu = ({ data }: Props) => {
                 </ul>
 
                 <div className="px-5 py-6">
-                    <WhatsupMobileButton href="https://wa.me/1234567890" className="bg-primary px-4 w-full" iconWidth={20} iconHeight={20} label="Call Us On WhatsApp" />
+                    <WhatsupMobileButton href="https://wa.me/1234567890" className="bg-primary px-4 w-full" iconWidth={20} iconHeight={20} label={data.whatsappButtonLabel || "WhatsApp"} />
                 </div>
 
                 <div className="space-y-6 mb-6 px-5 pt-5">
@@ -81,7 +85,7 @@ const MobileMenu = ({ data }: Props) => {
                         </div>
                         <div>
                             <p className="text-sm font-semibold text-white/90">{data.city || "Amsterdam"}</p>
-                            <p className="text-sm text-white/70">Bicycle service and repairs</p>
+                            <p className="text-sm text-white/70">{data.cityDescription}</p>
                         </div>
                     </div>
 
@@ -92,7 +96,7 @@ const MobileMenu = ({ data }: Props) => {
 
                         <div>
                             <p className="text-sm font-semibold text-white/90">{data.phone}</p>
-                            <p className="text-sm text-white/70">Call or WhatsApp</p>
+                            <p className="text-sm text-white/70">{data.phoneNumberDescription}</p>
                         </div>
                     </a>
 
@@ -102,7 +106,7 @@ const MobileMenu = ({ data }: Props) => {
                         </div>
                         <div>
                             <p className="text-sm font-semibold text-white/90">{data.email}</p>
-                            <p className="text-sm text-white/80">Get in touch with us</p>
+                            <p className="text-sm text-white/80">{data.emailDescription}</p>
                         </div>
                     </a>
                 </div>

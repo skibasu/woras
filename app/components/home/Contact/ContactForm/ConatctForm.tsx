@@ -1,5 +1,4 @@
 "use client"
-
 import { useRef, useState, type ChangeEvent } from "react"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -26,8 +25,16 @@ export interface FormData {
     email: string
     message: string
 }
-
-const ContactForm = () => {
+type Props = {
+    title: string | null
+    description: string | null
+    namePlaceholder: string | null
+    emailPlaceholder: string | null
+    messagePlaceholder: string | null
+    sendButtonText: string | null
+    addImagesLabel: string | null
+}
+const ContactForm = ({ title, description, namePlaceholder, emailPlaceholder, messagePlaceholder, sendButtonText, addImagesLabel }: Props) => {
     const { setSubmissionResult, clearSubmissionResult } = useContactFormContext()
     const [loading, setLoading] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -98,26 +105,26 @@ const ContactForm = () => {
 
     return (
         <form noValidate>
-            <h2 className="mb-6 text-3xl">Contact Form</h2>
-            <p className="mb-8 text-black/70">Tell us what&apos;s wrong and we&apos;ll help you get back on the road.</p>
+            <h2 className="mb-6 text-3xl">{title}</h2>
+            <p className="mb-8 text-black/70">{description}</p>
             <div className="flex flex-col gap-1 w-full">
                 <div className="relative z-10 pb-9">
-                    <Input placeholder="Your name or phone number" {...register("login")} isError={!!errors.login?.message} />
+                    <Input placeholder={namePlaceholder || "Your name or phone number"} {...register("login")} isError={!!errors.login?.message} />
                     {errors.login?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.login?.message}</p>}
                 </div>
                 <div className="relative z-10 pb-9">
-                    <Input type="email" placeholder="Your email" {...register("email")} isError={!!errors.email?.message} />
+                    <Input type="email" placeholder={emailPlaceholder || "Your email"} {...register("email")} isError={!!errors.email?.message} />
                     {errors.email?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.email?.message}</p>}
                 </div>
                 <div className="relative z-10 pb-9">
-                    <Textarea placeholder="Describe your problem" {...register("message")} className={clsx(errors.message?.message && "border-b border-red-600 bg-red-50", "max-h-50")} />
+                    <Textarea placeholder={messagePlaceholder || "Describe your problem"} {...register("message")} className={clsx(errors.message?.message && "border-b border-red-600 bg-red-50", "max-h-50")} />
                     {errors.message?.message && <p className="text-[12px] text-red-600 absolute bottom-4 left-0">{errors.message?.message}</p>}
                 </div>
             </div>
             <input key={fileInputKey} ref={fileInputRef} type="file" accept="image/*" multiple className="hidden" onChange={onPickImages} />
 
             <div className="mb-6">
-                <p className="text-reset mb-2">Add images</p>
+                <p className="text-reset mb-2">{addImagesLabel || "Add images"}</p>
                 <div className="flex gap-2">
                     <button type="button" className="text-accent disabled:opacity-60" onClick={() => fileInputRef.current?.click()} aria-label="Attach images" disabled={loading}>
                         <ClipIcon className="block h-6 w-6 text-current" aria-hidden="true" />
@@ -130,7 +137,7 @@ const ContactForm = () => {
             </div>
 
             <div>
-                <Button onClick={handleSubmit(onSubmit)} size="large" label={loading ? "Sending..." : "Send"} disabled={loading} />
+                <Button onClick={handleSubmit(onSubmit)} size="large" label={loading ? `${sendButtonText}...` : sendButtonText || "Send"} disabled={loading} />
             </div>
 
             {errorMessage ? <p className="mt-3 text-sm text-red-600">{errorMessage}</p> : null}
