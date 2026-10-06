@@ -51,6 +51,10 @@ export const HOME_QUERY = gql`
                                 id
                                 sourceUrl
                                 altText
+                                mediaDetails {
+                                    width
+                                    height
+                                }
                             }
                         }
                     }
@@ -192,6 +196,7 @@ export const CONTACT_QUERY = gql`
                 titleAccent
                 accentEnd
                 subtitle
+                contactFormRodoLabel
 
                 openingHours {
                     day
