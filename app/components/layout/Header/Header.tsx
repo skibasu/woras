@@ -3,7 +3,7 @@ import Hamburger from "./Hamburger/Hamburger"
 import MenuModal from "./MenuModal/MenuModal"
 import NavLinks from "./NavLinks/NavLinks"
 import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
-import WhatsupMobileButton from "../../ui/WhatsupMobileButton"
+import WhatsAppMobileButton from "../../ui/WhatsAppMobileButton"
 
 import { getGeneralSettings } from "@/lib/getGeneralSettings"
 
@@ -22,7 +22,7 @@ const Header = async () => {
                         <NavLinks className="block menu-link px-3" />
                     </div>
                     <div className="flexitems-center pl-9 border-l border-gray-600">
-                        <WhatsupMobileButton href="https://wa.me/1234567890" className="bg-primary px-4" iconWidth={20} iconHeight={20} label="WhatsApp" />
+                        <WhatsAppMobileButton className="bg-primary px-4" iconWidth={20} iconHeight={20} label="WhatsApp" phoneNumber={phoneNumber || null} />
                     </div>
                 </nav>
                 <Hamburger />

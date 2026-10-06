@@ -7,11 +7,12 @@ import Gallery from "./components/home/Gallery/Gallery"
 import Pricing from "./components/home/Pricing/Pricing"
 import Contact from "./components/home/Contact/Contact"
 import { GalleryContextProvider } from "./context/GalleryContext"
-import WhatsupMobileButton from "./components/ui/WhatsupMobileButton"
+import WhatsupMobileButton from "./components/ui/WhatsAppMobileButton"
+import { getGeneralSettings } from "@/lib/getGeneralSettings"
 
 const Home = async () => {
     const data = await wordpressClient.request(HomeDocument)
-
+    const settingsData = await getGeneralSettings()
     return (
         <main>
             <Hero data={data.page?.homePage?.hero} />
@@ -23,7 +24,7 @@ const Home = async () => {
             </GalleryContextProvider>
             <Pricing />
             <Contact />
-            <WhatsupMobileButton iconWidth={28} iconHeight={28} href={"#"} className="fixed bottom-6 right-6 z-50 lg:hidden bg-whatsapp-hover" />
+            <WhatsupMobileButton iconWidth={28} iconHeight={28} className="fixed bottom-6 right-6 z-50 lg:hidden bg-whatsapp-hover" label={""} phoneNumber={settingsData?.phoneNumber || null} />
         </main>
     )
 }

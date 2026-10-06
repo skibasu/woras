@@ -34,7 +34,7 @@ const Contact = async () => {
                             <OpeningHours items={data?.page?.contactPage?.openingHours} />
                         </div>
                     </div>
-                    <WhatsApp url="#" eyebrow={data.page?.contactPage?.eyebrow || null} subtitle={data.page?.contactPage?.whatsappSubtitle || null} />
+                    <WhatsApp url={phoneNumber || null} eyebrow={data.page?.contactPage?.eyebrow || null} subtitle={data.page?.contactPage?.whatsappSubtitle || null} />
                 </div>
             </section>
         </ContactFormProvider>

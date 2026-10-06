@@ -11,7 +11,7 @@ import { menuScrollTo } from "@/app/helpers/menuScrollTo"
 import clsx from "clsx"
 import { menuSettings } from "../menuSettngs"
 import ProgressiveImage from "@/app/components/ui/ProgressiveImage/ProgressiveImage"
-import WhatsupMobileButton from "@/app/components/ui/WhatsupMobileButton"
+import WhatsupMobileButton from "@/app/components/ui/WhatsAppMobileButton"
 
 interface Data {
     logoUrl: string | null
@@ -75,7 +75,7 @@ const MobileMenu = ({ data }: Props) => {
                 </ul>
 
                 <div className="px-5 py-6">
-                    <WhatsupMobileButton href="https://wa.me/1234567890" className="bg-primary px-4 w-full" iconWidth={20} iconHeight={20} label={data.whatsappButtonLabel || "WhatsApp"} />
+                    <WhatsupMobileButton className="bg-primary px-4 w-full" iconWidth={20} iconHeight={20} label={data.whatsappButtonLabel || "WhatsApp"} phoneNumber={data?.phone} />
                 </div>
 
                 <div className="space-y-6 mb-6 px-5 pt-5">
