@@ -1,8 +1,10 @@
 "use client"
 import CloseIcon from "@/app/components/ui/IconsSvg/CloseIcon"
 import Portal from "@/app/components/ui/Portal/Portal"
+import useScrollLock from "@/app/hooks/useScrollLock"
 import { motion, Variants } from "motion/react"
 import Image from "next/image"
+import { useEffect } from "react"
 
 const variants: Variants = {
     hidden: {
@@ -35,6 +37,13 @@ const variants: Variants = {
     },
 }
 export const GalleryMotionPicture = ({ image: { src, alt, width, height }, layoutId, cb }: { layoutId: string; image: { src: string; alt: string; width: number; height: number }; cb?: () => void; selected?: boolean }) => {
+    const { lockScroll, unLockScroll } = useScrollLock()
+    useEffect(() => {
+        lockScroll()
+        return () => {
+            unLockScroll()
+        }
+    }, [])
     return (
         <Portal>
             <motion.div

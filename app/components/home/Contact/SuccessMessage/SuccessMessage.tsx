@@ -1,5 +1,7 @@
 import { motion } from "motion/react"
 import CloseIcon from "@/app/components/ui/IconsSvg/CloseIcon"
+import { useEffect } from "react"
+import useScrollLock from "@/app/hooks/useScrollLock"
 
 type Props = {
     eyebrow: string | null
@@ -9,6 +11,14 @@ type Props = {
     onClose: () => void
 }
 const SuccessMessage = ({ onClose, eyebrow, successMessage, description, accentText }: Props) => {
+    const { lockScroll, unLockScroll } = useScrollLock()
+    useEffect(() => {
+        lockScroll()
+        return () => {
+            unLockScroll()
+        }
+    }, [])
+
     return (
         <motion.article
             initial={{
