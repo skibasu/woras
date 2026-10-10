@@ -6,12 +6,14 @@ import Reviews from "./components/home/Reviews/Reviews"
 import Gallery from "./components/home/Gallery/Gallery"
 import Pricing from "./components/home/Pricing/Pricing"
 import Contact from "./components/home/Contact/Contact"
-import { GalleryContextProvider } from "./context/GalleryContext"
 import WhatsupMobileButton from "./components/ui/WhatsAppMobileButton"
 import { getGeneralSettings } from "@/lib/getGeneralSettings"
 
+async function getHomeData() {
+    return wordpressClient.request(HomeDocument)
+}
 const Home = async () => {
-    const data = await wordpressClient.request(HomeDocument)
+    const data = await getHomeData()
     const settingsData = await getGeneralSettings()
     return (
         <main>
@@ -19,9 +21,9 @@ const Home = async () => {
             <Features data={data.page?.homePage?.features} />
 
             <Reviews data={data.page?.homePage?.reviews} />
-            <GalleryContextProvider>
-                <Gallery data={data.page?.homePage?.gallery} />
-            </GalleryContextProvider>
+
+            <Gallery data={data.page?.homePage?.gallery} />
+
             <Pricing />
             <Contact />
             <WhatsupMobileButton iconWidth={28} iconHeight={28} className="fixed bottom-6 right-6 z-50 lg:hidden bg-whatsapp-hover" label={""} phoneNumber={settingsData?.phoneNumber || null} />
