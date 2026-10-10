@@ -1,49 +1,63 @@
 "use client"
 
-import { useEffect } from "react"
+import { useCallback, useRef } from "react"
 
-const useScrollLock = (isLocked: boolean) => {
-    useEffect(() => {
-        if (!isLocked) return
+type PreviousStyles = {
+    bodyOverflow: string
+    htmlOverflow: string
+    bodyPaddingRight: string
+}
 
-        const scrollY = window.scrollY
+const useScrollLock = () => {
+    const isLockedRef = useRef(false)
+    const previousStylesRef = useRef<PreviousStyles | null>(null)
+
+    const lockScroll = useCallback(() => {
+        if (isLockedRef.current || typeof document === "undefined") {
+            return
+        }
 
         const body = document.body
         const html = document.documentElement
 
-        const previousBodyStyles = {
-            position: body.style.position,
-            top: body.style.top,
-            left: body.style.left,
-            right: body.style.right,
-            width: body.style.width,
-            overflow: body.style.overflow,
+        previousStylesRef.current = {
+            bodyOverflow: body.style.overflow,
+            htmlOverflow: html.style.overflow,
+            bodyPaddingRight: body.style.paddingRight,
         }
 
-        const previousHtmlOverflow = html.style.overflow
+        // Prevent layout shift when the scrollbar disappears.
+        const scrollbarWidth = window.innerWidth - html.clientWidth
 
-        body.style.position = "fixed"
-        body.style.top = `-${scrollY}px`
-        body.style.left = "0"
-        body.style.right = "0"
-        body.style.width = "100%"
+        if (scrollbarWidth > 0) {
+            const currentPadding = Number.parseFloat(window.getComputedStyle(body).paddingRight) || 0
+
+            body.style.paddingRight = `${currentPadding + scrollbarWidth}px`
+        }
+
+        // Do not change body positioning: Motion can measure layout normally.
+        html.style.overflow = "hidden"
         body.style.overflow = "hidden"
 
-        html.style.overflow = "hidden"
+        isLockedRef.current = true
+    }, [])
 
-        return () => {
-            body.style.position = previousBodyStyles.position
-            body.style.top = previousBodyStyles.top
-            body.style.left = previousBodyStyles.left
-            body.style.right = previousBodyStyles.right
-            body.style.width = previousBodyStyles.width
-            body.style.overflow = previousBodyStyles.overflow
+    const unLockScroll = useCallback(() => {
+        if (!isLockedRef.current) return
 
-            html.style.overflow = previousHtmlOverflow
+        const previous = previousStylesRef.current
 
-            window.scrollTo(0, scrollY)
+        if (previous) {
+            document.body.style.overflow = previous.bodyOverflow
+            document.documentElement.style.overflow = previous.htmlOverflow
+            document.body.style.paddingRight = previous.bodyPaddingRight
         }
-    }, [isLocked])
+
+        previousStylesRef.current = null
+        isLockedRef.current = false
+    }, [])
+
+    return { lockScroll, unLockScroll }
 }
 
 export default useScrollLock

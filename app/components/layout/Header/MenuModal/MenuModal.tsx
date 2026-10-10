@@ -24,7 +24,19 @@ interface Props {
 
 const MenuModal = ({ data }: Props) => {
     const { isMenuOpen, setIsMenuOpen } = useMenuContext()
-    useScrollLock(isMenuOpen)
+    const { lockScroll, unLockScroll } = useScrollLock()
+
+    useEffect(() => {
+        if (isMenuOpen) {
+            lockScroll()
+        } else {
+            unLockScroll()
+        }
+
+        return () => {
+            unLockScroll()
+        }
+    }, [isMenuOpen, lockScroll, unLockScroll])
 
     useEffect(() => {
         if (!isMenuOpen) {

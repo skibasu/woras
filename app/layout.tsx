@@ -40,12 +40,14 @@ const RootLayout = ({ children }: LayoutProps<"/">) => {
         <html lang="en" className={`${squadaOne.variable} ${roboto.variable} h-full`}>
             <body className="min-h-full flex flex-col antialiased">
                 <MenuContextProvider>
-                    <Header />
+                    <>
+                        <Header />
+
+                        {children}
+
+                        <Footer />
+                    </>
                 </MenuContextProvider>
-
-                {children}
-
-                <Footer />
             </body>
         </html>
     )
