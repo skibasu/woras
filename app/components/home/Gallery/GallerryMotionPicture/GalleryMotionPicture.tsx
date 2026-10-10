@@ -66,7 +66,7 @@ export const GalleryMotionPicture = ({ image: { src, alt, width, height }, layou
                 </motion.div>
                 <motion.article key="motion-article" variants={variants} layoutId={layoutId} initial="hidden" animate={"visible"} exit="exit" className="fixed left-1/2 top-1/2 z-100 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl bg-black/20 max-h-[80vh]">
                     <div
-                        className="shadow overflow-hidden rounded-2xl w-full h-full absolute inset-0"
+                        className="shadow overflow-hidden rounded-2xl w-full h-full relative"
                         style={{
                             aspectRatio: `${width} / ${height}`,
                             width: `min(80vw, calc(90vh * ${width / height}))`,
