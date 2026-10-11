@@ -26,9 +26,6 @@ export async function sendContactMessage(data: FormData, attachments: MailAttach
 
     const responseText = await response.text()
 
-    console.log("Contact API status:", response.status)
-    console.log("Contact API response:", responseText)
-
     let result: ContactMessageResponse
 
     try {
