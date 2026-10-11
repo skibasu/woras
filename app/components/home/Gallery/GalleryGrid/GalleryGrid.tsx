@@ -76,6 +76,10 @@ const GalleryGrid = ({ slides }: Props) => {
     }
 
     useEffect(() => {
+        console.log("[Gallery preload] EFFECT", {
+            activeSection,
+            slidesCount: slides?.length,
+        })
         if (activeSection !== "#gallery" || !slides) return
 
         let cancelled = false
