@@ -3,7 +3,7 @@
 import { HomeQuery } from "@/graphql/generated/graphql"
 import { useMenuContext } from "@/app/context/MenuContext"
 import { AnimatePresence, motion } from "motion/react"
-import Image, { getImageProps } from "next/image"
+import Image from "next/image"
 import { useEffect, useState } from "react"
 import GalleryMotionPicture from "../GallerryMotionPicture/GalleryMotionPicture"
 import clsx from "clsx"
@@ -31,14 +31,6 @@ const GalleryGrid = ({ slides }: Props) => {
 
     const preloadImage = (image: SelectedImage): Promise<string> => {
         return new Promise((resolve, reject) => {
-            const { props } = getImageProps({
-                src: image.src,
-                alt: image.alt,
-                width: image.width,
-                height: image.height,
-                sizes: "80vw",
-            })
-
             const img = new window.Image()
 
             img.onload = () => {
@@ -69,13 +61,29 @@ const GalleryGrid = ({ slides }: Props) => {
                 reject(new Error(`Failed to load ${image.src}`))
             }
 
-            img.srcset = props.srcSet || ""
-            img.sizes = props.sizes || "80vw"
-            img.src = props.src
+            img.src = image.src
+
+            // Obsługa przypadku, gdy obraz jest już w cache.
+            if (img.complete) {
+                if (img.naturalWidth > 0) {
+                    setPreloadedImages((prev) => {
+                        if (prev.has(image.id)) return prev
+
+                        const next = new Set(prev)
+                        next.add(image.id)
+                        return next
+                    })
+
+                    resolve(image.id)
+                } else {
+                    reject(new Error(`Failed to load ${image.src}`))
+                }
+            }
         })
     }
+
     useEffect(() => {
-        console.log("[Gallery preload] PRELOADED IMAGES", preloadedImages)
+        console.log("[Gallery preload] PRELOADED IMAGES", [...preloadedImages])
     }, [preloadedImages])
 
     useEffect(() => {
@@ -83,33 +91,44 @@ const GalleryGrid = ({ slides }: Props) => {
             activeSection,
             slidesCount: slides?.length,
         })
+
         if (activeSection !== "#gallery" || !slides) return
 
         let cancelled = false
 
         const preloadAllImages = async () => {
-            const images = slides
-                .map((slide) => {
-                    const node = slide?.image?.node
+            const images: SelectedImage[] = slides.flatMap((slide) => {
+                const node = slide?.image?.node
 
-                    if (!node?.id || !node.sourceUrl) return null
+                if (!node?.id || !node.sourceUrl) return []
 
-                    return {
+                return [
+                    {
                         id: node.id,
                         src: node.sourceUrl,
                         alt: node.altText || "",
                         width: node.mediaDetails?.width || 1000,
                         height: node.mediaDetails?.height || 1000,
-                    }
-                })
-                .filter((image) => image !== null)
+                    },
+                ]
+            })
 
-            await Promise.allSettled(images.map((image) => preloadImage(image)))
+            console.log("[Gallery preload] START", {
+                count: images.length,
+                images: images.map(({ id, src }) => ({ id, src })),
+            })
+
+            const results = await Promise.allSettled(images.map((image) => preloadImage(image)))
+
+            console.log("[Gallery preload] FINISHED", {
+                successful: results.filter((result) => result.status === "fulfilled").length,
+                failed: results.filter((result) => result.status === "rejected").length,
+            })
 
             if (cancelled) return
         }
 
-        preloadAllImages()
+        void preloadAllImages()
 
         return () => {
             cancelled = true
@@ -131,6 +150,7 @@ const GalleryGrid = ({ slides }: Props) => {
 
                     const width = node.mediaDetails?.width || 1000
                     const height = node.mediaDetails?.height || 1000
+                    const isPreloaded = preloadedImages.has(node.id)
 
                     return (
                         <motion.button
@@ -139,7 +159,8 @@ const GalleryGrid = ({ slides }: Props) => {
                             className={clsx("gallery-grid-item cart bg-blue-300", cureentSlideId === node.id ? "z-2" : "z-1")}
                             layoutId={`gallery-${node.id}`}
                             onClick={() => {
-                                if (!preloadedImages.has(node.id)) return
+                                if (!isPreloaded) return
+
                                 setCurrentSlideId(node.id)
                                 setSelected({
                                     id: node.id,
@@ -150,7 +171,7 @@ const GalleryGrid = ({ slides }: Props) => {
                                 })
                             }}
                         >
-                            <Image src={node.sourceUrl} alt={node.altText || ""} width={width} height={height} sizes={sizes} loading="lazy" className={clsx("object-cover w-full h-full hover:scale-105 transition-all duration-700", preloadedImages.has(node.id) ? "grayscale-0 cursor-pointer" : "grayscale cursor-progress")} />
+                            <Image src={node.sourceUrl} alt={node.altText || ""} width={width} height={height} sizes={sizes} loading="lazy" className={clsx("object-cover w-full h-full hover:scale-105 transition-all duration-700", isPreloaded ? "grayscale-0 cursor-pointer" : "grayscale cursor-progress")} />
                         </motion.button>
                     )
                 })}
