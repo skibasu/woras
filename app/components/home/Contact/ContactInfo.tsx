@@ -15,7 +15,7 @@ const ContactInfo = ({ companyName, phoneNumber, companyEmail }: Props) => {
             <div className="space-y-4 mb-6">
                 <div className="flex items-center gap-4">
                     <a href={`tel:${phoneNumber?.replaceAll(" ", "")}`} className="flex items-center gap-3">
-                        <div className="h-5 ">
+                        <div className="h-4 ">
                             <PhoneIcon className="block h-full w-auto text-accent " aria-hidden="true" />
                         </div>
                         <p>{phoneNumber}</p>
@@ -23,7 +23,7 @@ const ContactInfo = ({ companyName, phoneNumber, companyEmail }: Props) => {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <div className="h-5 text-primary">
+                    <div className="h-4 text-primary">
                         <EmailIcon className="block h-full w-auto text-accent " aria-hidden="true" />
                     </div>
                     <p>{companyEmail}</p>
