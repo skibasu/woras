@@ -42,6 +42,14 @@ const GalleryGrid = ({ slides }: Props) => {
             const img = new window.Image()
 
             img.onload = () => {
+                console.log("[Gallery preload] SUCCESS", {
+                    id: image.id,
+                    src: image.src,
+                    currentSrc: img.currentSrc,
+                    naturalWidth: img.naturalWidth,
+                    naturalHeight: img.naturalHeight,
+                })
+
                 setPreloadedImages((prev) => {
                     const next = new Set(prev)
                     next.add(image.id)
@@ -52,6 +60,12 @@ const GalleryGrid = ({ slides }: Props) => {
             }
 
             img.onerror = () => {
+                console.error("[Gallery preload] FAILED", {
+                    id: image.id,
+                    src: image.src,
+                    currentSrc: img.currentSrc,
+                })
+
                 reject(new Error(`Failed to load ${image.src}`))
             }
 
