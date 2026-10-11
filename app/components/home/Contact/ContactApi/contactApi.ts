@@ -6,7 +6,7 @@ export interface MailAttachment {
 }
 
 export async function sendContactMessage(data: FormData, attachments: MailAttachment[] = []): Promise<{ success: boolean; error?: string }> {
-    const response = await fetch("https://px661515.pxcloud.pl/api/contact.php", {
+    const response = await fetch("https://px661515.pxcloud.pl/api/contact/contact.php", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
