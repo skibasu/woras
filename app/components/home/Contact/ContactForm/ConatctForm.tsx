@@ -223,7 +223,7 @@ const ContactForm = ({ title, description, namePlaceholder, emailPlaceholder, me
                     {errors.email?.message && <p className="absolute bottom-4 left-0 text-[12px] text-red-600">{errors.email.message}</p>}
                 </div>
 
-                <div className="relative z-10 pb-3">
+                <div className="relative z-10 pb-9">
                     <Textarea placeholder={messagePlaceholder || "Describe your problem"} {...register("message")} className={clsx(errors.message?.message && "border-b border-red-600 bg-red-50", "max-h-50")} />
 
                     {errors.message?.message && <p className="absolute bottom-4 left-0 text-[12px] text-red-600">{errors.message.message}</p>}
