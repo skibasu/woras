@@ -74,6 +74,9 @@ const GalleryGrid = ({ slides }: Props) => {
             img.src = props.src
         })
     }
+    useEffect(() => {
+        console.log("[Gallery preload] PRELOADED IMAGES", preloadedImages)
+    }, [preloadedImages])
 
     useEffect(() => {
         console.log("[Gallery preload] EFFECT", {
