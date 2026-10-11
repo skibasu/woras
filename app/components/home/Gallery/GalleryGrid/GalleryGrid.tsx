@@ -106,7 +106,7 @@ const GalleryGrid = ({ slides }: Props) => {
             if (cancelled) return
         }
 
-        void preloadAllImages()
+        preloadAllImages()
 
         return () => {
             cancelled = true
