@@ -5,7 +5,13 @@ export interface MailAttachment {
     data: string
 }
 
-export async function sendContactMessage(data: FormData, attachments: MailAttachment[] = []): Promise<{ success: boolean; error?: string }> {
+interface ContactMessageResponse {
+    success: boolean
+    error?: string
+    message?: string
+}
+
+export async function sendContactMessage(data: FormData, attachments: MailAttachment[], recaptchaToken: string): Promise<ContactMessageResponse> {
     const response = await fetch("https://px661515.pxcloud.pl/api/contact/contact.php", {
         method: "POST",
         headers: {
@@ -14,13 +20,14 @@ export async function sendContactMessage(data: FormData, attachments: MailAttach
         body: JSON.stringify({
             ...data,
             attachments,
+            recaptchaToken,
         }),
     })
 
-    const result = await response.json()
+    const result: ContactMessageResponse = await response.json()
 
     if (!response.ok || !result.success) {
-        throw new Error(result.error || "Failed to send message")
+        throw new Error(result.error || result.message || "Failed to send message")
     }
 
     return result
