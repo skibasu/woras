@@ -24,7 +24,18 @@ export async function sendContactMessage(data: FormData, attachments: MailAttach
         }),
     })
 
-    const result: ContactMessageResponse = await response.json()
+    const responseText = await response.text()
+
+    console.log("Contact API status:", response.status)
+    console.log("Contact API response:", responseText)
+
+    let result: ContactMessageResponse
+
+    try {
+        result = JSON.parse(responseText) as ContactMessageResponse
+    } catch {
+        throw new Error(`Server returned an invalid response (HTTP ${response.status}). Check the console for details.`)
+    }
 
     if (!response.ok || !result.success) {
         throw new Error(result.error || result.message || "Failed to send message")
