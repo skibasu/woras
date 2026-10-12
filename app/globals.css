@@ -218,13 +218,13 @@
     text-decoration: none;
     @apply hover:text-link-hover transition-colors;
 }
-.link-disabled {
-    @apply pointer-events-none opacity-50 cursor-not-allowed text-gray-400;
-}
 .link {
-    @apply text-link hover:text-link-hover transition-colors;
+    @apply text-link hover:text-link-hover transition-colors underline  hover:decoration-link decoration-link underline-offset-4;
 }
 
+.link-disabled {
+    @apply pointer-events-none opacity-50 text-gray-400;
+}
 .menu-link {
     line-height: var(--line-height-sm);
     @apply text-white/70 font-semibold hover:text-accent transition-all duration-300 ease-in-out text-center rounded-sm;
