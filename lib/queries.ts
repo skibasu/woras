@@ -92,6 +92,10 @@ export const HOME_QUERY = gql`
                                 id
                                 sourceUrl
                                 altText
+                                mediaDetails {
+                                    width
+                                    height
+                                }
                             }
                         }
                         title

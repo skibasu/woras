@@ -10,7 +10,7 @@ type Props = Omit<ImageProps, "onLoad" | "onError"> & {
     loading?: "lazy" | "eager"
 }
 
-const ProgressiveImage = ({ containerClassName = "", className = "", alt, onLoadOpacity = 1, loading, ...imageProps }: Props) => {
+const ProgressiveImage = ({ containerClassName = "", className = "", alt, onLoadOpacity = 1, loading, style, ...imageProps }: Props) => {
     const [loaded, setLoaded] = useState(false)
     const [error, setError] = useState(false)
     const imageRef = useRef<HTMLImageElement>(null)
@@ -32,6 +32,7 @@ const ProgressiveImage = ({ containerClassName = "", className = "", alt, onLoad
                 onLoad={() => setLoaded(true)}
                 onError={() => setError(true)}
                 style={{
+                    ...style,
                     opacity: loaded ? onLoadOpacity : 0,
                 }}
                 className={clsx("transition-all duration-700 ease-in-out", className)}
