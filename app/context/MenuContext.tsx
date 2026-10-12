@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react"
+import { usePathname } from "next/navigation"
 import { menuSettings } from "../components/layout/Header/menuSettngs"
 const MenuContext = createContext<MenuContextValue | null>(null)
 
@@ -8,11 +9,13 @@ type MenuContextValue = {
     isMenuOpen: boolean
     setIsMenuOpen: (isOpen: boolean) => void
     activeSection: string
+    setActiveSection: (section: string) => void
 }
 
 type MenuProviderProps = { children: ReactNode }
 
 export const MenuContextProvider = ({ children }: MenuProviderProps) => {
+    const pathname = usePathname()
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [activeSection, setActiveSection] = useState("")
 
@@ -21,6 +24,7 @@ export const MenuContextProvider = ({ children }: MenuProviderProps) => {
             isMenuOpen,
             setIsMenuOpen,
             activeSection,
+            setActiveSection,
         }),
         [isMenuOpen, activeSection],
     )
@@ -28,8 +32,7 @@ export const MenuContextProvider = ({ children }: MenuProviderProps) => {
     useEffect(() => {
         if (!document) return
 
-        const currentIds = menuSettings.links.map((link) => `#${link.target}`) // Exclude #contact from active section tracking
-
+        const currentIds = menuSettings.links.map((link) => `#${link.target}`)
         const isMobile = window.matchMedia("(max-width: 767px)").matches
         const effectiveThreshold = isMobile ? 0.3 : 0.5
 
@@ -55,7 +58,7 @@ export const MenuContextProvider = ({ children }: MenuProviderProps) => {
         elements.forEach((element) => observer.observe(element))
 
         return () => observer.disconnect()
-    }, [])
+    }, [pathname])
 
     return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>
 }

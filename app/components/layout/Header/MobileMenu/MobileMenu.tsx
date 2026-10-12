@@ -12,6 +12,7 @@ import clsx from "clsx"
 import { menuSettings } from "../menuSettngs"
 import ProgressiveImage from "@/app/components/ui/ProgressiveImage/ProgressiveImage"
 import WhatsupMobileButton from "@/app/components/ui/WhatsAppMobileButton"
+import { usePathname, useRouter } from "next/navigation"
 
 interface Data {
     logoUrl: string | null
@@ -29,6 +30,8 @@ interface Props {
     data: Data
 }
 const MobileMenu = ({ data }: Props) => {
+    const pathname = usePathname()
+    const router = useRouter()
     const { setIsMenuOpen, activeSection } = useMenuContext()
     const linksRest = menuSettings.links // Exclude #contact from the main links list
 
@@ -37,19 +40,13 @@ const MobileMenu = ({ data }: Props) => {
     }
 
     const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>, target: string) => {
-        if (typeof window !== "undefined" && window.location.pathname === "/") {
-            event.preventDefault()
-            closeMenu()
-
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    menuScrollTo(target)
-                })
-            })
-
-            return
+        event.preventDefault()
+        if (pathname === "/") {
+            menuScrollTo(target)
+        } else {
+            sessionStorage.setItem("pendingHomeScrollTarget", target)
+            router.push("/")
         }
-
         closeMenu()
     }
 

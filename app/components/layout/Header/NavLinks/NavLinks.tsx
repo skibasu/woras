@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname, useRouter } from "next/navigation"
 import { menuScrollTo } from "@/app/helpers/menuScrollTo"
 import clsx from "clsx"
 import { useMenuContext } from "@/app/context/MenuContext"
@@ -8,19 +9,21 @@ import { menuSettings } from "../menuSettngs"
 
 type Props = {
     className?: string
-    onNavigate?: () => void
 }
 
-const NavLinks = ({ className = "", onNavigate }: Props) => {
+const NavLinks = ({ className = "" }: Props) => {
     const { activeSection } = useMenuContext()
+    const pathname = usePathname()
+    const router = useRouter()
 
     const handleClick = (event: React.MouseEvent<HTMLAnchorElement>, target: string) => {
-        if (typeof window !== "undefined" && window.location.pathname === "/") {
-            event.preventDefault()
+        event.preventDefault()
+        if (pathname === "/") {
             menuScrollTo(target)
+        } else {
+            sessionStorage.setItem("pendingHomeScrollTarget", target)
+            router.push("/")
         }
-
-        onNavigate?.()
     }
 
     return (

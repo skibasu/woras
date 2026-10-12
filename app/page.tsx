@@ -8,6 +8,7 @@ import Pricing from "./components/home/Pricing/Pricing"
 import Contact from "./components/home/Contact/Contact"
 import WhatsupMobileButton from "./components/ui/WhatsAppMobileButton"
 import { getGeneralSettings } from "@/lib/getGeneralSettings"
+import PendingScroll from "./components/ui/PendingScroll/PendingScroll"
 
 async function getHomeData() {
     return wordpressClient.request(HomeDocument)
@@ -16,6 +17,7 @@ const Home = async () => {
     const [data, settingsData] = await Promise.all([getHomeData(), getGeneralSettings()])
     return (
         <main>
+            <PendingScroll />
             <Hero data={data.page?.homePage?.hero} />
             <Features data={data.page?.homePage?.features} />
 
