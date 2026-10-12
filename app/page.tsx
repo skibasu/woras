@@ -13,8 +13,7 @@ async function getHomeData() {
     return wordpressClient.request(HomeDocument)
 }
 const Home = async () => {
-    const data = await getHomeData()
-    const settingsData = await getGeneralSettings()
+    const [data, settingsData] = await Promise.all([getHomeData(), getGeneralSettings()])
     return (
         <main>
             <Hero data={data.page?.homePage?.hero} />

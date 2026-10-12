@@ -439,3 +439,29 @@
             "box-5 box-5 box-5 box-5 box-6 box-6 box-6 box-6 box-7 box-7 box-7 box-7";
     }
 }
+
+.privacy-policy-page {
+    h1 {
+        @apply text-h2 my-8;
+    }
+
+    h2 {
+        @apply text-h3 my-4;
+    }
+
+    p {
+        @apply mb-4;
+    }
+
+    ul {
+        @apply mb-4 list-disc pl-6;
+    }
+
+    li {
+        @apply mb-2;
+    }
+
+    a {
+        @apply underline;
+    }
+}

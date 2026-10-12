@@ -230,3 +230,14 @@ export const CONTACT_QUERY = gql`
         }
     }
 `
+export const PRIVACY_POLICY_QUERY = gql`
+    query PrivacyPolicy {
+        page(id: "3", idType: DATABASE_ID) {
+            title
+            privacyPolicy {
+                pageContent
+            }
+            modified
+        }
+    }
+`
