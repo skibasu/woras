@@ -150,7 +150,7 @@ const GalleryGrid = ({ slides }: Props) => {
                                 })
                             }}
                         >
-                            <Image src={node.sourceUrl} alt={node.altText || ""} width={width} height={height} sizes={sizes} loading="eager" className={clsx("object-cover w-full h-full hover:scale-105 transition-all duration-700", preloadedImages.has(node.id) ? "grayscale-0 cursor-pointer" : "grayscale cursor-progress")} />
+                            <Image src={node.sourceUrl} alt={node.altText || ""} width={width} height={height} sizes={sizes} loading="lazy" className={clsx("object-cover w-full h-full hover:scale-105 transition-all duration-700", preloadedImages.has(node.id) ? "grayscale-0 cursor-pointer" : "grayscale cursor-progress")} />
                         </motion.button>
                     )
                 })}

@@ -27,7 +27,7 @@ const Features = ({ data }: FeaturesProps) => {
                     <ButtonScrollTo className="btn btn-large btn-primary" target="contact" label={"Contact Us"} />
                 </div>
             </div>
-            <ProgressiveImage src="images/background-wheel-s.webp" alt="background" className=" w-full h-auto" width={1912} height={1274} containerClassName="absolute right-0 top-0 translate-x-2/3 translate-y-[-10%] z-0 w-[1912px] h-[1274px]" onLoadOpacity={0.07} />
+            <ProgressiveImage src="images/background-wheel-s.webp" alt="background" fill={false} className=" w-full h-auto" width={1912} height={1274} containerClassName="absolute right-0 top-0 translate-x-2/3 translate-y-[-10%] z-0 w-[1912px] h-[1274px]" onLoadOpacity={0.07} />
         </section>
     )
 }
