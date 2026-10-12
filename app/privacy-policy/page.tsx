@@ -1,6 +1,5 @@
 import { PrivacyPolicyDocument } from "@/graphql/generated/graphql"
 import { wordpressClient } from "@/lib/wpgraphql"
-import { main } from "motion/react-client"
 
 async function getPrivacyPolicyData() {
     return wordpressClient.request(PrivacyPolicyDocument)
