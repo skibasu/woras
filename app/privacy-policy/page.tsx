@@ -14,9 +14,11 @@ const PrivacyPolicyPage = async () => {
                 <div className="main-container-sm relative z-30">
                     <article>
                         <h1>{data.page?.title}</h1>
-                        <p>
-                            <strong>Last updated:</strong> {data?.page?.modified ? new Date(data?.page?.modified).toLocaleDateString() : "Unknown"}
-                        </p>
+                        {data.page?.privacyPolicy?.isLastUpdate && (
+                            <p>
+                                <strong>{data.page?.privacyPolicy?.lastUpdateLabel || ""}</strong> {data?.page?.modified ? new Date(data?.page?.modified).toLocaleDateString() : "Unknown"}
+                            </p>
+                        )}
                         <div dangerouslySetInnerHTML={{ __html: data.page?.privacyPolicy?.pageContent || "" }}></div>
                     </article>
                 </div>
