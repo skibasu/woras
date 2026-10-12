@@ -236,6 +236,8 @@ export const PRIVACY_POLICY_QUERY = gql`
             title
             privacyPolicy {
                 pageContent
+                isLastUpdate
+                lastUpdateLabel
             }
             modified
         }
