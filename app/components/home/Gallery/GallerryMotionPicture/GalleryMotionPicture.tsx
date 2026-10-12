@@ -60,16 +60,16 @@ export const GalleryMotionPicture = ({ image: { src, alt, width, height }, layou
                     </button>
                 </div>
             </motion.div>
-            <motion.article onClick={(e) => e.stopPropagation()} key="motion-article" variants={variants} layoutId={layoutId} initial="hidden" animate={"visible"} exit="exit" className="fixed left-1/2 top-1/2 z-100 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl max-h-[80vh]">
+            <motion.article onClick={(e) => e.stopPropagation()} key="motion-article" variants={variants} layoutId={layoutId} initial="hidden" animate={"visible"} exit="exit" className="fixed left-1/2 top-1/2 z-100 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl max-h-[90vh]">
                 <div
                     className="shadow overflow-hidden rounded-2xl w-full h-full relative"
                     style={{
                         aspectRatio: `${width} / ${height}`,
-                        width: `min(80vw, calc(90vh * ${width / height}))`,
+                        width: `min(90vw, calc(90vh * ${width / height}))`,
                         height: `min(80vh, calc(80vw * ${height / width}))`,
                     }}
                 >
-                    <Image src={src} alt={alt} priority fill sizes="80vw" className="block" />
+                    <Image src={src} alt={alt} priority fill sizes="90vw" className="block" />
                 </div>
             </motion.article>
         </Portal>
