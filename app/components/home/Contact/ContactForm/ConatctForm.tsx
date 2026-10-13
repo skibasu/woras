@@ -80,7 +80,6 @@ const ContactForm = ({
     })
 
     const onSubmit = async (data: FormData) => {
-        console.log("Form data", data)
         if (loading) {
             return
         }
@@ -282,7 +281,6 @@ const ContactForm = ({
                     {errorMessage}
                 </p>
             )}
-            <p>Field Type : {fieldType}</p>
         </form>
     )
 }
