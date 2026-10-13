@@ -168,7 +168,7 @@ const ContactForm = ({
         >
             <h2 className="mb-6 text-3xl">{title}</h2>
 
-            <p className="mb-8 text-black/70">{description}</p>
+            <p className="mb-8 text-black/90">{description}</p>
 
             <div className="flex w-full flex-col gap-1">
                 <div className="relative z-20 pb-9">
