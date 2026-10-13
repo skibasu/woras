@@ -253,7 +253,7 @@ const ContactForm = ({
                         />
                     </button>
 
-                    <p className="text-sm text-accent">
+                    <p className="text-sm text-accent font-bold">
                         {images.length} / {maxImages}
                     </p>
                 </div>
