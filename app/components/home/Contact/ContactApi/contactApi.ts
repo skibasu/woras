@@ -11,7 +11,11 @@ interface ContactMessageResponse {
     message?: string
 }
 
-export async function sendContactMessage(data: FormData, attachments: MailAttachment[], recaptchaToken: string): Promise<ContactMessageResponse> {
+export async function sendContactMessage(
+    data: Omit<FormData, "countryCode">,
+    attachments: MailAttachment[],
+    recaptchaToken: string
+): Promise<ContactMessageResponse> {
     const response = await fetch("https://px661515.pxcloud.pl/api/contact/contact.php", {
         method: "POST",
         headers: {

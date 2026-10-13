@@ -226,6 +226,21 @@ export const CONTACT_QUERY = gql`
                 successMessage
                 successMessageAccent
                 successMessageDescription
+
+                eNameOrPhoneRequired
+                eNameForbiddenCharacters
+                eNameToLong
+                eNameToShort
+
+                ePhoneToLong
+                ePhoneNotValid
+
+                eEmailRequired
+                eEmailNotValid
+
+                eMessageRequired
+                eMessageToShort
+                eMessageToLong
             }
         }
     }
