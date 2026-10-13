@@ -17,7 +17,7 @@ const Input = ({ className = "", placeholder, isError, ...props }: Props) => {
             />
             <span
                 className={clsx(
-                    "pointer-events-none absolute left-0 -top-5 text-sm font-semibold text-black/80 opacity-0 translate-y-1 transition-all duration-200 peer-focus:opacity-100 peer-focus:translate-y-0"
+                    "pointer-events-none absolute left-0 -top-5 text-sm font-semibold text-black opacity-0 translate-y-1 transition-all duration-200 peer-focus:opacity-100 peer-focus:translate-y-0"
                 )}
             >
                 {placeholder}
