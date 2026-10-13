@@ -176,7 +176,9 @@ const ContactForm = ({
                         <Select
                             initialCountryCode={getValues("countryCode") as CountryCode}
                             className="absolute left-0 top-0 z-2"
-                            onChange={(value) => setValue("countryCode", value, { shouldValidate: true })}
+                            onChange={(value) => {
+                                setValue("countryCode", value)
+                            }}
                         />
                     )}
                     <Input
