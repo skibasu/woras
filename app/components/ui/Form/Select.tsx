@@ -7,10 +7,6 @@ import { AnimatePresence, motion } from "motion/react"
 type Props = { className: string; initialCountryCode: CountryCode; onChange?: (value: string) => void }
 
 const Select = ({ className, initialCountryCode, onChange }: Props) => {
-    const initialCountry = useMemo(
-        () => getCountries().find((country) => country === initialCountryCode),
-        [initialCountryCode]
-    )
     const countries = useMemo(
         () =>
             getCountries().map((country) => ({
@@ -20,7 +16,7 @@ const Select = ({ className, initialCountryCode, onChange }: Props) => {
             })),
         []
     )
-    const [selectedCountryCode, setSelectedCountryCode] = useState<CountryCode>(initialCountry || countries[0].code)
+    const [selectedCountryCode, setSelectedCountryCode] = useState<CountryCode>(initialCountryCode)
     const [selectOpen, setSelectOpen] = useState(false)
     const selectRef = useRef<HTMLUListElement | null>(null)
 
@@ -47,7 +43,6 @@ const Select = ({ className, initialCountryCode, onChange }: Props) => {
                 type="button"
                 onClick={() => {
                     setSelectOpen((prev) => !prev)
-                    onChange?.(selectedCountryCode)
                 }}
             >
                 <Image
@@ -83,7 +78,7 @@ const Select = ({ className, initialCountryCode, onChange }: Props) => {
                                     type="button"
                                     onClick={() => {
                                         setSelectedCountryCode(code)
-
+                                        onChange?.(code)
                                         setSelectOpen(false)
                                     }}
                                 >
