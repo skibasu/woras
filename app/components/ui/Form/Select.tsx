@@ -51,6 +51,7 @@ const Select = ({ className, initialCountryCode, onChange }: Props) => {
                     className="w-6 h-4 mr-2"
                     width={6}
                     height={4}
+                    loading="lazy"
                 />
                 <span>{`+${getCountryCallingCode(selectedCountryCode)}`}</span>
                 <div className="w-3 h-3 ml-1 ">
