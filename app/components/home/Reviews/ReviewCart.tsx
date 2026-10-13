@@ -49,7 +49,7 @@ const ReviewCart = ({ data, className }: Props) => {
                     </div>
                 </div>
                 <div className="pb-6">
-                    <p className="text-base leading-normal">
+                    <p className="text-base leading-normal text-black/80">
                         <TextExcerpt
                             text={data?.text?.text || ""}
                             maxLength={ReviewLimit.REVIEW_LIMIT}
