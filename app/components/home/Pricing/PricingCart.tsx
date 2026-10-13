@@ -1,5 +1,4 @@
 import type { PricingQuery } from "@/graphql/generated/graphql"
-import Image from "next/image"
 import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
 
 type PricingCategory = NonNullable<
