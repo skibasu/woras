@@ -127,16 +127,26 @@ const GalleryGrid = ({ slides }: Props) => {
                     const mobileFull = [0, 3, 6].includes(index)
                     const desktopHalf = index >= 3
 
-                    const sizes = mobileFull ? (desktopHalf ? "(max-width: 767px) 100vw, 50vw" : "(max-width: 767px) 100vw, 33.33vw") : desktopHalf ? "50vw" : "(max-width: 767px) 50vw, 33.33vw"
+                    const sizes = mobileFull
+                        ? desktopHalf
+                            ? "(max-width: 767px) 100vw, 50vw"
+                            : "(max-width: 767px) 100vw, 33.33vw"
+                        : desktopHalf
+                          ? "50vw"
+                          : "(max-width: 767px) 50vw, 33.33vw"
 
                     const width = node.mediaDetails?.width || 1000
                     const height = node.mediaDetails?.height || 1000
 
                     return (
                         <motion.button
+                            aria-label={`Open Picture ${node.altText || ""}`}
                             key={node.id}
                             type="button"
-                            className={clsx("gallery-grid-item cart bg-blue-300", cureentSlideId === node.id ? "z-2" : "z-1")}
+                            className={clsx(
+                                "gallery-grid-item cart bg-blue-300",
+                                cureentSlideId === node.id ? "z-2" : "z-1"
+                            )}
                             layoutId={`gallery-${node.id}`}
                             onClick={() => {
                                 if (!preloadedImages.has(node.id)) return
@@ -150,7 +160,20 @@ const GalleryGrid = ({ slides }: Props) => {
                                 })
                             }}
                         >
-                            <Image src={node.sourceUrl} alt={node.altText || ""} width={width} height={height} sizes={sizes} loading="lazy" className={clsx("object-cover w-full h-full hover:scale-105 transition-all duration-700", preloadedImages.has(node.id) ? "grayscale-0 cursor-pointer" : "grayscale cursor-progress")} />
+                            <Image
+                                src={node.sourceUrl}
+                                alt={node.altText || ""}
+                                width={width}
+                                height={height}
+                                sizes={sizes}
+                                loading="lazy"
+                                className={clsx(
+                                    "object-cover w-full h-full hover:scale-105 transition-all duration-700",
+                                    preloadedImages.has(node.id)
+                                        ? "grayscale-0 cursor-pointer"
+                                        : "grayscale cursor-progress"
+                                )}
+                            />
                         </motion.button>
                     )
                 })}
