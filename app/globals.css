@@ -323,7 +323,10 @@
     background-color: var(--accent);
     @apply w-4 lg:w-12 h-0.5 lg:h-1 mr-2 lg:mr-4 inline-block;
 }
-
+.with-empty-separator-left::before {
+    content: "";
+    @apply opacity-0;
+}
 .with-accent-separator-right::after {
     content: "";
     background-color: var(--accent);
