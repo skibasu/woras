@@ -231,7 +231,9 @@
 .link {
     @apply text-link hover:text-link-hover transition-colors underline  hover:decoration-link decoration-link underline-offset-4;
 }
-
+.animated-line {
+    @apply overflow-hidden;
+}
 .link-disabled {
     @apply pointer-events-none  text-gray-500 decoration-0;
 }
