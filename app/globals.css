@@ -275,7 +275,7 @@
 
 /* Text helpers */
 .text-page-slogan {
-    @apply uppercase text-[14vw] sm:text-8xl xl:text-9xl font-slogan leading-none font-normal;
+    @apply uppercase text-[13vw] sm:text-7xl md:text-8xl xl:text-9xl font-slogan leading-none font-normal;
 }
 
 .text-title {
@@ -284,7 +284,7 @@
 
 .text-subtitle {
     letter-spacing: var(--letter-spacing-lg);
-    @apply text-xl lg:text-2xl font-base  font-normal;
+    @apply text-sm md:text-xl lg:text-2xl font-base  font-normal;
 }
 
 .text-subtitle-small {

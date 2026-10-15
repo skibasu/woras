@@ -1,7 +1,7 @@
 "use client"
 
 import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react"
-import { stagger, useAnimate } from "motion/react"
+import { stagger, useAnimate, usePresence } from "motion/react"
 import clsx from "clsx"
 
 type Props = {
@@ -23,6 +23,7 @@ type Words = Word[]
 const punctuationRegex = /^[?!.,:;…*%$#)\]}»'"”’\-]+$/
 
 const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassName }: Props) => {
+    const [isPresent, safeToRemove] = usePresence()
     const linesRef = useRef<HTMLSpanElement[]>([])
     const lettersRef = useRef<(HTMLSpanElement | null)[][]>([])
     const [scope, animate] = useAnimate()
@@ -116,7 +117,6 @@ const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassN
         linesRef.current.map(async (element, lineIndex) => {
             if (!element) return
 
-            const lineDelay = 0.5
             const letters = lettersRef.current[lineIndex] ?? []
 
             animate(
@@ -143,27 +143,43 @@ const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassN
                         delay: stagger(0.035, { startDelay: 0.6 }),
                     },
                 ],
-                [
+            ])
+        })
+    }
+
+    const handleExitAnimation = async () => {
+        await Promise.all(
+            linesRef.current.map(async (element, lineIndex) => {
+                if (!element) return
+
+                const letters = lettersRef.current[lineIndex] ?? []
+
+                await animate(
                     letters,
                     {
                         opacity: [1, 0],
                         x: [lineIndex % 2 === 0 ? -46 : 46],
-                        // rotate: [0, -8, 0],
                     },
                     {
                         duration: 0.2,
-                        delay: stagger(0.035, { startDelay: 5 }),
-                    },
-                ],
-            ])
-        })
+                        delay: stagger(0.035),
+                    }
+                )
+            })
+        )
+
+        safeToRemove?.()
     }
 
     useEffect(() => {
         if (lines.length === 0) return
 
-        handleAnimation()
-    }, [lines])
+        if (isPresent) {
+            handleAnimation()
+        } else {
+            handleExitAnimation()
+        }
+    }, [lines, isPresent])
 
     return (
         <div

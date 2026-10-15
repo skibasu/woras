@@ -18,7 +18,7 @@ export const Hero = ({ data }: HeroProps) => {
     return (
         <section
             id="home"
-            className="hero-section section-hero-gradient relative bg-image-cover flex flex-col justify-center min-h-dvh"
+            className="hero-section section-hero-gradient relative bg-image-cover flex flex-col md:justify-center min-h-dvh"
         >
             <HeroPicture
                 src={data.backgroundImage?.node?.sourceUrl || ""}

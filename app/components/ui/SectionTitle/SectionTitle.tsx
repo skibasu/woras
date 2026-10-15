@@ -11,12 +11,29 @@ interface Props {
     textColor?: "light" | "dark"
     className?: string
 }
-const SectionTitle = ({ title, titleAccent, accentEnd, eyebrow, subtitle, textColor = "dark", className: customClassName }: Props) => {
+const SectionTitle = ({
+    title,
+    titleAccent,
+    accentEnd,
+    eyebrow,
+    subtitle,
+    textColor = "dark",
+    className: customClassName,
+}: Props) => {
     const className = textColor === "light" ? "text-white/80" : "text-black/40"
     const classNameTitle = textColor === "light" ? "text-white" : "text-black"
     return (
         <div className={customClassName}>
-            {eyebrow && <p className={clsx("text-eyebrow text-black/40 flex justify-center items-center with-accent-separator-right with-accent-separator-left mb-2 lg:mb-4", className)}>{eyebrow}</p>}
+            {eyebrow && (
+                <p
+                    className={clsx(
+                        "text-eyebrow text-black/40 flex justify-center items-center with-accent-separator-right with-accent-separator-left mb-2 lg:mb-4",
+                        className
+                    )}
+                >
+                    {eyebrow}
+                </p>
+            )}
 
             <h2 className={clsx("text-title text-center mb-3", classNameTitle)}>
                 {title}
