@@ -12,7 +12,7 @@ const Pricing = async () => {
     return (
         <section
             id="pricing"
-            className="page-section section-y-spacing section-full-height bg-image-cover relative "
+            className="page-section section-y-spacing section-full-height bg-image-cover relative section-hero-gradient"
         >
             <HeroPicture
                 src={data.page?.pricingPage?.heroImage?.node?.sourceUrl || ""}
