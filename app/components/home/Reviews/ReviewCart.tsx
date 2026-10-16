@@ -10,7 +10,8 @@ interface Props {
     className?: string
 }
 enum ReviewLimit {
-    REVIEW_LIMIT = 320,
+    REVIEW_LIMIT = 260,
+    REVIEW_MOBILE_LIMIT = 180,
 }
 const ReviewCart = ({ data, className }: Props) => {
     const reiewLimit = ReviewLimit.REVIEW_LIMIT
@@ -53,6 +54,7 @@ const ReviewCart = ({ data, className }: Props) => {
                         <TextExcerpt
                             text={data?.text?.text || ""}
                             maxLength={ReviewLimit.REVIEW_LIMIT}
+                            mobileMaxLength={ReviewLimit.REVIEW_MOBILE_LIMIT}
                         />
                     </p>
                 </div>
