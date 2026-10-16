@@ -158,11 +158,12 @@ const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassN
                     letters,
                     {
                         opacity: [1, 0],
-                        x: [lineIndex % 2 === 0 ? -46 : 46],
+                        x: 12,
                     },
                     {
                         duration: 0.2,
-                        delay: stagger(0.035),
+
+                        delay: stagger(0.055, { from: "last" }),
                     }
                 )
             })
