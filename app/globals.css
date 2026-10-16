@@ -275,7 +275,7 @@
 
 /* Text helpers */
 .text-page-slogan {
-    @apply uppercase text-[13vw] sm:text-7xl md:text-8xl xl:text-9xl font-slogan leading-none font-normal;
+    @apply uppercase text-[12vw] sm:text-7xl md:text-8xl xl:text-9xl font-slogan leading-none font-normal;
 }
 
 .text-title {

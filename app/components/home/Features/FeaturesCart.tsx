@@ -17,7 +17,7 @@ type Props = {
     containerStyle?: MotionStyle
 }
 
-const FeaturesCart = ({ feature, className, containerClassName, style, containerStyle }: Props) => {
+const FeaturesCart = ({ feature, className, containerClassName, containerStyle }: Props) => {
     return (
         <motion.div
             className={containerClassName}

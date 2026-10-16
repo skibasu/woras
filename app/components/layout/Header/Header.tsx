@@ -3,7 +3,7 @@ import Hamburger from "./Hamburger/Hamburger"
 import MenuModal from "./MenuModal/MenuModal"
 import NavLinks from "./NavLinks/NavLinks"
 import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
-import WhatsAppMobileButton from "../../ui/WhatsAppMobileButton"
+import WhatsAppMobileButton from "../../ui/WhatsAppMobileButton/WhatsAppMobileButton"
 
 import { getGeneralSettings } from "@/lib/getGeneralSettings"
 

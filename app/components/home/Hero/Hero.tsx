@@ -1,6 +1,6 @@
 import type { HomeQuery } from "@/graphql/generated/graphql"
 import ServiceList from "./ServiceList"
-import SectionSlogan from "../../ui/SectionSlogan/SectionSlogan"
+import SectionSlogan, { SlogansData } from "../../ui/SectionSlogan/SectionSlogan"
 import HeroPicture from "./HeroPicture"
 import ButtonScrollTo from "../../ui/ButtonScrollTo/ButtonScrollTo"
 
@@ -29,13 +29,10 @@ export const Hero = ({ data }: HeroProps) => {
             <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/80 to-black/70 w-full h-full min-h-150 top-0 left-0 z-0" />
 
             <div className="w-full">
-                <div className="relative z-10 max-w-4xl pt-10 md:pt-0">
+                <div className="relative z-10 max-w-4xl pt-[8vh] md:pt-0">
                     <SectionSlogan
                         eyebrow={data.eyebrow}
-                        slogan={data.slogan}
-                        sloganAccent={data.sloganAccent}
-                        sloganEnd={data.sloganEnd}
-                        subtitle={data.subtitle}
+                        slogans={data?.pageSlogans as SlogansData[]}
                     />
                     <ButtonScrollTo
                         className="btn btn-large btn-primary"

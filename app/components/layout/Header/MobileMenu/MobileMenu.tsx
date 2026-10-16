@@ -11,7 +11,7 @@ import { menuScrollTo } from "@/app/helpers/menuScrollTo"
 import clsx from "clsx"
 import { menuSettings } from "../menuSettngs"
 import ProgressiveImage from "@/app/components/ui/ProgressiveImage/ProgressiveImage"
-import WhatsupMobileButton from "@/app/components/ui/WhatsAppMobileButton"
+import WhatsupMobileButton from "@/app/components/ui/WhatsAppMobileButton/WhatsAppMobileButton"
 import { usePathname, useRouter } from "next/navigation"
 import { useMemo } from "react"
 
@@ -57,19 +57,52 @@ const MobileMenu = ({ data }: Props) => {
     return (
         <div className="h-full pb-8">
             <div className="py-6 flex justify-between items-start px-5 relative z-1 border-b border-black/90">
-                <Link href="/" className="block" aria-label="Go to homepage">
-                    {data?.logoUrl ? <ProgressiveImage src={data?.logoUrl} alt={data.logoAlt || "Logo"} width={260} height={60} className="block h-13 w-auto" /> : <span className="text-white text-lg font-bold">Logo</span>}
+                <Link
+                    href="/"
+                    className="block"
+                    aria-label="Go to homepage"
+                >
+                    {data?.logoUrl ? (
+                        <ProgressiveImage
+                            src={data?.logoUrl}
+                            alt={data.logoAlt || "Logo"}
+                            width={260}
+                            height={60}
+                            className="block h-13 w-auto"
+                        />
+                    ) : (
+                        <span className="text-white text-lg font-bold">Logo</span>
+                    )}
                 </Link>
-                <button type="button" className="flex justify-center items-center w-5 h-5" aria-label="Close menu" onClick={closeMenu}>
-                    <CloseIcon className="block text-accent w-full h-full" aria-hidden="true" />
+                <button
+                    type="button"
+                    className="flex justify-center items-center w-5 h-5"
+                    aria-label="Close menu"
+                    onClick={closeMenu}
+                >
+                    <CloseIcon
+                        className="block text-accent w-full h-full"
+                        aria-hidden="true"
+                    />
                 </button>
             </div>
-            <nav className="relative z-1 pt-2" aria-label="Mobile navigation">
+            <nav
+                className="relative z-1 pt-2"
+                aria-label="Mobile navigation"
+            >
                 <h2 className="sr-only">Main menu</h2>
                 <ul className="flex flex-col px-3 gap-1">
                     {linksRest.map((link) => (
                         <li key={link.target}>
-                            <Link className={clsx("mobile-menu-link", activeSection === `#${link.target}` && "mobile-menu-link-active")} href={link.href} aria-current={activeSection === `#${link.target}` ? "location" : undefined} onClick={(event) => handleLinkClick(event, link.target)}>
+                            <Link
+                                className={clsx(
+                                    "mobile-menu-link",
+                                    activeSection === `#${link.target}` && "mobile-menu-link-active"
+                                )}
+                                href={link.href}
+                                aria-current={activeSection === `#${link.target}` ? "location" : undefined}
+                                onClick={(event) => handleLinkClick(event, link.target)}
+                            >
                                 {link.label}
                             </Link>
                         </li>
@@ -77,13 +110,22 @@ const MobileMenu = ({ data }: Props) => {
                 </ul>
 
                 <div className="px-5 py-6">
-                    <WhatsupMobileButton className="bg-primary px-4 w-full" iconWidth={20} iconHeight={20} label={data.whatsappButtonLabel || "WhatsApp"} phoneNumber={data?.phone} />
+                    <WhatsupMobileButton
+                        className="bg-primary px-4 w-full"
+                        iconWidth={20}
+                        iconHeight={20}
+                        label={data.whatsappButtonLabel || "WhatsApp"}
+                        phoneNumber={data?.phone}
+                    />
                 </div>
 
                 <div className="space-y-6 mb-6 px-5 pt-5">
                     <div className="flex items-center gap-4">
                         <div className="w-4  shrink-0 grow-0">
-                            <MapMarkerIcon className="block h-auto w-full text-accent" aria-hidden="true" />
+                            <MapMarkerIcon
+                                className="block h-auto w-full text-accent"
+                                aria-hidden="true"
+                            />
                         </div>
                         <div>
                             <p className="text-sm font-semibold text-white/90">{data.city || "Amsterdam"}</p>
@@ -92,9 +134,16 @@ const MobileMenu = ({ data }: Props) => {
                     </div>
 
                     {normalizedPhone ? (
-                        <a href={`tel:${normalizedPhone}`} className="flex items-center gap-3" aria-label={`Call ${normalizedPhone}`}>
+                        <a
+                            href={`tel:${normalizedPhone}`}
+                            className="flex items-center gap-3"
+                            aria-label={`Call ${normalizedPhone}`}
+                        >
                             <div className="h-5">
-                                <PhoneIcon className="block h-full w-auto text-accent" aria-hidden="true" />
+                                <PhoneIcon
+                                    className="block h-full w-auto text-accent"
+                                    aria-hidden="true"
+                                />
                             </div>
 
                             <div>
@@ -103,17 +152,30 @@ const MobileMenu = ({ data }: Props) => {
                             </div>
                         </a>
                     ) : (
-                        <div className="flex items-center gap-3" aria-hidden="true">
+                        <div
+                            className="flex items-center gap-3"
+                            aria-hidden="true"
+                        >
                             <div className="h-5">
-                                <PhoneIcon className="block h-full w-auto text-accent" aria-hidden="true" />
+                                <PhoneIcon
+                                    className="block h-full w-auto text-accent"
+                                    aria-hidden="true"
+                                />
                             </div>
                         </div>
                     )}
 
                     {normalizedEmail ? (
-                        <a href={`mailto:${normalizedEmail}`} className="flex items-center gap-4" aria-label={`Send email to ${normalizedEmail}`}>
+                        <a
+                            href={`mailto:${normalizedEmail}`}
+                            className="flex items-center gap-4"
+                            aria-label={`Send email to ${normalizedEmail}`}
+                        >
                             <div className="h-5">
-                                <EmailIcon className="block h-full w-auto text-accent" aria-hidden="true" />
+                                <EmailIcon
+                                    className="block h-full w-auto text-accent"
+                                    aria-hidden="true"
+                                />
                             </div>
                             <div>
                                 <p className="text-sm font-semibold text-white/90">{normalizedEmail}</p>
@@ -121,16 +183,28 @@ const MobileMenu = ({ data }: Props) => {
                             </div>
                         </a>
                     ) : (
-                        <div className="flex items-center gap-4" aria-hidden="true">
+                        <div
+                            className="flex items-center gap-4"
+                            aria-hidden="true"
+                        >
                             <div className="h-5">
-                                <EmailIcon className="block h-full w-auto text-accent" aria-hidden="true" />
+                                <EmailIcon
+                                    className="block h-full w-auto text-accent"
+                                    aria-hidden="true"
+                                />
                             </div>
                         </div>
                     )}
                 </div>
             </nav>
             <div className="absolute h-40 w-60 bottom-0 right-0 translate-x-10 translate-y-8 overflow-hidden z-0">
-                <Image src="/images/menu-background.webp" alt="" aria-hidden="true" fill className="inset-0 h-full w-full object-cover object-center opacity-20" />
+                <Image
+                    src="/images/menu-background.webp"
+                    alt=""
+                    aria-hidden="true"
+                    fill
+                    className="inset-0 h-full w-full object-cover object-center opacity-20"
+                />
             </div>
         </div>
     )

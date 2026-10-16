@@ -7,45 +7,20 @@ import SplitTextToSpans from "../SplitTextToSpans/SplitTextToSpans"
 import { motion } from "motion/react"
 
 type TextValue = string | null | undefined
-
-type Props = {
-    eyebrow: TextValue
+export type SlogansData = {
     slogan: TextValue
     sloganAccent: TextValue
     sloganEnd: TextValue
     subtitle: TextValue
 }
-
-export const slogans = [
-    {
-        slogan: "ARE YOU READY TO PULL YOUR",
-        accent: "ACE",
-        accentEnd: "?",
-        subtitle: "Quick fix. 100% warranty.",
-    },
-    {
-        slogan: "BACK ON THE ROAD.",
-        accent: "FAST",
-        accentEnd: ".",
-        subtitle: "Fast service. No unnecessary waiting.",
-    },
-    {
-        slogan: "YOUR",
-        accent: "BIKE.",
-        accentEnd: "OUR BUSINESS.",
-        subtitle: "Careful repairs. Quality you can trust.",
-    },
-    {
-        slogan: "DON'T JUST RIDE. RIDE",
-        accent: "ACE",
-        accentEnd: ".",
-        subtitle: "Keep moving. We'll handle the rest.",
-    },
-]
+type Props = {
+    eyebrow: TextValue
+    slogans: SlogansData[]
+}
 
 const AUTOPLAY_DELAY = 8000
 
-const SectionSlogan = ({ eyebrow, slogan, sloganAccent, sloganEnd, subtitle }: Props) => {
+const SectionSlogan = ({ eyebrow, slogans }: Props) => {
     const [activeIndex, setActiveIndex] = useState(0)
 
     useEffect(() => {
@@ -99,17 +74,17 @@ const SectionSlogan = ({ eyebrow, slogan, sloganAccent, sloganEnd, subtitle }: P
                 <AnimatePresence mode="wait">
                     <SplitTextToSpans
                         key={activeIndex}
-                        text={currentSlogan.slogan}
-                        textAccented={currentSlogan.accent}
-                        textEnd={currentSlogan.accentEnd}
+                        text={currentSlogan.slogan || ""}
+                        textAccented={currentSlogan.sloganAccent || ""}
+                        textEnd={currentSlogan.sloganEnd || ""}
                     />
                 </AnimatePresence>
             </h2>
             <motion.p
-                key={activeIndex + currentSlogan.subtitle}
-                initial={{ opacity: 0, x: 150 }}
-                animate={{ opacity: 1, x: 16, transition: { duration: 2 } }}
-                exit={{ opacity: 0, x: 30, transition: { duration: 0.7 } }}
+                key={activeIndex + (currentSlogan.subtitle || "")}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 16, transition: { duration: 1, delay: 2 } }}
+                exit={{ opacity: 0, x: 30, transition: { duration: 0.5 } }}
                 className="text-subtitle text-white/70 mb-12"
             >
                 {currentSlogan.subtitle}
