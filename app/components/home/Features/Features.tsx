@@ -74,11 +74,17 @@ const Features = ({ data }: FeaturesProps) => {
                                                         }
                                                 : {}
                                         }
-                                        containerClassName={`${
-                                            i === 2
-                                                ? "md:col-span-2 lg:col-span-1 md:max-w-1/2 m-auto lg:max-w-full lg:m-0"
-                                                : ""
-                                        } ${i === 1 ? "z-10" : "z-1"} shadow-xl cart py-9`}
+                                        containerClassName={`
+    ${i === 1 ? "order-1 md:order-1 md:col-span-2 lg:order-none lg:col-span-1" : "order-2 md:order-2 lg:order-none"}
+    ${i === 2 ? "max-w-full" : ""}
+    ${i === 1 ? "z-10" : "z-1"}
+    shadow-xl cart py-9
+`}
+                                        //  containerClassName={`${
+                                        //      i === 2
+                                        //          ? "md:col-span-2 lg:col-span-1 md:max-w-1/2 m-auto lg:max-w-full lg:m-0"
+                                        //          : ""
+                                        //  } ${i === 1 ? "z-10" : "z-1"} shadow-xl cart py-9 order-1 md:order-0`}
                                         //containerStyle={{ scale: 1 }}
                                     />
                                 )
