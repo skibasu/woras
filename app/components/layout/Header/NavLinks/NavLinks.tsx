@@ -6,13 +6,11 @@ import { menuScrollTo } from "@/app/helpers/menuScrollTo"
 import clsx from "clsx"
 import { useMenuContext } from "@/app/context/MenuContext"
 import { menuSettings } from "../menuSettngs"
+import { motion } from "motion/react"
 
-type Props = {
-    className?: string
-}
-
-const NavLinks = ({ className = "" }: Props) => {
+const NavLinks = () => {
     const { activeSection } = useMenuContext()
+
     const pathname = usePathname()
     const router = useRouter()
 
@@ -27,13 +25,32 @@ const NavLinks = ({ className = "" }: Props) => {
     }
 
     return (
-        <>
+        <ul className="md:flex items-center lg:gap-2 xl:gap-6 pr-6">
             {menuSettings.links.map((link) => (
-                <Link key={link.target} className={clsx(className, activeSection === `#${link.target}` && "menu-link-active")} href={link.href} onClick={(event) => handleClick(event, link.target)}>
-                    {link.label}
-                </Link>
+                <li
+                    key={link.target}
+                    className="relative"
+                >
+                    <Link
+                        className={clsx(
+                            "block menu-link px-3 py-2",
+                            activeSection === `#${link.target}` && "menu-link-active"
+                        )}
+                        href={link.href}
+                        onClick={(event) => handleClick(event, link.target)}
+                    >
+                        {link.label}
+                    </Link>
+                    {activeSection === `#${link.target}` && (
+                        <motion.div
+                            className="absolute bottom-0 w-full bg-accent h-px"
+                            layoutId="menu-underline"
+                            id="menu-underline"
+                        />
+                    )}
+                </li>
             ))}
-        </>
+        </ul>
     )
 }
 

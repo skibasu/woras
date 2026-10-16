@@ -8,10 +8,13 @@ export const HOME_QUERY = gql`
             homePage {
                 hero {
                     eyebrow
-                    slogan
-                    sloganAccent
-                    sloganEnd
-                    subtitle
+                    pageSlogans {
+                        slogan
+                        sloganAccent
+                        sloganEnd
+                        subtitle
+                    }
+
                     buttonText
                     buttonUrl
                     backgroundImage {
@@ -138,6 +141,7 @@ export const PRICING_QUERY = gql`
                     }
                     thumbnail {
                         node {
+                            id
                             sourceUrl
                             altText
                         }

@@ -2,7 +2,7 @@ type Props = {
     companyName: string
     eyebrow: string
 }
-const LogoExtended = async ({ companyName, eyebrow }: Props) => {
+const LogoExtended = ({ companyName, eyebrow }: Props) => {
     return (
         <div className="flex items-center gap-4 mb-8">
             <div>

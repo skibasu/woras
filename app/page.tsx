@@ -6,9 +6,10 @@ import Reviews from "./components/home/Reviews/Reviews"
 import Gallery from "./components/home/Gallery/Gallery"
 import Pricing from "./components/home/Pricing/Pricing"
 import Contact from "./components/home/Contact/Contact"
-import WhatsupMobileButton from "./components/ui/WhatsAppMobileButton"
+import WhatsupMobileButton from "./components/ui/WhatsAppMobileButton/WhatsAppMobileButton"
 import { getGeneralSettings } from "@/lib/getGeneralSettings"
 import PendingScroll from "./components/ui/PendingScroll/PendingScroll"
+import Portal from "./components/ui/Portal/Portal"
 
 async function getHomeData() {
     return wordpressClient.request(HomeDocument)
@@ -27,7 +28,14 @@ const Home = async () => {
 
             <Pricing />
             <Contact />
-            <WhatsupMobileButton iconWidth={28} iconHeight={28} className="fixed bottom-6 right-6 z-50 lg:hidden bg-whatsapp-hover" label={""} phoneNumber={settingsData?.phoneNumber || null} />
+
+            <WhatsupMobileButton
+                iconWidth={28}
+                iconHeight={28}
+                className="w-11 h-11 rounded-full bg-whatsapp-hover shadow-lg fixed bottom-6 right-6 z-50 lg:hidden flex items-center"
+                label={""}
+                phoneNumber={settingsData?.phoneNumber || null}
+            />
         </main>
     )
 }

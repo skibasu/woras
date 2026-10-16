@@ -231,16 +231,18 @@
 .link {
     @apply text-link hover:text-link-hover transition-colors underline  hover:decoration-link decoration-link underline-offset-4;
 }
-
+.animated-line {
+    @apply overflow-hidden;
+}
 .link-disabled {
     @apply pointer-events-none  text-gray-500 decoration-0;
 }
 .menu-link {
     line-height: var(--line-height-sm);
-    @apply text-white/70 font-semibold hover:text-accent transition-all duration-300 ease-in-out text-center rounded-sm;
+    @apply text-white/80 font-semibold hover:text-accent transition-all duration-300 ease-in-out text-center rounded-sm;
 }
 .menu-link-active {
-    @apply text-accent text-shadow-primary underline decoration-accent underline-offset-8 transition-all duration-600 ease-in-out;
+    @apply text-accent transition-all duration-600 ease-in-out;
 }
 .mobile-menu-link {
     @apply block py-3 text-white/90 px-5 font-bold uppercase hover:bg-accent/10 active:bg-accent/10;
@@ -273,7 +275,7 @@
 
 /* Text helpers */
 .text-page-slogan {
-    @apply uppercase text-[14vw] sm:text-8xl xl:text-9xl font-slogan leading-none font-normal;
+    @apply uppercase text-[12vw] sm:text-7xl md:text-8xl xl:text-9xl font-slogan leading-none font-normal;
 }
 
 .text-title {
@@ -282,7 +284,7 @@
 
 .text-subtitle {
     letter-spacing: var(--letter-spacing-lg);
-    @apply text-xl lg:text-2xl font-base  font-normal;
+    @apply text-sm md:text-xl lg:text-2xl font-base  font-normal;
 }
 
 .text-subtitle-small {
