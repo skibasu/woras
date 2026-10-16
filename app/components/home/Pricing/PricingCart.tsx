@@ -12,7 +12,7 @@ type Props = {
 const PricingCart = ({ item }: Props) => {
     return (
         <div className="cart w-full h-full">
-            <div className="h-24 w-full bg-image-cover relative opacity-70 border-b border-gray-300">
+            <div className="h-24 w-full pb-4 bg-image-cover relative opacity-70 border-b border-gray-300">
                 <ProgressiveImage
                     src={item?.thumbnail?.node?.sourceUrl ?? ""}
                     alt={item?.thumbnail?.node?.altText ?? ""}
