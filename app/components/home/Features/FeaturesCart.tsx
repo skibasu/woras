@@ -27,14 +27,15 @@ const FeaturesCart = ({ feature, className, containerClassName, containerStyle }
                 <ProgressiveImage
                     src={feature?.image?.node?.sourceUrl ?? ""}
                     alt={feature?.image?.node?.altText ?? ""}
-                    fill
+                    width={feature?.image?.node?.mediaDetails?.width ?? 0}
+                    height={feature?.image?.node?.mediaDetails?.height ?? 0}
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-contain"
-                    containerClassName="relative w-full overflow-hidden flex justify-center h-50"
+                    className="h-full w-auto"
+                    containerClassName="w-full overflow-hidden flex justify-center h-18 md:h-30 lg:h-40"
                     onLoadOpacity={0.75}
                 />
 
-                <h3 className="mb-6 mt-8">{feature?.title}</h3>
+                <h3 className="mb-3 mt-3 md:mb-6 md:mt-8">{feature?.title}</h3>
 
                 <p className="text-lg leading-[1.3]">{feature?.description}</p>
             </div>
