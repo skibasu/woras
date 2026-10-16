@@ -1,7 +1,7 @@
 "use client"
 import clsx from "clsx"
 
-import { motion } from "motion/react"
+import { motion, stagger, Variants } from "motion/react"
 
 type TextTypes = string | null | undefined
 
@@ -14,22 +14,22 @@ interface Props {
     textColor?: "light" | "dark"
     className?: string
 }
-const variants = {
+const variants: Variants = {
     hidden: { opacity: 0, y: 55 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" } },
 }
-const titleVariants = {
+const titleVariants: Variants = {
     hidden: { opacity: 0, y: 35 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.75, opacity: { duration: 0.75 }, ease: "easeOut" } },
 }
-const containerVariants = {
+const containerVariants: Variants = {
     hidden: { opacity: 1 },
     visible: {
         opacity: 1,
 
         transition: {
-            delayChildren: 0.1,
-            staggerChildren: 0.15,
+            delayChildren: stagger(0.15, { startDelay: 0.1 }),
+            // staggerChildren: 0.15,
         },
     },
 }

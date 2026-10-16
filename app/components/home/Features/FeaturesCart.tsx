@@ -1,8 +1,9 @@
 "use client"
-import { HomeQuery } from "@/graphql/generated/graphql"
-import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
-import { motion, Variants } from "motion/react"
+
+import type { HomeQuery } from "@/graphql/generated/graphql"
+import { motion, type MotionStyle } from "motion/react"
 import clsx from "clsx"
+import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
 
 type FeatureItem = NonNullable<
     NonNullable<NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["features"]>["items"]
@@ -12,24 +13,17 @@ type Props = {
     feature: FeatureItem
     containerClassName?: string
     className?: string
-    style: React.CSSProperties
-    variants?: Variants
+
+    containerStyle?: MotionStyle
 }
 
-const FeaturesCart = ({ feature, className, containerClassName, style, variants }: Props) => {
+const FeaturesCart = ({ feature, className, containerClassName, style, containerStyle }: Props) => {
     return (
         <motion.div
-            key={feature?.image?.node?.id || feature?.title}
             className={containerClassName}
-            variants={variants}
-            initial={"hidden"}
-            // whileInView={"visible"}
-            // viewport={{ amount: 0.5, once: false }}
+            style={containerStyle}
         >
-            <div
-                className={clsx("px-4 text-center bg-white relative", className)}
-                style={style}
-            >
+            <div className={clsx("px-4 text-center bg-white relative", className)}>
                 <ProgressiveImage
                     src={feature?.image?.node?.sourceUrl ?? ""}
                     alt={feature?.image?.node?.altText ?? ""}
@@ -41,6 +35,7 @@ const FeaturesCart = ({ feature, className, containerClassName, style, variants 
                 />
 
                 <h3 className="mb-6 mt-8">{feature?.title}</h3>
+
                 <p className="text-lg leading-[1.3]">{feature?.description}</p>
             </div>
         </motion.div>
