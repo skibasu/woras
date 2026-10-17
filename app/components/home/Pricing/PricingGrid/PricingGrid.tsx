@@ -2,9 +2,9 @@
 
 import type { PricingQuery } from "@/graphql/generated/graphql"
 import { useBreakpoint } from "@/app/hooks/useBreakpoiint"
-import PricingGridDesktop2Xl from "./PricingGridDesktop2Xl"
-import PricingGridTablet from "./PricingGridTablet"
-import PricingCart from "./PricingCart"
+import PricingGridDesktop2Xl from "../PricingGridDesktop2Xl/PricingGridDesktop2Xl"
+import PricingGridTablet from "../PricingGridTablet/PricingGridTablet"
+import PricingCart from "../PricingCart/PricingCart"
 
 type Props = {
     categories: NonNullable<NonNullable<NonNullable<NonNullable<PricingQuery["page"]>["pricingPage"]>["categories"]>>

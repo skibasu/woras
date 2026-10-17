@@ -3,7 +3,7 @@
 import type { HomeQuery } from "@/graphql/generated/graphql"
 import { motion, type MotionStyle } from "motion/react"
 import clsx from "clsx"
-import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
+import ProgressiveImage from "../../../ui/ProgressiveImage/ProgressiveImage"
 
 type FeatureItem = NonNullable<
     NonNullable<NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["features"]>["items"]

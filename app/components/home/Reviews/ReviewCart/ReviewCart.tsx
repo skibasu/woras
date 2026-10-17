@@ -1,8 +1,8 @@
 import { GoogleReview } from "@/lib/google-reviews"
-import StarsCounter from "./Rating/StarsCounter"
-import { TextExcerpt } from "../../ui/TextExcerpt/TextExcerpt"
+import StarsCounter from "../Rating/StarsCounter"
+import { TextExcerpt } from "../../../ui/TextExcerpt/TextExcerpt"
 import { clsx } from "clsx"
-import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
+import ProgressiveImage from "../../../ui/ProgressiveImage/ProgressiveImage"
 import GoogleIcon from "@/app/components/ui/IconsSvg/GoogleIcon"
 
 interface Props {

@@ -1,7 +1,7 @@
 import type { GoogleReview } from "@/lib/google-reviews"
 
-import EmblaCarousel from "../../ui/Carousel/EmblaCarousel"
-import ReviewCart from "./ReviewCart"
+import EmblaCarousel from "../../../ui/Carousel/EmblaCarousel"
+import ReviewCart from "../ReviewCart/ReviewCart"
 
 type Props = {
     reviews: GoogleReview[] | undefined
@@ -11,7 +11,12 @@ const ReviewsSlider = ({ reviews }: Props) => {
     return (
         <EmblaCarousel>
             {reviews?.map((review, index) => {
-                return <ReviewCart key={index} data={review} />
+                return (
+                    <ReviewCart
+                        key={index}
+                        data={review}
+                    />
+                )
             })}
         </EmblaCarousel>
     )

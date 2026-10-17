@@ -1,5 +1,5 @@
 import type { HomeQuery } from "@/graphql/generated/graphql"
-import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
+import ProgressiveImage from "../../../ui/ProgressiveImage/ProgressiveImage"
 
 type ServiceListData = NonNullable<
     NonNullable<NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["hero"]>["serviceList"]

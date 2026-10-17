@@ -1,5 +1,5 @@
 import type { PricingQuery } from "@/graphql/generated/graphql"
-import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
+import ProgressiveImage from "../../../ui/ProgressiveImage/ProgressiveImage"
 
 type PricingCategory = NonNullable<
     NonNullable<NonNullable<NonNullable<PricingQuery["page"]>["pricingPage"]>["categories"]>[number]

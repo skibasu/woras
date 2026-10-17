@@ -10,6 +10,8 @@ type Props = {
     textEnd: string
     className?: string
     letterClassName?: string
+    counter: number
+    setCounter: React.Dispatch<React.SetStateAction<number>>
 }
 
 type Word = {
@@ -22,7 +24,7 @@ type Words = Word[]
 
 const punctuationRegex = /^[?!.,:;…*%$#)\]}»'"”’\-]+$/
 
-const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassName }: Props) => {
+const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassName, counter, setCounter }: Props) => {
     const [isPresent, safeToRemove] = usePresence()
     const linesRef = useRef<HTMLSpanElement[]>([])
     const lettersRef = useRef<(HTMLSpanElement | null)[][]>([])
@@ -100,8 +102,24 @@ const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassN
 
                 line.words.push(item)
             })
+            const nextLines = grouped.map((line) => line.words)
+            // setLines(grouped.map((line) => line.words))
+            setLines((previousLines) => {
+                const unchanged =
+                    previousLines.length === nextLines.length &&
+                    previousLines.every(
+                        (line, index) =>
+                            line.length === nextLines[index].length &&
+                            line.every(
+                                (word, wordIndex) =>
+                                    word.word === nextLines[index][wordIndex].word &&
+                                    word.isAccented === nextLines[index][wordIndex].isAccented &&
+                                    word.isEnd === nextLines[index][wordIndex].isEnd
+                            )
+                    )
 
-            setLines(grouped.map((line) => line.words))
+                return unchanged ? previousLines : nextLines
+            })
         }
 
         measureLines()
@@ -115,9 +133,10 @@ const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassN
 
     const handleAnimation = async () => {
         linesRef.current.map(async (element, lineIndex) => {
-            if (!element) return
-
             const letters = lettersRef.current[lineIndex] ?? []
+            if (!element) return
+            if (letters.length === 0) return
+            if (counter === 0) return
 
             animate(
                 element,
@@ -130,21 +149,20 @@ const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassN
                 }
             )
 
-            animate([
-                [
-                    letters,
-                    {
-                        opacity: [0.5, 1],
-                        x: [0, 16],
-                        // rotate: [0, -8, 0],
-                    },
-                    {
-                        duration: 0.2,
-                        delay: stagger(0.035, { startDelay: 0.6 }),
-                    },
-                ],
-            ])
+            animate(
+                letters,
+                {
+                    opacity: [0.5, 1],
+                    x: [0, 16],
+                    // rotate: [0, -8, 0],
+                },
+                {
+                    duration: 0.2,
+                    delay: stagger(0.035, { startDelay: 0.6 }),
+                }
+            )
         })
+        setCounter((prevCounter) => prevCounter + 1)
     }
 
     const handleExitAnimation = async () => {
@@ -191,7 +209,7 @@ const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassN
             <span
                 ref={measureRef}
                 aria-hidden="true"
-                className="pointer-events-none invisible block w-full"
+                className={clsx("pointer-events-none  block w-full", counter === 0 ? "" : "invisible")}
             >
                 {mergedWords.map((item, index) => (
                     <Fragment key={`${index}-${item.word}`}>
@@ -199,7 +217,7 @@ const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassN
 
                         <span
                             data-word={item.word}
-                            className="inline-block whitespace-nowrap"
+                            className={clsx("inline-block whitespace-nowrap", item.isAccented && "text-accent")}
                         >
                             {item.word}
                         </span>

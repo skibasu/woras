@@ -4,7 +4,7 @@ import type { HomeQuery } from "@/graphql/generated/graphql"
 import { useRef, useState } from "react"
 import { motion, useMotionValueEvent, useScroll, useTransform } from "motion/react"
 
-import FeaturesCart from "./FeaturesCart"
+import FeaturesCart from "./FeaturesCart/FeaturesCart"
 import SectionTitle from "../../ui/SectionTitle/SectionTitle"
 import ProgressiveImage from "../../ui/ProgressiveImage/ProgressiveImage"
 import ButtonScrollTo from "../../ui/ButtonScrollTo/ButtonScrollTo"

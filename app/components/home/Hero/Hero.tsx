@@ -1,7 +1,7 @@
 import type { HomeQuery } from "@/graphql/generated/graphql"
-import ServiceList from "./ServiceList"
+import ServiceList from "./ServiceList/ServiceList"
 import SectionSlogan, { SlogansData } from "../../ui/SectionSlogan/SectionSlogan"
-import HeroPicture from "./HeroPicture"
+import HeroPicture from "./HeroPicture/HeroPicture"
 import ButtonScrollTo from "../../ui/ButtonScrollTo/ButtonScrollTo"
 
 type HeroData = NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["hero"] | undefined

@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import WhatsAppButton from "../../ui/WhatsAppButton/WhatsAppButton"
+import WhatsAppButton from "../../../ui/WhatsAppButton/WhatsAppButton"
 
 interface Props {
     eyebrow: string | null

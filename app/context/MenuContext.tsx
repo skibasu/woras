@@ -1,8 +1,7 @@
 "use client"
-
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react"
 import { usePathname } from "next/navigation"
-import { menuSettings } from "../components/layout/Header/menuSettngs"
+import { menuSettings } from "../components/layout/Header/helpers/menuSettngs"
 const MenuContext = createContext<MenuContextValue | null>(null)
 
 type MenuContextValue = {
@@ -26,7 +25,7 @@ export const MenuContextProvider = ({ children }: MenuProviderProps) => {
             activeSection,
             setActiveSection,
         }),
-        [isMenuOpen, activeSection],
+        [isMenuOpen, activeSection]
     )
 
     useEffect(() => {
@@ -44,7 +43,9 @@ export const MenuContextProvider = ({ children }: MenuProviderProps) => {
 
         const observer = new IntersectionObserver(
             (entries) => {
-                const visibleSections = entries.filter((entry) => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+                const visibleSections = entries
+                    .filter((entry) => entry.isIntersecting)
+                    .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
                 if (visibleSections.length) {
                     setActiveSection(`#${visibleSections[0].target.id}`)
                 }
@@ -52,7 +53,7 @@ export const MenuContextProvider = ({ children }: MenuProviderProps) => {
             {
                 threshold: effectiveThreshold,
                 rootMargin: `-${headerHeight}px 0px 0px 0px`,
-            },
+            }
         )
 
         elements.forEach((element) => observer.observe(element))

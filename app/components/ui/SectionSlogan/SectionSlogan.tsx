@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { AnimatePresence } from "motion/react"
 import LogoExtended from "../LogoExtended/LogoExtended"
 import SplitTextToSpans from "../SplitTextToSpans/SplitTextToSpans"
@@ -22,7 +22,7 @@ const AUTOPLAY_DELAY = 8000
 
 const SectionSlogan = ({ eyebrow, slogans }: Props) => {
     const [activeIndex, setActiveIndex] = useState(0)
-
+    const [counter, setCounter] = useState(0)
     useEffect(() => {
         let interval: ReturnType<typeof setInterval> | undefined
 
@@ -70,20 +70,26 @@ const SectionSlogan = ({ eyebrow, slogans }: Props) => {
                 eyebrow={eyebrow ?? ""}
             />
 
-            <h2 className="text-page-slogan text-white shadow mb-2 xl:mb-4 w-full max-w-150 md:max-w-167 xl:max-w-240">
+            <h2 className="text-page-slogan text-white shadow mb-2 xl:mb-4 w-full max-w-150 md:max-w-170 xl:max-w-240">
                 <AnimatePresence mode="wait">
                     <SplitTextToSpans
                         key={activeIndex}
                         text={currentSlogan.slogan || ""}
                         textAccented={currentSlogan.sloganAccent || ""}
                         textEnd={currentSlogan.sloganEnd || ""}
+                        counter={counter}
+                        setCounter={setCounter}
                     />
                 </AnimatePresence>
             </h2>
             <motion.p
                 key={activeIndex + (currentSlogan.subtitle || "")}
                 initial={{ opacity: 0, x: 100 }}
-                animate={{ opacity: 1, x: 16, transition: { duration: 1, delay: 2 } }}
+                animate={{
+                    opacity: 1,
+                    x: 16,
+                    transition: { duration: 1, delay: counter === 0 ? 0 : 2 },
+                }}
                 exit={{ opacity: 0, x: 30, transition: { duration: 0.5 } }}
                 className="text-subtitle text-white/70 mb-12"
             >

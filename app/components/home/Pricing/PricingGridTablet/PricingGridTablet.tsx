@@ -3,14 +3,14 @@
 import { motion } from "motion/react"
 import type { PricingQuery } from "@/graphql/generated/graphql"
 
-import PricingCart from "./PricingCart"
-import { desktopVariants } from "./pricingVariants"
+import PricingCart from "../PricingCart/PricingCart"
+import { tabletVariants } from "../helpers/pricingVariants"
 
 type Props = {
     categories: NonNullable<NonNullable<NonNullable<NonNullable<PricingQuery["page"]>["pricingPage"]>["categories"]>>
 }
 
-const PricingGridDesktop2Xl = ({ categories }: Props) => {
+const PricingGridTablet = ({ categories }: Props) => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-6 lg:gap-10 2xl:gap-6">
             {categories.map((item, i) => {
@@ -21,10 +21,10 @@ const PricingGridDesktop2Xl = ({ categories }: Props) => {
                         key={item.thumbnail?.node?.id ?? i}
                         className="relative h-full w-full"
                         style={{ zIndex: i }}
-                        variants={desktopVariants[i % desktopVariants.length]}
+                        variants={tabletVariants[i % tabletVariants.length]}
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ amount: 0.5, once: true }}
+                        viewport={{ amount: 0.3, once: true }}
                     >
                         <PricingCart item={item} />
                     </motion.div>
@@ -34,4 +34,4 @@ const PricingGridDesktop2Xl = ({ categories }: Props) => {
     )
 }
 
-export default PricingGridDesktop2Xl
+export default PricingGridTablet

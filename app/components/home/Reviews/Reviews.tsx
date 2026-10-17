@@ -1,10 +1,10 @@
 import type { HomeQuery } from "@/graphql/generated/graphql"
 import { getGoogleReviews } from "@/lib/google-reviews"
 import RatingSummary from "./Rating/RatingSummary"
-import ReviewsSlider from "./ReviewsSlider"
+import ReviewsSlider from "./ReviewsSlider/ReviewsSlider"
 import StarsCounter from "./Rating/StarsCounter"
 import SectionTitle from "../../ui/SectionTitle/SectionTitle"
-import HeroPicture from "../Hero/HeroPicture"
+import HeroPicture from "../Hero/HeroPicture/HeroPicture"
 
 type ReviewsData = NonNullable<NonNullable<HomeQuery["page"]>["homePage"]>["reviews"] | undefined
 

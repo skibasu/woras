@@ -2,9 +2,9 @@ import { PricingDocument } from "@/graphql/generated/graphql"
 import { wordpressClient } from "@/lib/wpgraphql"
 import SectionTitle from "../../ui/SectionTitle/SectionTitle"
 
-import HeroPicture from "../Hero/HeroPicture"
+import HeroPicture from "../Hero/HeroPicture/HeroPicture"
 
-import PricingGrid from "./PricingGrid"
+import PricingGrid from "./PricingGrid/PricingGrid"
 
 const Pricing = async () => {
     const data = await wordpressClient.request(PricingDocument)

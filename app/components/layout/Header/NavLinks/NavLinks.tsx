@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { menuScrollTo } from "@/app/helpers/menuScrollTo"
 import clsx from "clsx"
 import { useMenuContext } from "@/app/context/MenuContext"
-import { menuSettings } from "../menuSettngs"
+import { menuSettings } from "../helpers/menuSettngs"
 import { motion } from "motion/react"
 
 const NavLinks = () => {

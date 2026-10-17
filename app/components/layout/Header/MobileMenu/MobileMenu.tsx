@@ -9,7 +9,7 @@ import { useMenuContext } from "@/app/context/MenuContext"
 import { menuScrollTo } from "@/app/helpers/menuScrollTo"
 
 import clsx from "clsx"
-import { menuSettings } from "../menuSettngs"
+import { menuSettings } from "../helpers/menuSettngs"
 import ProgressiveImage from "@/app/components/ui/ProgressiveImage/ProgressiveImage"
 import WhatsupMobileButton from "@/app/components/ui/WhatsAppMobileButton/WhatsAppMobileButton"
 import { usePathname, useRouter } from "next/navigation"
