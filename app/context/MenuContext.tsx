@@ -33,7 +33,7 @@ export const MenuContextProvider = ({ children }: MenuProviderProps) => {
 
         const currentIds = menuSettings.links.map((link) => `#${link.target}`)
         const isMobile = window.matchMedia("(max-width: 767px)").matches
-        const effectiveThreshold = isMobile ? 0.3 : 0.5
+        const effectiveThreshold = isMobile ? 0.1 : 0.25
 
         const header = document.querySelector("#header")
         const headerHeight = header?.getBoundingClientRect().height ?? 0
