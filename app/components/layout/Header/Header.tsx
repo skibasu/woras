@@ -44,8 +44,8 @@ const Header = async () => {
                         <ProgressiveImage
                             src={logo.node.sourceUrl}
                             alt={logo.node.altText || "Logo"}
-                            width={200}
-                            height={50}
+                            width={70}
+                            height={46}
                             className="block h-10 w-auto"
                         />
                     ) : (

@@ -171,6 +171,7 @@ const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassN
                 if (!element) return
 
                 const letters = lettersRef.current[lineIndex] ?? []
+                if (!letters.length) return
 
                 await animate(
                     letters,
