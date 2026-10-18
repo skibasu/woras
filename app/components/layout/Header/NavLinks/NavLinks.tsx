@@ -43,7 +43,7 @@ const NavLinks = () => {
                     </Link>
                     {activeSection === `#${link.target}` && (
                         <motion.div
-                            className="absolute bottom-0 w-full bg-accent h-px"
+                            className="absolute bottom-0 w-full bg-tetiary h-px"
                             layoutId="menu-underline"
                             id="menu-underline"
                         />
