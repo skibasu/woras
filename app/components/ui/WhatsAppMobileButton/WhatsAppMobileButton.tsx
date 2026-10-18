@@ -4,6 +4,7 @@ import Link from "next/link"
 import clsx from "clsx"
 import { motion, useReducedMotion } from "motion/react"
 import WhatsAppIcon from "../IconsSvg/WhatsAppIcon"
+import { getWhatsAppLink } from "../../home/Contact/ContactForm/utils"
 
 type Props = {
     iconWidth: number
@@ -46,7 +47,7 @@ const WhatsAppMobileButton = ({ className = "", iconWidth, iconHeight, label, ph
                     "inline-flex p-2 items-center justify-center gap-2 rounded-full text-white text-sm font-semibold hover:bg-whatsapp-hover hover:shadow-sm transition-colors",
                     className
                 )}
-                href={`https://wa.me/${phoneNumber ?? ""}`}
+                href={getWhatsAppLink(phoneNumber) || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
             >
