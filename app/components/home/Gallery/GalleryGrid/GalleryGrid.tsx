@@ -7,6 +7,7 @@ import Image, { getImageProps } from "next/image"
 import { useEffect, useState } from "react"
 import GalleryMotionPicture from "../GallerryMotionPicture/GalleryMotionPicture"
 import clsx from "clsx"
+import ProgressiveImage from "@/app/components/ui/ProgressiveImage/ProgressiveImage"
 
 interface SelectedImage {
     src: string
@@ -74,15 +75,8 @@ const GalleryGrid = ({ slides }: Props) => {
             img.src = props.src
         })
     }
-    useEffect(() => {
-        console.log("[Gallery preload] PRELOADED IMAGES", preloadedImages)
-    }, [preloadedImages])
 
     useEffect(() => {
-        console.log("[Gallery preload] EFFECT", {
-            activeSection,
-            slidesCount: slides?.length,
-        })
         if (activeSection !== "#gallery" || !slides) return
 
         let cancelled = false
@@ -160,15 +154,15 @@ const GalleryGrid = ({ slides }: Props) => {
                                 })
                             }}
                         >
-                            <Image
+                            <ProgressiveImage
                                 src={node.sourceUrl}
                                 alt={node.altText || ""}
-                                width={width}
-                                height={height}
+                                fill={true}
                                 sizes={sizes}
                                 loading="lazy"
+                                containerClassName="relative w-full h-full"
                                 className={clsx(
-                                    "object-cover w-full h-full hover:scale-105 transition-all duration-700",
+                                    "object-cover hover:scale-105 transition-all duration-700",
                                     preloadedImages.has(node.id)
                                         ? "grayscale-0 cursor-pointer"
                                         : "grayscale cursor-progress"
