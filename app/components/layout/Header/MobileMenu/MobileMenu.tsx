@@ -81,7 +81,7 @@ const MobileMenu = ({ data }: Props) => {
                     onClick={closeMenu}
                 >
                     <CloseIcon
-                        className="block text-accent w-full h-full"
+                        className="block text-tetiary w-full h-full"
                         aria-hidden="true"
                     />
                 </button>

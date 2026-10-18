@@ -6,7 +6,7 @@
     --foreground: #000000;
     --primary: #417c22;
     --primary-hover: #376021;
-
+    --tetiary: #ff0000;
     --accent: #ff6600;
     --whatsapp: #455a64;
     --whatsapp-hover: #2eb843;
@@ -22,6 +22,7 @@
     --color-primary: var(--primary);
     --color-primary-hover: var(--primary-hover);
     --color-accent: var(--accent);
+    --color-tetiary: var(--tetiary);
     --color-link: var(--link);
     --color-link-hover: var(--link-hover);
     --color-whatsapp: var(--whatsapp);
@@ -239,16 +240,16 @@
 }
 .menu-link {
     line-height: var(--line-height-sm);
-    @apply text-white/80 font-semibold hover:text-accent transition-all duration-300 ease-in-out text-center rounded-sm;
+    @apply text-white/80 font-semibold hover:text-tetiary transition-all duration-300 ease-in-out text-center rounded-sm;
 }
 .menu-link-active {
-    @apply text-accent transition-all duration-600 ease-in-out;
+    @apply text-tetiary transition-all duration-600 ease-in-out;
 }
 .mobile-menu-link {
-    @apply block py-3 text-white/90 px-5 font-bold uppercase hover:bg-accent/10 active:bg-accent/10;
+    @apply block py-3 text-white/90 px-5 font-bold uppercase hover:bg-tetiary/10 active:bg-tetiary/10 rounded-r-md;
 }
 .mobile-menu-link-active {
-    @apply bg-accent/10 border-l-4 border-accent;
+    @apply bg-tetiary/10 border-l-4;
 }
 .mobile-menu-gradient {
     background: #181717;
