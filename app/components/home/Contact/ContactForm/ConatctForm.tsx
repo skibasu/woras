@@ -210,7 +210,11 @@ const ContactForm = ({
                     <Textarea
                         placeholder={messagePlaceholder || "Describe your problem"}
                         {...register("message")}
-                        className={clsx(errors.message?.message && "border-b border-red-600 bg-red-50", "max-h-50")}
+                        className={clsx(
+                            errors.message?.message &&
+                                "border-b border-red-600 bg-red-50 active:border-red-600 focus:border-red-600",
+                            "max-h-50"
+                        )}
                     />
 
                     {errors.message?.message && (

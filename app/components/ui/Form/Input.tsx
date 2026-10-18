@@ -10,8 +10,9 @@ const Input = ({ className = "", placeholder, isError, ...props }: Props) => {
                 className={clsx(
                     "px-4 rounded-sm peer w-full appearance-none border border-gray-200  py-3 text-base text-black shadow-none outline-none transition-colors placeholder:text-base placeholder:text-gray-600 hover:border-gray-300 focus:border-primary focus:placeholder:text-transparent focus:outline-none focus:ring-0 active:border-primary",
                     className,
-                    isError && "border-b border-red-600 bg-red-50"
+                    isError && "border-b border-red-600 bg-red-50 active:border-red-600 focus:border-red-600"
                 )}
+
                 placeholder={placeholder}
                 {...props}
             />
