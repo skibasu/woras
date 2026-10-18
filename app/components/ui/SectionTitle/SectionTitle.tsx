@@ -56,7 +56,7 @@ const SectionTitle = ({
                 <motion.p
                     key="eyebrow"
                     className={clsx(
-                        "text-eyebrow text-black/40 flex justify-center items-center with-accent-separator-right with-accent-separator-left mb-2 lg:mb-4",
+                        "text-eyebrow text-black/70 flex justify-center items-center with-accent-separator-right with-accent-separator-left mb-2 lg:mb-4",
                         className
                     )}
 
