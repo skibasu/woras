@@ -58,7 +58,7 @@ const SuccessMessage = ({ onClose, eyebrow, successMessage, description, accentT
                     onClick={() => onClose()}
                 >
                     <CloseIcon
-                        className="block text-tertiary"
+                        className="block"
                         aria-hidden="true"
                     />
                 </button>
