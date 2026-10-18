@@ -36,7 +36,7 @@ const PricingCart = ({ item }: Props) => {
                             <div className="flex justify-between border-b border-gray-300 pb-2 mb-2">
                                 <h4 className="first-letter:uppercase text-black">{subItem?.itemTitle ?? ""}</h4>
                                 {subItem?.price && (
-                                    <p className="shrink-0 grow-0 pl-5 font-semibold text-black/70">{`$${subItem.price}`}</p>
+                                    <p className="shrink-0 grow-0 pl-5 font-semibold text-black/70">{`€${subItem.price}`}</p>
                                 )}
                             </div>
                             <p className="first-letter:uppercase text-sm text-black">
