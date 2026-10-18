@@ -132,11 +132,17 @@ const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassN
     }, [text, textAccented, textEnd])
 
     const handleAnimation = async () => {
-        linesRef.current.map(async (element, lineIndex) => {
+        const animations = linesRef.current.map((element, lineIndex) => {
             const letters = lettersRef.current[lineIndex] ?? []
-            if (!element) return
-            if (!letters.length) return
-            if (counter === 0) return
+
+            if (!element || !letters.length || counter === 0) {
+                return null
+            }
+
+            // Zabezpieczenie przed pustymi lub odmontowanymi elementami
+            const validLetters = letters.filter((letter): letter is HTMLElement => letter instanceof HTMLElement)
+
+            if (!validLetters.length) return null
 
             animate(
                 element,
@@ -149,12 +155,11 @@ const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassN
                 }
             )
 
-            animate(
-                letters,
+            return animate(
+                validLetters,
                 {
                     opacity: [0.5, 1],
                     x: [0, 16],
-                    // rotate: [0, -8, 0],
                 },
                 {
                     duration: 0.2,
@@ -162,6 +167,9 @@ const SplitTextToSpans = ({ text, textAccented, textEnd, className, letterClassN
                 }
             )
         })
+
+        await Promise.all(animations.filter(Boolean))
+
         setCounter((prevCounter) => prevCounter + 1)
     }
 
